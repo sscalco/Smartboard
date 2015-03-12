@@ -1,0 +1,15 @@
+#Title {
+	font-size: 100%;
+	color: green;
+	text-align: center;
+	border-style: solid;
+	border-color: green;
+	border-left-width: 0px;
+	border-right-width: 0px;
+}
+#LoginBox{
+	font-size: 100%
+	color: green;
+	border-style: solid;
+	border-color: green;
+}
