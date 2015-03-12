@@ -1,11 +1,16 @@
 package com.YCPCS;
 
+import java.sql.Date;
+
 public class User {
 
+	private int id;
 	private String username;
-	private String password;
+	private String password;	//Should be storing the password as a hash
 	private String firstname;
 	private String lastname;
+	private Date lastLoginDate;
+	private WhiteboardPermissions permissions;
 	
 	public User(){
 		
@@ -24,8 +29,27 @@ public class User {
 		this.password = password;
 	}
 	
-	public void setFirstName(String name){
+	public void setFirstname(String name){
 		this.firstname = name;
 	}
 	
+	public void setLastname(String name){
+		this.lastname = name;
+	}
+	
+	public String getFirstname(){
+		return this.firstname;
+	}
+	
+	public String getLastname(){
+		return lastname;
+	}
+	
+	public String getUsername(){
+		return username;
+	}
+	
+	public String getPassword(){
+		return password;
+	}
 }
