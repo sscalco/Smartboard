@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry excluding="com/YCPCS/Whiteboard/|src/com/YCPCS/Whiteboard/|com/YCPCS/Whiteboard/" kind="src" path=""/>
-	<classpathentry combineaccessrules="false" kind="src" path="/CS320_Jetty"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="C:/Users/Brandon/Desktop/lib/jetty-alpn-client-9.2.9.v20150224.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Brandon/Desktop/lib/jetty-alpn-server-9.2.9.v20150224.jar"/>
@@ -29,5 +28,6 @@
 	<classpathentry kind="lib" path="C:/Users/Brandon/Desktop/lib/jetty-webapp-9.2.9.v20150224.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Brandon/Desktop/lib/jetty-xml-9.2.9.v20150224.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Brandon/Desktop/lib/servlet-api-3.1.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -52,4 +52,20 @@ public class User {
 	public String getPassword(){
 		return password;
 	}
+	
+	public void setPermissions(WhiteboardPermissions permissions){
+		this.permissions = permissions;
+	}
+	
+	public WhiteboardPermissions getPermissions(){
+		return permissions;
+	}
+	
+	public void setLastLoginDate(Date date){
+		this.lastLoginDate = date;
+	}
+	
+	public Date getLastLoginDate(){
+		return lastLoginDate;
+	}
 }
