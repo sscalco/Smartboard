@@ -25,7 +25,9 @@
 		<br>
 		
 		<button type="submit">Login</button>
-		<button type="button">Sign Up</button>
+		</form>
+		<form action="signup.jsp" method="get">
+		<button type="submit">Sign Up</button>
 		</form>
 	</div>
 	</body>
