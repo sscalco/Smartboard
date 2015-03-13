@@ -1,0 +1,29 @@
+h1 {
+	font-size: 300%;
+	background-color: white;
+	color: green;
+	border-style: solid;
+	border-color: green;
+	text-align: center;
+}
+h2 {
+	font-size: 140%;
+	color: white;
+	text-align: center;
+}
+body {
+	background-color: green;
+	border-style: solid;
+	border-color: white;
+	height: 100vh;
+}
+#SignUpBox {
+	text-align: center;
+	color: white
+	border-color: white;
+	border-style: solid;
+	font-size: 120%;
+}
+p {
+	color: white;
+}
