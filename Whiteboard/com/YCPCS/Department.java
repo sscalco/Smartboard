@@ -1,7 +1,7 @@
 package com.YCPCS;
 import java.util.ArrayList;
 
-public class Class 
+public class Department 
 {
 	//Declare Variables
 	private int classSize = 0;
@@ -10,12 +10,12 @@ public class Class
 	private Schedule schedule;
 	private Forum forum;
 	private Calendar calendar;
-	public Class()
+	public Department() //Class
 	{
 		
 	}
 	
-	public Class(int classSize)
+	public Department(int classSize)
 	{
 		this.classSize = classSize;
 	}
@@ -55,6 +55,7 @@ public class Class
 	public void addStudent(User user)
 	{
 		students.add(user);
+		setClassSize(getStudentList().size());
 	}
 	
 	public ArrayList<Assignment> getAssignments()

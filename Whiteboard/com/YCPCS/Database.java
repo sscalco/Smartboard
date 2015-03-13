@@ -14,7 +14,7 @@ public class Database {
 	public void makeConnection() throws ClassNotFoundException{
 		Connection conn = null;
 		try {
-			Class.forName("org.sqlite.JDBC");
+			//Class.forName("org.sqlite.JDBC");
 			conn = DriverManager.getConnection("jdbc:sqlite:test.db");
 			conn.setAutoCommit(true);
 	
