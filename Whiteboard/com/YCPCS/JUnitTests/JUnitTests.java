@@ -13,17 +13,17 @@ public class JUnitTests extends TestCase{
 	}
 	
 	public void testSetFirstName(){
-		user.setUsername("David");
+		user.setFirstname("David");
 		assertEquals("David", user.getFirstname());
 	}
 	
 	public void testSetLastName(){
-		user.setUsername("Hoevemeyer");
+		user.setLastname("Hoevemeyer");
 		assertEquals("Hoevemeyer", user.getLastname());
 	}
 	
 	public void testSetPassword(){
-		user.setUsername("Bojangle");
+		user.setPassword("Bojangle");
 		assertEquals("Bojangle", user.getPassword());
 	}
 }
