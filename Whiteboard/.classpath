@@ -2,32 +2,7 @@
 <classpath>
 	<classpathentry excluding="com/YCPCS/Whiteboard/|src/com/YCPCS/Whiteboard/|com/YCPCS/Whiteboard/" kind="src" path=""/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="C:/Users/Brandon/Desktop/lib/jetty-alpn-client-9.2.9.v20150224.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Brandon/Desktop/lib/jetty-alpn-server-9.2.9.v20150224.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Brandon/Desktop/lib/jetty-annotations-9.2.9.v20150224.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Brandon/Desktop/lib/jetty-cdi-9.2.9.v20150224.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Brandon/Desktop/lib/jetty-client-9.2.9.v20150224.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Brandon/Desktop/lib/jetty-continuation-9.2.9.v20150224.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Brandon/Desktop/lib/jetty-deploy-9.2.9.v20150224.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Brandon/Desktop/lib/jetty-http-9.2.9.v20150224.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Brandon/Desktop/lib/jetty-io-9.2.9.v20150224.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Brandon/Desktop/lib/jetty-jaas-9.2.9.v20150224.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Brandon/Desktop/lib/jetty-jaspi-9.2.9.v20150224.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Brandon/Desktop/lib/jetty-jmx-9.2.9.v20150224.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Brandon/Desktop/lib/jetty-jndi-9.2.9.v20150224.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Brandon/Desktop/lib/jetty-plus-9.2.9.v20150224.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Brandon/Desktop/lib/jetty-proxy-9.2.9.v20150224.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Brandon/Desktop/lib/jetty-quickstart-9.2.9.v20150224.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Brandon/Desktop/lib/jetty-rewrite-9.2.9.v20150224.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Brandon/Desktop/lib/jetty-schemas-3.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Brandon/Desktop/lib/jetty-security-9.2.9.v20150224.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Brandon/Desktop/lib/jetty-server-9.2.9.v20150224.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Brandon/Desktop/lib/jetty-servlet-9.2.9.v20150224.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Brandon/Desktop/lib/jetty-servlets-9.2.9.v20150224.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Brandon/Desktop/lib/jetty-util-9.2.9.v20150224.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Brandon/Desktop/lib/jetty-webapp-9.2.9.v20150224.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Brandon/Desktop/lib/jetty-xml-9.2.9.v20150224.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Brandon/Desktop/lib/servlet-api-3.1.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/CS320_Jetty"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
