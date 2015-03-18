@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+              http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+         version="2.5"
+         xmlns="http://java.sun.com/xml/ns/javaee">
+
+  <!-- Servlets -->
+  <servlet>
+    <servlet-name>LoginServlet</servlet-name>
+    <servlet-class>com.YCPCS.Whiteboard.servlet.LoginServlet</servlet-class>
+  </servlet>
+
+  <!-- Servlet mappings -->
+  <servlet-mapping>
+    <servlet-name>LoginServlet</servlet-name>
+    <url-pattern>/war/_view/login.jsp</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>HubServlet</servlet-name>
+    <url-pattern>/war/_view/hub.jsp</url-pattern>
+  </servlet-mapping>
+  
+  <!-- Listeners -->
+  <listener>
+    <listener-class>com.YCPCS.Whiteboard.servlet.DatabaseInitListener</listener-class>
+  </listener>
+
+  <welcome-file-list>
+    <welcome-file>/_view/login.jsp</welcome-file>
+  </welcome-file-list>
+</web-app>
