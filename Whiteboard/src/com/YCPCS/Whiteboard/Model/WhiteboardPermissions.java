@@ -1,4 +1,4 @@
-package com.YCPCS;
+package com.YCPCS.Whiteboard.Model;
 
 public class WhiteboardPermissions {
 	

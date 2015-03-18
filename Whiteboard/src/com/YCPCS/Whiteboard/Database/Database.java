@@ -1,6 +1,8 @@
-package com.YCPCS;
+package com.YCPCS.Whiteboard.Database;
 
 import java.util.ArrayList;
+
+import com.YCPCS.Whiteboard.Model.User;
 
 public class Database {
 

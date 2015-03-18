@@ -1,4 +1,4 @@
-package com.YCPCS;
+package com.YCPCS.Whiteboard.servlet;
 
 import java.io.IOException;
 

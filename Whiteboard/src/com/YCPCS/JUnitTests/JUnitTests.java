@@ -1,6 +1,6 @@
 package com.YCPCS.JUnitTests;
 
-import com.YCPCS.User;
+import com.YCPCS.Whiteboard.Model.User;
 
 import junit.framework.TestCase;
 
