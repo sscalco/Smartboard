@@ -4,7 +4,7 @@
 
 <html>
 	<head>
-	<link rel="stylesheet" type="text/css" href="LoginCSS.css">
+	<link rel="stylesheet" type="text/css" href="_view/LoginCSS.css">
 	<div id="Title">
 		<title>SmartBoard</title>
 	</div>
