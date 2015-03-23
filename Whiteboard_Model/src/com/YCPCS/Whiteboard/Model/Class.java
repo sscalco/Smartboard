@@ -19,7 +19,7 @@ public class Class
 	{
 		this.classSize = classSize;
 	}
-
+	
 	public int getClassSize()
 	{
 		return classSize;
