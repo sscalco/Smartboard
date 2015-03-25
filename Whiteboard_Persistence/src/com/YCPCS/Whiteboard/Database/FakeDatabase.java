@@ -27,6 +27,16 @@ public class FakeDatabase implements DatabaseLayer{
 			return null;
 		}
 	}
+
+	//TODO: Implement
+	public String getFirstNameFromId(int id) {
+		return null;
+	}
+
+	//TODO: Implement
+	public String getLastNameFromId(int id) {
+		return null;
+	}
 	
 	
 
