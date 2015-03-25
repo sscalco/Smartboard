@@ -10,6 +10,10 @@
     <servlet-name>LoginServlet</servlet-name>
     <servlet-class>com.YCPCS.Whiteboard.servlet.LoginServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>HubServlet</servlet-name>
+    <servlet-class>com.YCPCS.Whiteboard.servlet.HubServlet</servlet-class>
+  </servlet>
 
   <!-- Servlet mappings -->
   <servlet-mapping>
