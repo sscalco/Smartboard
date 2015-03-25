@@ -28,8 +28,8 @@ public class LoginServlet extends HttpServlet{
 		String password = req.getParameter("password");
 		
 		// Check whether parameters are valid
-		if (username == null || password == null) {
-			req.setAttribute("error", "You must enter both a username and a password");
+		if (username == "" || password == "") {
+			req.setAttribute("errorMessage", "You must enter both a username and a password");
 		} else {
 			LoginController controller = new LoginController();
 			
@@ -43,11 +43,6 @@ public class LoginServlet extends HttpServlet{
 			
 			req.setAttribute("errorMessage", "No such username/password");
 		}
-		
-		//TODO: Use a controller to process the request
-		//TODO: Send back a response
-		//resp.setContentType("text/plain");
-		//resp.getWriter().println(result.toString());
 		
 		req.getRequestDispatcher("/_view/login.jsp").forward(req, resp);
 	}

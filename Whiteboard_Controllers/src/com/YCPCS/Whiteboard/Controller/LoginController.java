@@ -20,7 +20,7 @@ public class LoginController {
 		
 		int userId = database.getUserIDByLogin(username, password);
 		
-		if(userId==0){
+		if(userId==-1){
 			return null;
 		}else{
 			User user = new User(username, password);
