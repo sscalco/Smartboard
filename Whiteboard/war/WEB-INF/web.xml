@@ -33,5 +33,6 @@
 
   <welcome-file-list>
     <welcome-file>/login</welcome-file>
+    <welcome-file>/hub</welcome-file>
   </welcome-file-list>
 </web-app>
