@@ -1,15 +1,15 @@
 package com.YCPCS.JUnitTests;
 
-import com.YCPCS.Whiteboard.Model.User;
-import com.YCPCS.Whiteboard.Model.Class;
-import com.YCPCS.Whiteboard.Model.Assignment;
+import com.YCPCS.Assignment;
+import com.YCPCS.Department;
+import com.YCPCS.User;
 
 import junit.framework.TestCase;
 import java.util.ArrayList;
 
 public class JUnitTests extends TestCase{
 	User user = new User();
-	Class aClass = new Class();
+	Department aClass = new Department();
 	ArrayList<User> students = new ArrayList<User>();
 	ArrayList<Assignment> assignments = new ArrayList<Assignment>();
 	
