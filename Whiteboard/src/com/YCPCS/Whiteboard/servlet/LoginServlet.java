@@ -7,16 +7,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.YCPCS.Whiteboard.Controller.LoginController;
+import com.YCPCS.Whiteboard.Model.User;
+
 public class LoginServlet extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		super.doGet(req, resp);
+		doRequest(req, resp);
 	}
 	
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		super.doPost(req, resp);
+		doRequest(req, resp);
 	}
 	
 	private void doRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -26,13 +29,26 @@ public class LoginServlet extends HttpServlet{
 		
 		// Check whether parameters are valid
 		if (username == null || password == null) {
+			req.setAttribute("error", "You must enter both a username and a password");
+		} else {
+			LoginController controller = new LoginController();
 			
-			return;
+			User user = (User) controller.findUser(username, password);
+			if (user != null) {
+				// Successful login: add user to session
+				req.getSession().setAttribute("user", user);
+				resp.sendRedirect(req.getContextPath() + "/hub");
+				return;
+			}
+			
+			req.setAttribute("errorMessage", "No such username/password");
 		}
 		
 		//TODO: Use a controller to process the request
 		//TODO: Send back a response
 		//resp.setContentType("text/plain");
 		//resp.getWriter().println(result.toString());
+		
+		req.getRequestDispatcher("/_view/login.jsp").forward(req, resp);
 	}
 }

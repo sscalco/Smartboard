@@ -18,12 +18,12 @@
   <!-- Servlet mappings -->
   <servlet-mapping>
     <servlet-name>LoginServlet</servlet-name>
-    <url-pattern>/war/_view/login.jsp</url-pattern>
+    <url-pattern>/login/*</url-pattern>
   </servlet-mapping>
   
   <servlet-mapping>
     <servlet-name>HubServlet</servlet-name>
-    <url-pattern>/war/_view/hub.jsp</url-pattern>
+    <url-pattern>/hub/*</url-pattern>
   </servlet-mapping>
   
   <!-- Listeners -->
@@ -32,6 +32,6 @@
   </listener>
 
   <welcome-file-list>
-    <welcome-file>/_view/login.jsp</welcome-file>
+    <welcome-file>/login</welcome-file>
   </welcome-file-list>
 </web-app>
