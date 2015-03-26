@@ -18,7 +18,6 @@ public class LoginServlet extends HttpServlet{
 	}
 	
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
 		doRequest(req, resp);
 	}
 	
@@ -26,10 +25,9 @@ public class LoginServlet extends HttpServlet{
 		// Get parameters
 		String username = req.getParameter("username");
 		String password = req.getParameter("password");
-		
 		// Check whether parameters are valid
 		if (username == "" || password == "") {
-			req.setAttribute("errorMessage", "You must enter both a username and a password");
+			req.setAttribute("errorMessage", "Enter Your Username & Password");
 		} else {
 			LoginController controller = new LoginController();
 			

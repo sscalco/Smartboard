@@ -18,9 +18,8 @@ public class FakeDatabase implements DatabaseLayer{
 	public FakeDatabase() {
 		usernames = new ArrayList<Username>();
 		passwords = new ArrayList<Password>();
-		
 		// get initial data
-		readInitialData();
+		//readInitialData();
 	}
 	
 	public void readInitialData() {
