@@ -79,4 +79,8 @@ public class User {
 	public ArrayList<Class> getClasses(){
 		return classes;
 	}
+	
+	public UserProfile getProfile(){
+		return profile;
+	}
 }

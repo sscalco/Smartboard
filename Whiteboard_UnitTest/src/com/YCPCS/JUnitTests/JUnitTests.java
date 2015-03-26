@@ -3,12 +3,15 @@ package com.YCPCS.JUnitTests;
 import com.YCPCS.Whiteboard.Model.User;
 import com.YCPCS.Whiteboard.Model.Class;
 import com.YCPCS.Whiteboard.Model.Assignment;
+import com.YCPCS.Whiteboard.Model.UserProfile;
 
 import junit.framework.TestCase;
+
 import java.util.ArrayList;
 
 public class JUnitTests extends TestCase{
 	User user = new User();
+	UserProfile profile = user.getProfile();
 	Class aClass = new Class();
 	ArrayList<User> students = new ArrayList<User>();
 	ArrayList<Assignment> assignments = new ArrayList<Assignment>();
@@ -31,6 +34,28 @@ public class JUnitTests extends TestCase{
 	public void testSetPassword(){
 		user.setPassword("Bojangle");
 		assertEquals("Bojangle", user.getPassword());
+	}
+	
+	//UserProfile
+	public void testSetUserProfileName(){
+		profile.setUsername("Al458");
+		assertEquals("Al458", profile.getUsername());
+	}
+	
+	public void testSetFirstProfileName(){
+		profile.setFirstName("Al");
+		assertEquals("Al", profile.getFirstName());
+	}
+	
+	public void testSetLastProfileName(){
+		profile.setLastName("Higgins");
+		assertEquals("Higgins", profile.getLastName());
+	}
+	
+	public void testGetFullName(){
+		profile.setFirstName("Al");
+		profile.setLastName("Higgins");
+		assertEquals("Al Higgins", profile.getFullName());
 	}
 	
 	//Class	
