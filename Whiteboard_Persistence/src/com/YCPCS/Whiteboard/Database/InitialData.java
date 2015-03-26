@@ -20,12 +20,13 @@ public class InitialData {
 				}
 				Iterator<String> i = tuple.iterator();
 				User user = new User();
+				user.setId(Integer.parseInt(i.next()));
 				user.setUsername(i.next());
 				user.setPassword(i.next());
 				user.setLastname(i.next());
 				user.setFirstname(i.next());
-				// add whiteboard permissions
-				// add login date
+				//TODO: add whiteboard permissions
+				//TODO: add login date
 				userList.add(user);
 			}
 			return userList;
