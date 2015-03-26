@@ -15,12 +15,27 @@ public class FakeDatabase implements DatabaseLayer{
 		readInitialData();
 	}
 	
+	public void addUserToDatabase(User user){
+		usersList.add(user);
+	}
+	
 	public void readInitialData() {
 		try {
 			usersList.addAll(InitialData.getUsers());
 		} catch (IOException e) {
 			throw new IllegalStateException("Couldn't read initial data", e);
 		}
+	}
+	
+	public User getUserByUsernameAndPassword(String username, String password){
+		if(username!=null && password!=null){
+			for(User user : usersList){
+				if(user.getUsername().equals(username) && user.getPassword().equals(password)){
+					return user;
+				}
+			}
+		}
+		return null;
 	}
 	
 	public int getUserIDByLogin(String Username, String password) {
@@ -49,7 +64,4 @@ public class FakeDatabase implements DatabaseLayer{
 		}
 		return null;
 	}
-	
-	
-
 }

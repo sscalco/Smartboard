@@ -11,14 +11,22 @@
     <servlet-class>com.YCPCS.Whiteboard.servlet.LoginServlet</servlet-class>
   </servlet>
   <servlet>
-    <servlet-name>HubServlet</servlet-name>
+  <servlet-name>HubServlet</servlet-name>
     <servlet-class>com.YCPCS.Whiteboard.servlet.HubServlet</servlet-class>
   </servlet>
-
+  <servlet>
+  <servlet-name>SignUpServlet</servlet-name>
+    <servlet-class>com.YCPCS.Whiteboard.servlet.SignUpServlet</servlet-class>
+  </servlet>
   <!-- Servlet mappings -->
   <servlet-mapping>
     <servlet-name>LoginServlet</servlet-name>
     <url-pattern>/login/*</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>SignUpServlet</servlet-name>
+    <url-pattern>/SignUp/*</url-pattern>
   </servlet-mapping>
   
   <servlet-mapping>

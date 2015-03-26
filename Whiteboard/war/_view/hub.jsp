@@ -9,7 +9,7 @@
 	<h1>SmartBoard: Home</h1>
 	<h2> Welcome ${username}:</h2>
 	<div id="Options">
-	<h3>My Account | Help | Log Out</h3>
+	<h3><form action="/hub"><button type="submit">My Account</button> | <button type="submit">Help</button> | <button type="submit" name="logout" value="true">Log Out</button></form></h3>
 	</div>	
 	<div id="Links">
 		<ul>Classes</ul>

@@ -30,7 +30,6 @@ public class LoginServlet extends HttpServlet{
 			req.setAttribute("errorMessage", "Enter Your Username & Password");
 		} else {
 			LoginController controller = new LoginController();
-			
 			User user = (User) controller.findUser(username, password);
 			if (user != null) {
 				// Successful login: add user to session

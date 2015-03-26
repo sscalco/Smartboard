@@ -1,6 +1,6 @@
 <html>
 	<head>
-	<link rel="stylesheet" type="text/css" href="SignUp.css">
+	<link rel="stylesheet" type="text/css" href="_view/SignUp.css">
 	<div id="Title">
 		<title>SmartBoard</title>
 	</div>

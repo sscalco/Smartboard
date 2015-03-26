@@ -75,8 +75,9 @@ public class JUnitTests extends TestCase{
 		}
 		
 		User user1 = usersList.get(0);
+		assertEquals(1, user1.getId());
 		assertEquals("Nexion21",user1.getUsername());
-		assertEquals("melons123",user1.getPassword());
+		assertEquals("melon123",user1.getPassword());
 		assertEquals("Todd",user1.getFirstname());
 		assertEquals("Leach",user1.getLastname());
 			
