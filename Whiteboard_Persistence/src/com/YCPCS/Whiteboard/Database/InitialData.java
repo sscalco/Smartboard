@@ -8,11 +8,10 @@ import java.util.List;
 import com.YCPCS.Whiteboard.Model.*;
 
 public class InitialData {
-
 	
 	public static List<User> getUsers() throws IOException {
 		List<User> userList = new ArrayList<User>();
-		ReadCSV readUsers = new ReadCSV("user.csv");
+		ReadCSV readUsers = new ReadCSV("Users.csv");
 		try {
 			while (true) {
 				List<String> tuple = readUsers.next();
@@ -25,6 +24,8 @@ public class InitialData {
 				user.setPassword(i.next());
 				user.setLastname(i.next());
 				user.setFirstname(i.next());
+				// add whiteboard permissions
+				// add login date
 				userList.add(user);
 			}
 			return userList;
