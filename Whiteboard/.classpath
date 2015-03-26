@@ -7,5 +7,6 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/CS320_Jetty"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/Whiteboard_Controllers"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/Whiteboard_Persistence"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Whiteboard_Model"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

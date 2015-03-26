@@ -7,6 +7,8 @@ public interface DatabaseLayer {
 	//Password is preferably stored in a hash
 	public int getUserIDByLogin(String Username, String password);
 	
-	public String getNameFromId(int id);
+	public String getFirstNameFromId(int id);
+	
+	public String getLastNameFromId(int id);
 
 }

@@ -14,7 +14,8 @@
 		<h1>Welcome to SmartBoard!</h1>
 	<div id="Login">
 		<h2>Please Login Below!</h2>
-		<form action="hub.jsp" method="get">
+		<h3 id="errorMessage">${errorMessage}</h3>
+		<form action="${pageContext.request.contextPath}/login" method="post">
 		<p>Username:</p>
 		<input type="text" name="username">
 		<br>

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 h1 {
 	font-size: 300%;
 	background-color: white;
@@ -27,4 +28,20 @@ p {
 	width: 50%;
 	margin-left: 25%;
 	margin-right: 25%;
+=======
+#Title {
+	font-size: 100%;
+	color: green;
+	text-align: center;
+	border-style: solid;
+	border-color: green;
+	border-left-width: 0px;
+	border-right-width: 0px;
+}
+#LoginBox{
+	font-size: 100%
+	color: green;
+	border-style: solid;
+	border-color: green;
+>>>>>>> refs/remotes/Fitz/master
 }

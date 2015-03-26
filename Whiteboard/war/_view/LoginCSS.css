@@ -12,6 +12,11 @@ body {
 	border-color: white;
 	height: 100vh;
 }
+
+#errorMessage{
+	color:red;
+}
+
 h2 {
 	font-size: 140%;
 	color: white;
