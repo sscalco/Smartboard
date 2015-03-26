@@ -62,6 +62,7 @@ public class Main {
 		
 		System.out.println("Server Shutting Down");
 		server.stop();
+		keyboard.close();
 		System.exit(0);
 	}
 	

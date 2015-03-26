@@ -5,28 +5,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.YCPCS.Whiteboard.Database.InitialData;
-
-import com.YCPCS.Whiteboard.DBModel.*;
+import com.YCPCS.Whiteboard.Model.*;
 
 public class FakeDatabase implements DatabaseLayer{
-
-	private List<Username> usernames;
-	private List<Password> passwords;
+	private List<User> usersList;
+	private ArrayList<String> usernames;
+	private ArrayList<String> passwords;
 	private ArrayList<String> names = new ArrayList<String>();
 	private ArrayList<Integer> userIds = new ArrayList<Integer>();
 	
 	public FakeDatabase() {
-		usernames = new ArrayList<Username>();
-		passwords = new ArrayList<Password>();
-		
+		usersList = new ArrayList<User>();
 		// get initial data
 		readInitialData();
 	}
 	
 	public void readInitialData() {
 		try {
-			usernames.addAll(InitialData.getUsernames());
-			passwords.addAll(InitialData.getPasswords());
+			usersList.addAll(InitialData.getUsers());
 		} catch (IOException e) {
 			throw new IllegalStateException("Couldn't read initial data", e);
 		}
