@@ -1,23 +1,42 @@
 package com.YCPCS.Whiteboard.Model;
 import java.util.ArrayList;
 
-public class Class 
+public class Lecture 
 {
 	//Declare Variables
 	private int classSize = 0;
+	private int classId;
+	private String className;
+	private String classDescription;
 	private ArrayList<User> students = new ArrayList<User>();
 	private ArrayList<Assignment> assignments = new ArrayList<Assignment>();
 	private Schedule schedule;
 	private Forum forum;
 	private Calendar calendar;
-	public Class()
+	
+	public Lecture()
 	{
 		
 	}
 	
-	public Class(int classSize)
-	{
+	public Lecture(int classSize){
 		this.classSize = classSize;
+	}
+	
+	public int getClassId(){
+		return this.classId;
+	}
+	
+	public void setClassId(int id){
+		this.classId = id;
+	}
+	
+	public String getClassName() {
+		return className;
+	}
+
+	public void setClassName(String className) {
+		this.className = className;
 	}
 	
 	public int getClassSize()
@@ -31,6 +50,14 @@ public class Class
 		this.classSize = classSize;
 	}
 	
+	public String getClassDescription() {
+		return classDescription;
+	}
+
+	public void setClassDescription(String classDescription) {
+		this.classDescription = classDescription;
+	}
+
 	public Schedule getSchedule()
 	{
 		return schedule;
@@ -68,4 +95,5 @@ public class Class
 	{
 		assignments.add(assignment);
 	}
+
 }

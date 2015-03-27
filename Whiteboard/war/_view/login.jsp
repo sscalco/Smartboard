@@ -27,7 +27,7 @@
 		
 		<button type="submit">Login</button>
 		</form>
-		<form action="signup.jsp" method="get">
+		<form action="${pageContext.request.contextPath}/SignUp" method="get">
 		<button type="submit">Sign Up</button>
 		</form>
 	</div>

@@ -10,10 +10,8 @@ public class UserProfile {
 		
 	}
 	
-	public UserProfile(String username, String firstName, String lastName){
+	public UserProfile(String username){
 		this.username = username;
-		this.firstName = firstName;
-		this.lastName = lastName;
 	}
 	
 	public String getUsername(){

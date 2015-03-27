@@ -5,52 +5,109 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import com.YCPCS.Whiteboard.DBModel.*;
+import com.YCPCS.Whiteboard.Model.*;
+import com.YCPCS.Whiteboard.Model.Lecture;
 
 public class InitialData {
-	public static List<Username> getUsernames() throws IOException {
-		List<Username> usernameList = new ArrayList<Username>();
-		ReadCSV readUsernames= new ReadCSV("usernames.csv");
-		
+	
+	public static List<User> getUsers() throws IOException {
+		List<User> userList = new ArrayList<User>();
+		ReadCSV readUsers = new ReadCSV("Users.csv");
 		try {
 			while (true) {
-				List<String> tuple = readUsernames.next();
+				List<String> tuple = readUsers.next();
 				if (tuple == null) {
 					break;
 				}
 				Iterator<String> i = tuple.iterator();
-				Username username = new Username();
-				username.setUsername(i.next());
-				usernameList.add(username);
+				User user = new User();
+				user.setId(Integer.parseInt(i.next()));
+				user.setUsername(i.next());
+				user.setPassword(i.next());
+				user.setLastname(i.next());
+				user.setFirstname(i.next());
+				
+				//TODO: add whiteboard permissions
+				//TODO: add login date
+				
+				userList.add(user);
 			}
-		
-			return usernameList;
-		
+			return userList;
 		} finally {
-			readUsernames.close();
+			readUsers.close();
+		}
+	}
+
+	public static List<Lecture> getClasses() throws IOException {
+		List<Lecture> classList = new ArrayList<Lecture>();
+		ReadCSV readClasses = new ReadCSV("Classes.csv");
+		try {
+			while (true) {
+				List<String> tuple = readClasses.next();
+				if (tuple == null) {
+					break;
+				}
+				Iterator<String> i = tuple.iterator();
+				Lecture class1 = new Lecture();
+				class1.setClassId(Integer.parseInt(i.next()));
+				class1.setClassName(i.next());
+				class1.setClassDescription(i.next());
+				class1.setClassSize(Integer.parseInt(i.next()));
+				
+				classList.add(class1);
+			}
+			return classList;
+		} finally {
+			readClasses.close();
 		}
 	}
 	
-	public static List<Password> getPasswords() throws IOException {
-		List<Password> passwordList = new ArrayList<Password>();
-		ReadCSV readPasswords= new ReadCSV("passwords.csv");
-		
+	public static List<Assignment> getAssignments() throws IOException {
+		List<Assignment> assignmentList = new ArrayList<Assignment>();
+		ReadCSV readAssignments = new ReadCSV("Assignments.csv");
 		try {
 			while (true) {
-				List<String> tuple = readPasswords.next();
+				List<String> tuple = readAssignments.next();
 				if (tuple == null) {
 					break;
 				}
 				Iterator<String> i = tuple.iterator();
-				Password password = new Password();
-				password.setPassword(i.next());
-				passwordList.add(password);
+				Assignment assign = new Assignment();
+				assign.setId(Integer.parseInt(i.next()));
+				assign.setName(i.next());
+				assign.setPointValue(Integer.parseInt(i.next()));
+				assign.setDescription(i.next());
+				
+				assignmentList.add(assign);
 			}
-		
-			return passwordList;
-		
+			return assignmentList;
 		} finally {
-			readPasswords.close();
+			readAssignments.close();
+		}
+	}
+	
+	public static List<Relationship> getRelationships() throws IOException {
+		List<Relationship> relationshipList = new ArrayList<Relationship>();
+		ReadCSV readRelationships = new ReadCSV("Relationships.csv");
+		try {
+			while (true) {
+				List<String> tuple = readRelationships.next();
+				if (tuple == null) {
+					break;
+				}
+				Iterator<String> i = tuple.iterator();
+				Relationship rel = new Relationship();
+				rel.setId(Integer.parseInt(i.next()));
+				rel.setTarget(i.next());
+				rel.setRoot(i.next());
+				rel.setTargetId(Integer.parseInt(i.next()));
+				rel.setRootId(Integer.parseInt(i.next()));
+				
+				relationshipList.add(rel);
+			}
+			return relationshipList;
+		} finally {
+			readRelationships.close();
 		}
 	}
 }

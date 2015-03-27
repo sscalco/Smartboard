@@ -12,17 +12,27 @@ public class User {
 	private String lastname;
 	private Date lastLoginDate;
 	private WhiteboardPermissions permissions;
-	private UserProfile profile = new UserProfile();
-	private ArrayList<Class> classes = new ArrayList<Class>();
+	private UserProfile profile;
+
+	private ArrayList<Lecture> lectures = new ArrayList<Lecture>();
 
 	
 	public User(){
-		
+		profile = new UserProfile();
 	}
-	
+
 	public User(String username, String password){
 		this.username = username;
 		this.password = password;
+		profile = new UserProfile(username);
+	}
+	
+	public void setId(int id){
+		this.id = id;
+	}
+	
+	public int getId(){
+		return id;
 	}
 	
 	public void setUsername(String username){
@@ -33,12 +43,12 @@ public class User {
 		this.password = password;
 	}
 	
-	public void setFirstname(String name){
-		this.firstname = name;
-	}
-	
 	public void setLastname(String name){
 		this.lastname = name;
+	}
+	
+	public void setFirstname(String name){
+		this.firstname = name;
 	}
 	
 	public String getFirstname(){
@@ -73,14 +83,15 @@ public class User {
 		return lastLoginDate;
 	}
 	
-	public void addClass(Class id){
-		classes.add(id);
-	}
-	public ArrayList<Class> getClasses(){
-		return classes;
-	}
-	
 	public UserProfile getProfile(){
 		return profile;
+	}
+
+	public ArrayList<Lecture> getLectures() {
+		return lectures;
+	}
+
+	public void setLectures(ArrayList<Lecture> lectures) {
+		this.lectures = lectures;
 	}
 }
