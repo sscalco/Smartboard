@@ -1,22 +1,17 @@
 package com.YCPCS.JUnitTests;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import com.YCPCS.Assignment;
+import com.YCPCS.Department;
+import com.YCPCS.User;
 
 import junit.framework.TestCase;
-
-import com.YCPCS.Whiteboard.Database.InitialData;
-import com.YCPCS.Whiteboard.Model.Assignment;
-import com.YCPCS.Whiteboard.Model.Class;
-import com.YCPCS.Whiteboard.Model.User;
+import java.util.ArrayList;
 
 public class JUnitTests extends TestCase{
 	User user = new User();
-	Class aClass = new Class();
+	Department aClass = new Department();
 	ArrayList<User> students = new ArrayList<User>();
 	ArrayList<Assignment> assignments = new ArrayList<Assignment>();
-	List<User> usersList = new ArrayList<User>();
 	
 	public void testSetUsername(){
 		user.setUsername("User");
@@ -64,22 +59,5 @@ public class JUnitTests extends TestCase{
 			assertEquals(assignments.get(i), aClass.getAssignments().get(i));
 			assertEquals(i+1, aClass.getAssignments().size());
 		}
-	}
-	
-	// fake database
-	public void testReadInitialData(){
-		try {
-			usersList.addAll(InitialData.getUsers());
-		} catch (IOException e) {
-			throw new IllegalStateException("Couldn't read initial data", e);
-		}
-		
-		User user1 = usersList.get(0);
-		assertEquals(1, user1.getId());
-		assertEquals("Nexion21",user1.getUsername());
-		assertEquals("melon123",user1.getPassword());
-		assertEquals("Todd",user1.getFirstname());
-		assertEquals("Leach",user1.getLastname());
-			
 	}
 }

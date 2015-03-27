@@ -16,10 +16,18 @@ public class User {
 	public User(){
 		
 	}
-	
+
 	public User(String username, String password){
 		this.username = username;
 		this.password = password;
+	}
+	
+	public void setId(int id){
+		this.id = id;
+	}
+	
+	public int getId(){
+		return id;
 	}
 	
 	public void setUsername(String username){
@@ -30,12 +38,12 @@ public class User {
 		this.password = password;
 	}
 	
-	public void setFirstname(String name){
-		this.firstname = name;
-	}
-	
 	public void setLastname(String name){
 		this.lastname = name;
+	}
+	
+	public void setFirstname(String name){
+		this.firstname = name;
 	}
 	
 	public String getFirstname(){
