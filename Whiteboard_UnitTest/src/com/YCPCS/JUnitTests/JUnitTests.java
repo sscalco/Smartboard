@@ -83,6 +83,9 @@ public class JUnitTests extends TestCase{
 		assertEquals("Leach",user1.getLastname());
 		
 		Class class1 = classList.get(0);
+		assertEquals(0, class1.getClassId());
+		assertEquals("Computer Science 320", class1.getClassName());
+		assertEquals("Is Awesome", class1.getClassDescription());
 		assertEquals(15, class1.getClassSize());
 		
 	}

@@ -21,6 +21,7 @@ public class InitialData {
 				}
 				Iterator<String> i = tuple.iterator();
 				User user = new User();
+				user.setId(Integer.parseInt(i.next()));
 				user.setUsername(i.next());
 				user.setPassword(i.next());
 				user.setLastname(i.next());
@@ -46,6 +47,9 @@ public class InitialData {
 				}
 				Iterator<String> i = tuple.iterator();
 				Class class1 = new Class();
+				class1.setClassId(Integer.parseInt(i.next()));
+				class1.setClassName(i.next());
+				class1.setClassDescription(i.next());
 				class1.setClassSize(Integer.parseInt(i.next()));
 				
 				// add whiteboard permissions
