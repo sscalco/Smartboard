@@ -6,9 +6,11 @@ import java.util.List;
 
 import com.YCPCS.Whiteboard.Database.InitialData;
 import com.YCPCS.Whiteboard.Model.*;
+import com.YCPCS.Whiteboard.Model.Class;
 
 public class FakeDatabase implements DatabaseLayer{
 	private List<User> usersList;
+	private List<Class> classList;
 	private ArrayList<String> usernames;
 	private ArrayList<String> passwords;
 	private ArrayList<String> names = new ArrayList<String>();
@@ -16,6 +18,7 @@ public class FakeDatabase implements DatabaseLayer{
 	
 	public FakeDatabase() {
 		usersList = new ArrayList<User>();
+		classList = new ArrayList<Class>();
 		// get initial data
 		readInitialData();
 	}
@@ -23,6 +26,7 @@ public class FakeDatabase implements DatabaseLayer{
 	public void readInitialData() {
 		try {
 			usersList.addAll(InitialData.getUsers());
+			classList.addAll(InitialData.getClasses());
 		} catch (IOException e) {
 			throw new IllegalStateException("Couldn't read initial data", e);
 		}
