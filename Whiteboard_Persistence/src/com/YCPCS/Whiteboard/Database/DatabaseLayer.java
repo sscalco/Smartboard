@@ -1,5 +1,9 @@
 package com.YCPCS.Whiteboard.Database;
 
+import java.util.List;
+
+import com.YCPCS.Whiteboard.Model.Lecture;
+import com.YCPCS.Whiteboard.Model.Relationship;
 import com.YCPCS.Whiteboard.Model.User;
 
 public interface DatabaseLayer {
@@ -16,5 +20,9 @@ public interface DatabaseLayer {
 	public User getUserByUsernameAndPassword(String username, String password);
 	
 	public void addUserToDatabase(User user);
+
+	public Lecture getClassById(int id);
+
+	public List<Relationship> getRelationshipsByRootAndTarget(String root, String target);
 
 }

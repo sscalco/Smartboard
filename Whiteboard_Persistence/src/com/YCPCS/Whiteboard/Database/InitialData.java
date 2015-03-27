@@ -6,7 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import com.YCPCS.Whiteboard.Model.*;
-import com.YCPCS.Whiteboard.Model.Class;
+import com.YCPCS.Whiteboard.Model.Lecture;
 
 public class InitialData {
 	
@@ -38,8 +38,8 @@ public class InitialData {
 		}
 	}
 
-	public static List<Class> getClasses() throws IOException {
-		List<Class> classList = new ArrayList<Class>();
+	public static List<Lecture> getClasses() throws IOException {
+		List<Lecture> classList = new ArrayList<Lecture>();
 		ReadCSV readClasses = new ReadCSV("Classes.csv");
 		try {
 			while (true) {
@@ -48,7 +48,7 @@ public class InitialData {
 					break;
 				}
 				Iterator<String> i = tuple.iterator();
-				Class class1 = new Class();
+				Lecture class1 = new Lecture();
 				class1.setClassId(Integer.parseInt(i.next()));
 				class1.setClassName(i.next());
 				class1.setClassDescription(i.next());
@@ -83,6 +83,31 @@ public class InitialData {
 			return assignmentList;
 		} finally {
 			readAssignments.close();
+		}
+	}
+	
+	public static List<Relationship> getRelationships() throws IOException {
+		List<Relationship> relationshipList = new ArrayList<Relationship>();
+		ReadCSV readRelationships = new ReadCSV("Relationships.csv");
+		try {
+			while (true) {
+				List<String> tuple = readRelationships.next();
+				if (tuple == null) {
+					break;
+				}
+				Iterator<String> i = tuple.iterator();
+				Relationship rel = new Relationship();
+				rel.setId(Integer.parseInt(i.next()));
+				rel.setTarget(i.next());
+				rel.setRoot(i.next());
+				rel.setTargetId(Integer.parseInt(i.next()));
+				rel.setRootId(Integer.parseInt(i.next()));
+				
+				relationshipList.add(rel);
+			}
+			return relationshipList;
+		} finally {
+			readRelationships.close();
 		}
 	}
 }

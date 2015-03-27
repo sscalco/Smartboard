@@ -6,12 +6,12 @@ import java.util.List;
 
 import com.YCPCS.Whiteboard.Database.InitialData;
 import com.YCPCS.Whiteboard.Model.*;
-import com.YCPCS.Whiteboard.Model.Class;
 
 public class FakeDatabase implements DatabaseLayer{
 	private List<User> usersList;
-	private List<Class> classList;
+	private List<Lecture> classList;
 	private List<Assignment> assignmentList;
+	private List<Relationship> relationshipList;
 	private ArrayList<String> usernames;
 	private ArrayList<String> passwords;
 	private ArrayList<String> names = new ArrayList<String>();
@@ -20,8 +20,9 @@ public class FakeDatabase implements DatabaseLayer{
 	
 	public FakeDatabase() {
 		usersList = new ArrayList<User>();
-		classList = new ArrayList<Class>();
+		classList = new ArrayList<Lecture>();
 		assignmentList = new ArrayList<Assignment>();
+		relationshipList = new ArrayList<Relationship>();
 		// get initial data
 		readInitialData();
 	}
@@ -35,6 +36,7 @@ public class FakeDatabase implements DatabaseLayer{
 			usersList.addAll(InitialData.getUsers());
 			classList.addAll(InitialData.getClasses());
 			assignmentList.addAll(InitialData.getAssignments());
+			relationshipList.addAll(InitialData.getRelationships());
 		} catch (IOException e) {
 			throw new IllegalStateException("Couldn't read initial data", e);
 		}
@@ -81,7 +83,7 @@ public class FakeDatabase implements DatabaseLayer{
 	
 	// class
 	public String getClassNameFromId(int id){
-		for (Class class1 : classList){
+		for (Lecture class1 : classList){
 			if(class1.getClassId()==id){
 				return class1.getClassName();
 			}
@@ -90,7 +92,7 @@ public class FakeDatabase implements DatabaseLayer{
 	}
 	
 	public String getClassDescriptionFromId(int id){
-		for (Class class1 : classList){
+		for (Lecture class1 : classList){
 			if(class1.getClassId()==id){
 				return class1.getClassDescription();
 			}
@@ -99,11 +101,30 @@ public class FakeDatabase implements DatabaseLayer{
 	}
 	
 	public int getClassSizeFromId(int id){
-		for (Class class1 : classList){
+		for (Lecture class1 : classList){
 			if(class1.getClassId()==id){
 				return class1.getClassSize();
 			}
 		}
 		return 0;
+	}
+
+	public Lecture getClassById(int id) {
+		for(Lecture lecture : classList){
+			if(lecture.getClassId()==id){
+				return lecture;
+			}
+		}
+		return null;
+	}
+
+	public List<Relationship> getRelationshipsByRootAndTarget(String root, String target) {
+		List<Relationship> relList = new ArrayList<Relationship>();
+		for(Relationship rel : relationshipList){
+			if(rel.getRoot().equals(root) && rel.getTarget().equals(target)){
+				relList.add(rel);
+			}
+		}
+		return relList;
 	}
 }

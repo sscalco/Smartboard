@@ -1,6 +1,7 @@
 package com.YCPCS.Whiteboard.Model;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
 public class User {
 
@@ -11,6 +12,7 @@ public class User {
 	private String lastname;
 	private Date lastLoginDate;
 	private WhiteboardPermissions permissions;
+	private ArrayList<Lecture> lectures = new ArrayList<Lecture>();
 
 	
 	public User(){
@@ -76,5 +78,13 @@ public class User {
 	
 	public Date getLastLoginDate(){
 		return lastLoginDate;
+	}
+
+	public ArrayList<Lecture> getLectures() {
+		return lectures;
+	}
+
+	public void setLectures(ArrayList<Lecture> lectures) {
+		this.lectures = lectures;
 	}
 }

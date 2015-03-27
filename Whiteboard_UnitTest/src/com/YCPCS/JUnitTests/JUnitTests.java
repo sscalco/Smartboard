@@ -9,17 +9,17 @@ import junit.framework.TestCase;
 import com.YCPCS.Whiteboard.Database.FakeDatabase;
 import com.YCPCS.Whiteboard.Database.InitialData;
 import com.YCPCS.Whiteboard.Model.Assignment;
-import com.YCPCS.Whiteboard.Model.Class;
+import com.YCPCS.Whiteboard.Model.Lecture;
 import com.YCPCS.Whiteboard.Model.User;
 
 public class JUnitTests extends TestCase{
 	User user = new User();
-	Class aClass = new Class();
+	Lecture aClass = new Lecture();
 	FakeDatabase db = new FakeDatabase();
 	ArrayList<User> students = new ArrayList<User>();
 	ArrayList<Assignment> assignments = new ArrayList<Assignment>();
 	List<User> usersList = new ArrayList<User>();
-	List<Class> classList = new ArrayList<Class>();
+	List<Lecture> classList = new ArrayList<Lecture>();
 	List<Assignment> assignmentList = new ArrayList<Assignment>();
 	
 	public void setUp(){
@@ -90,7 +90,7 @@ public class JUnitTests extends TestCase{
 		assertEquals("Todd",user1.getFirstname());
 		assertEquals("Leach",user1.getLastname());
 		
-		Class class1 = classList.get(0);
+		Lecture class1 = classList.get(0);
 		assertEquals(0, class1.getClassId());
 		assertEquals("Computer Science 320", class1.getClassName());
 		assertEquals("Is Awesome", class1.getClassDescription());

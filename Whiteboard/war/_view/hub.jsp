@@ -12,7 +12,7 @@
 	<h3><form action="/hub"><button type="submit">My Account</button> | <button type="submit">Help</button> | <button type="submit" name="logout" value="true">Log Out</button></form></h3>
 	</div>	
 	<div id="Links">
-		<ul>Classes</ul>
+		<ul><form action="${pageContext.request.contextPath}/lecture"><button type="submit">Classes</button></form></ul>
 		<ul>Schedule</ul>
 		<ul>Calendar</ul>
 		<ul>Grades</ul>

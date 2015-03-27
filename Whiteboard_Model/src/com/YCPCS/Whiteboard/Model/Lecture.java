@@ -1,7 +1,7 @@
 package com.YCPCS.Whiteboard.Model;
 import java.util.ArrayList;
 
-public class Class 
+public class Lecture 
 {
 	//Declare Variables
 	private int classSize = 0;
@@ -14,12 +14,12 @@ public class Class
 	private Forum forum;
 	private Calendar calendar;
 	
-	public Class()
+	public Lecture()
 	{
 		
 	}
 	
-	public Class(int classSize){
+	public Lecture(int classSize){
 		this.classSize = classSize;
 	}
 	

@@ -18,10 +18,19 @@
   <servlet-name>SignUpServlet</servlet-name>
     <servlet-class>com.YCPCS.Whiteboard.servlet.SignUpServlet</servlet-class>
   </servlet>
+  <servlet>
+  <servlet-name>LectureServlet</servlet-name>
+    <servlet-class>com.YCPCS.Whiteboard.servlet.LectureServlet</servlet-class>
+  </servlet>
   <!-- Servlet mappings -->
   <servlet-mapping>
     <servlet-name>LoginServlet</servlet-name>
     <url-pattern>/login/*</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>LectureServlet</servlet-name>
+    <url-pattern>/lecture/*</url-pattern>
   </servlet-mapping>
   
   <servlet-mapping>
