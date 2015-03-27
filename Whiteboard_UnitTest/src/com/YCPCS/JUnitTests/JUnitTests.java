@@ -84,7 +84,7 @@ public class JUnitTests extends TestCase{
 		setUp();
 		
 		User user1 = usersList.get(0);
-		assertEquals(1, user1.getId());
+		assertEquals(0, user1.getId());
 		assertEquals("nexion21",user1.getUsername());
 		assertEquals("melons123",user1.getPassword());
 		assertEquals("Todd",user1.getFirstname());
@@ -114,7 +114,12 @@ public class JUnitTests extends TestCase{
 	
 	public void testGetNameFromId(){
 		setUp();
-		assertEquals(usersList.get(0).getFirstname(), db.getFirstNameFromId(1));
-		assertEquals(usersList.get(0).getLastname(), db.getLastNameFromId(1));
+		assertEquals("Todd", db.getFirstNameFromId(0));
+		assertEquals("Leach", db.getLastNameFromId(0));
+	}
+	
+	public void testGetClassSizeFromId(){
+		setUp();
+		assertEquals(15, db.getClassSizeFromId(0));
 	}
 }

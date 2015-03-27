@@ -97,4 +97,13 @@ public class FakeDatabase implements DatabaseLayer{
 		}
 		return null;
 	}
+	
+	public int getClassSizeFromId(int id){
+		for (Class class1 : classList){
+			if(class1.getClassId()==id){
+				return class1.getClassSize();
+			}
+		}
+		return 0;
+	}
 }
