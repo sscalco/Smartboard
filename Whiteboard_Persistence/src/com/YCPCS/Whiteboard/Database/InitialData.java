@@ -62,5 +62,29 @@ public class InitialData {
 		}
 	}
 	
-	
+	public static List<Assignment> getAssignments() throws IOException {
+		List<Assignment> assignmentList = new ArrayList<Assignment>();
+		ReadCSV readAssignments = new ReadCSV("Assignments.csv");
+		try {
+			while (true) {
+				List<String> tuple = readAssignments.next();
+				if (tuple == null) {
+					break;
+				}
+				Iterator<String> i = tuple.iterator();
+				Assignment assign = new Assignment();
+				assign.setId(Integer.parseInt(i.next()));
+				assign.setName(i.next());
+				assign.setPointValue(Integer.parseInt(i.next()));
+				assign.setDescription(i.next());
+				
+				// add whiteboard permissions
+				// add login date
+				assignmentList.add(assign);
+			}
+			return assignmentList;
+		} finally {
+			readAssignments.close();
+		}
+	}
 }

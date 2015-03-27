@@ -11,14 +11,17 @@ import com.YCPCS.Whiteboard.Model.Class;
 public class FakeDatabase implements DatabaseLayer{
 	private List<User> usersList;
 	private List<Class> classList;
+	private List<Assignment> assignmentList;
 	private ArrayList<String> usernames;
 	private ArrayList<String> passwords;
 	private ArrayList<String> names = new ArrayList<String>();
 	private ArrayList<Integer> userIds = new ArrayList<Integer>();
 	
+	
 	public FakeDatabase() {
 		usersList = new ArrayList<User>();
 		classList = new ArrayList<Class>();
+		assignmentList = new ArrayList<Assignment>();
 		// get initial data
 		readInitialData();
 	}
@@ -27,6 +30,7 @@ public class FakeDatabase implements DatabaseLayer{
 		try {
 			usersList.addAll(InitialData.getUsers());
 			classList.addAll(InitialData.getClasses());
+			assignmentList.addAll(InitialData.getAssignments());
 		} catch (IOException e) {
 			throw new IllegalStateException("Couldn't read initial data", e);
 		}

@@ -18,6 +18,7 @@ public class JUnitTests extends TestCase{
 	ArrayList<Assignment> assignments = new ArrayList<Assignment>();
 	List<User> usersList = new ArrayList<User>();
 	List<Class> classList = new ArrayList<Class>();
+	List<Assignment> assignmentList = new ArrayList<Assignment>();
 	
 	public void testSetUsername(){
 		user.setUsername("User");
@@ -72,6 +73,7 @@ public class JUnitTests extends TestCase{
 		try {
 			usersList.addAll(InitialData.getUsers());
 			classList.addAll(InitialData.getClasses());
+			assignmentList.addAll(InitialData.getAssignments());
 		} catch (IOException e) {
 			throw new IllegalStateException("Couldn't read initial data", e);
 		}
@@ -88,5 +90,10 @@ public class JUnitTests extends TestCase{
 		assertEquals("Is Awesome", class1.getClassDescription());
 		assertEquals(15, class1.getClassSize());
 		
+		Assignment assignment1 = assignmentList.get(0);
+		assertEquals(0,assignment1.getId());
+		assertEquals("Quiz 1", assignment1.getName());
+		assertEquals(20, assignment1.getPointValue());
+		assertEquals("20 questions pertaining to the philosophy of velociraptors", assignment1.getDescription());
 	}
 }

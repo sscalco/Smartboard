@@ -19,8 +19,7 @@ public class Class
 		
 	}
 	
-	public Class(int classSize)
-	{
+	public Class(int classSize){
 		this.classSize = classSize;
 	}
 	
