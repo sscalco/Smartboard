@@ -26,8 +26,10 @@ public class InitialData {
 				user.setPassword(i.next());
 				user.setLastname(i.next());
 				user.setFirstname(i.next());
+				
 				//TODO: add whiteboard permissions
 				//TODO: add login date
+				
 				userList.add(user);
 			}
 			return userList;
@@ -52,8 +54,6 @@ public class InitialData {
 				class1.setClassDescription(i.next());
 				class1.setClassSize(Integer.parseInt(i.next()));
 				
-				// add whiteboard permissions
-				// add login date
 				classList.add(class1);
 			}
 			return classList;
@@ -78,8 +78,6 @@ public class InitialData {
 				assign.setPointValue(Integer.parseInt(i.next()));
 				assign.setDescription(i.next());
 				
-				// add whiteboard permissions
-				// add login date
 				assignmentList.add(assign);
 			}
 			return assignmentList;

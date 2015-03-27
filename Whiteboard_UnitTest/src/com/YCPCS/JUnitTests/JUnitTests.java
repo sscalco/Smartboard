@@ -6,6 +6,7 @@ import java.util.List;
 
 import junit.framework.TestCase;
 
+import com.YCPCS.Whiteboard.Database.FakeDatabase;
 import com.YCPCS.Whiteboard.Database.InitialData;
 import com.YCPCS.Whiteboard.Model.Assignment;
 import com.YCPCS.Whiteboard.Model.Class;
@@ -14,12 +15,22 @@ import com.YCPCS.Whiteboard.Model.User;
 public class JUnitTests extends TestCase{
 	User user = new User();
 	Class aClass = new Class();
+	FakeDatabase db = new FakeDatabase();
 	ArrayList<User> students = new ArrayList<User>();
 	ArrayList<Assignment> assignments = new ArrayList<Assignment>();
 	List<User> usersList = new ArrayList<User>();
 	List<Class> classList = new ArrayList<Class>();
 	List<Assignment> assignmentList = new ArrayList<Assignment>();
 	
+	public void setUp(){
+		try {
+			usersList.addAll(InitialData.getUsers());
+			classList.addAll(InitialData.getClasses());
+			assignmentList.addAll(InitialData.getAssignments());
+		} catch (IOException e) {
+			throw new IllegalStateException("Couldn't read initial data", e);
+		}
+	}
 	public void testSetUsername(){
 		user.setUsername("User");
 		assertEquals("User", user.getUsername());
@@ -70,18 +81,12 @@ public class JUnitTests extends TestCase{
 	
 	// fake database
 	public void testReadInitialData(){
-		try {
-			usersList.addAll(InitialData.getUsers());
-			classList.addAll(InitialData.getClasses());
-			assignmentList.addAll(InitialData.getAssignments());
-		} catch (IOException e) {
-			throw new IllegalStateException("Couldn't read initial data", e);
-		}
+		setUp();
 		
 		User user1 = usersList.get(0);
 		assertEquals(1, user1.getId());
-		assertEquals("Nexion21",user1.getUsername());
-		assertEquals("melon123",user1.getPassword());
+		assertEquals("nexion21",user1.getUsername());
+		assertEquals("melons123",user1.getPassword());
 		assertEquals("Todd",user1.getFirstname());
 		assertEquals("Leach",user1.getLastname());
 		
@@ -96,5 +101,20 @@ public class JUnitTests extends TestCase{
 		assertEquals("Quiz 1", assignment1.getName());
 		assertEquals(20, assignment1.getPointValue());
 		assertEquals("20 questions pertaining to the philosophy of velociraptors", assignment1.getDescription());
+	}
+	
+	// TODO: compare user login information to match database (csv file)
+//	public void testGetUserByUsernameAndPassword(){
+//		setUp();
+//		
+//		User user = usersList.get(0);
+//		
+//
+//	}
+	
+	public void testGetNameFromId(){
+		setUp();
+		assertEquals(usersList.get(0).getFirstname(), db.getFirstNameFromId(1));
+		assertEquals(usersList.get(0).getLastname(), db.getLastNameFromId(1));
 	}
 }
