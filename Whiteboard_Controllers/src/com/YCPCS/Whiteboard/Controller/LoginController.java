@@ -18,16 +18,7 @@ public class LoginController {
 		
 		DatabaseLayer database = DatabaseProvider.getInstance();
 		
-		int userId = database.getUserIDByLogin(username, password);
-		
-		if(userId==-1){
-			return null;
-		}else{
-			User user = new User(username, password);
-			user.setFirstname(database.getFirstNameFromId(userId));
-		}
-		
-		return new User(username, password);
+		return database.getUserByUsernameAndPassword(username, password);
 	}
 
 }

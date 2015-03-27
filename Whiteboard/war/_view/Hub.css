@@ -30,11 +30,24 @@ ul {
 h3 {
 	text-align: right;
 	color: white;
-	margin-right: 1%;
+	margin-right: 5%;
 }
+button {
+    border: 0;
+    padding: 0;
+    display: inline;
+    background: none;
+    text-decoration: underline;
+    color: white;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
 #Options {
 	border-style: solid;
 	border-color: white;
 	border-left-width: 0px;
 	border-right-width: 0px;
-}
+}}

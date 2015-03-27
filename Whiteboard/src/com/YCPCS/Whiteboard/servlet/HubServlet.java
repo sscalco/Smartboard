@@ -21,15 +21,20 @@ public class HubServlet extends HttpServlet{
 	}
 	
 	private void doRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
-		User user = (User) req.getSession().getAttribute("user");
+		String doLogout = (String)req.getParameter("logout");
+		if(doLogout!=null && doLogout.equals("true")){
+			resp.encodeRedirectURL("/login");
+		}else{
+			User user = (User) req.getSession().getAttribute("user");
 			if (user == null) {
 				// User is not logged in, redirect to login page
 				// FIXME: this would be better to do using a filter
 				resp.sendRedirect(req.getContextPath() + "/login");
 				return;
 			}else{
-				req.setAttribute("username", user.getUsername());
+				req.setAttribute("username", user.getFirstname());
 			}
 		req.getRequestDispatcher("/_view/hub.jsp").forward(req, resp);
+		}
 	}
 }
