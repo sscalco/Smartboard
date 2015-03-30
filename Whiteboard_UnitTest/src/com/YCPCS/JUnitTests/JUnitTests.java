@@ -1,22 +1,20 @@
 package com.YCPCS.JUnitTests;
 
 
-import com.YCPCS.Whiteboard.Model.User;
-import com.YCPCS.Whiteboard.Model.Assignment;
-import com.YCPCS.Whiteboard.Model.UserProfile;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import junit.framework.TestCase;
 
-import java.util.ArrayList;
+import com.YCPCS.Whiteboard.Controller.LectureController;
+import com.YCPCS.Whiteboard.Database.DatabaseProvider;
 import com.YCPCS.Whiteboard.Database.FakeDatabase;
 import com.YCPCS.Whiteboard.Database.InitialData;
 import com.YCPCS.Whiteboard.Model.Assignment;
 import com.YCPCS.Whiteboard.Model.Lecture;
 import com.YCPCS.Whiteboard.Model.User;
+import com.YCPCS.Whiteboard.Model.UserProfile;
 
 public class JUnitTests extends TestCase{
 	User user = new User();
@@ -121,7 +119,7 @@ public class JUnitTests extends TestCase{
 		assertEquals("Leach",user1.getLastname());
 		
 		Lecture class1 = classList.get(0);
-		assertEquals(0, class1.getClassId());
+		assertEquals(1, class1.getClassId());
 		assertEquals("Computer Science 320", class1.getClassName());
 		assertEquals("Is Awesome", class1.getClassDescription());
 		assertEquals(15, class1.getClassSize());
@@ -163,6 +161,19 @@ public class JUnitTests extends TestCase{
 	
 	public void testGetClassSizeFromId(){
 		setUp();
-		assertEquals(15, db.getClassSizeFromId(0));
+		assertEquals(15, db.getClassSizeFromId(1));
+	}
+	
+	public void testRelationship(){
+		DatabaseProvider.setInstance(new FakeDatabase());
+		//System.out.println("Number Of Relationships: "+DatabaseProvider.getInstance().getRelationshipsByRootAndTarget("user", "lecture").size());
+		int targetId = DatabaseProvider.getInstance().getRelationshipsByRootAndTarget("user", "lecture").get(0).getTargetId();
+		//System.out.println("First relationship target id: " + targetId);
+		Lecture lecture = DatabaseProvider.getInstance().getClassById(targetId);
+		System.out.print(lecture.getClassName());
+	}
+	
+	public void testUserClassRelationship(){
+		
 	}
 }
