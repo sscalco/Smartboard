@@ -20,6 +20,7 @@
 			<p>Grades</p>
 		</div>
 	</div>
+	${classHTML}
 </body>	
 		
 </html>
