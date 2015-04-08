@@ -12,16 +12,19 @@ public class User {
 	private String lastname;
 	private Date lastLoginDate;
 	private WhiteboardPermissions permissions;
+	private UserProfile profile;
+
 	private ArrayList<Lecture> lectures = new ArrayList<Lecture>();
 
 	
 	public User(){
-		
+		profile = new UserProfile();
 	}
 
 	public User(String username, String password){
 		this.username = username;
 		this.password = password;
+		profile = new UserProfile(username);
 	}
 	
 	public void setId(int id){
@@ -78,6 +81,10 @@ public class User {
 	
 	public Date getLastLoginDate(){
 		return lastLoginDate;
+	}
+	
+	public UserProfile getProfile(){
+		return profile;
 	}
 
 	public ArrayList<Lecture> getLectures() {

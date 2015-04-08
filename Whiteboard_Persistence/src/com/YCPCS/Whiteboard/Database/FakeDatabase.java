@@ -12,10 +12,11 @@ public class FakeDatabase implements DatabaseLayer{
 	private List<Lecture> classList;
 	private List<Assignment> assignmentList;
 	private List<Relationship> relationshipList;
-	private ArrayList<String> usernames;
-	private ArrayList<String> passwords;
-	private ArrayList<String> names = new ArrayList<String>();
-	private ArrayList<Integer> userIds = new ArrayList<Integer>();
+	//Below is covered in the user class
+	//private ArrayList<String> usernames;
+	//private ArrayList<String> passwords;
+	//private ArrayList<String> names = new ArrayList<String>();
+	//private ArrayList<Integer> userIds = new ArrayList<Integer>();
 	
 	
 	public FakeDatabase() {
