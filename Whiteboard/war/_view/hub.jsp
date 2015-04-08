@@ -13,10 +13,10 @@
 	</div>	
 	<div id="Links">
 		<ul><form action="${pageContext.request.contextPath}/lecture"><button type="submit">Classes</button></form></ul>
-		<ul>Schedule</ul>
-		<ul>Calendar</ul>
-		<ul>Grades</ul>
-		<ul>Assignments</ul>
-		<ul>Forums</ul>
+		<ul><form action="${pageContext.request.contextPath}/schedule"><button type="submit">Schedule</button></form></ul>
+		<ul><form action="${pageContext.request.contextPath}/calendar"><button type="submit">Calendar</button></form></ul>
+		<ul><form action="${pageContext.request.contextPath}/grades"><button type="submit">Grades</button></form></ul>
+		<ul><form action="${pageContext.request.contextPath}/assignments"><button type="submit">Assignments</button></form></ul>
+		<ul><form action="${pageContext.request.contextPath}/forums"><button type="submit">Forums</button></form></ul>
 	</div>
 </html>
