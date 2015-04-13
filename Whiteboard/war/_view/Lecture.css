@@ -46,3 +46,9 @@ h2 {
 h3 {
 	margin-left: 1%;
 }
+input[type="submit"] {
+    
+    width: 200px; /* width of image */
+    height: 50px; /* height of image */
+    border: 0;
+}
