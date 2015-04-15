@@ -18,11 +18,7 @@ h2 {
 	text-align: left;
 	margin-left: 1%;
 }
-#Links {
-	font-size: 100%;
-	color: white;
-	text-align: center;
-}
+
 ul {
 	font-size: 140%;
 	color: white;
@@ -50,4 +46,10 @@ button:hover {
 	border-color: white;
 	border-left-width: 0px;
 	border-right-width: 0px;
-}}
+}
+#Links {
+	font-size: 100%;
+	color: white;
+	text-align: center;
+}
+}

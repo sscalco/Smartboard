@@ -1,6 +1,6 @@
 <html>
 	<head>
-	<link rel="stylesheet" type="text/css" href="_view/Lecture.css">
+	<link rel="stylesheet" type="text/css" href="_view/Assignment.css">
 	<div id="Title">
 		<title>SmartBoard</title>
 	</div>
@@ -18,10 +18,6 @@
 		<ul><form action="${pageContext.request.contextPath}/grades"><button type="submit">Grades</button></form></ul>
 		<ul><form action="${pageContext.request.contextPath}/assignments"><button type="submit">Assignments</button></form></ul>
 		<ul><form action="${pageContext.request.contextPath}/forums"><button type="submit">Forums</button></form></ul>
-	</div>
-	<div id="Class">
-		<h2>Computer Science</h2>
-		<h3>Professor: David Hovemeyer</h3>
 	</div>
 	${classHTML}
 </body>			
