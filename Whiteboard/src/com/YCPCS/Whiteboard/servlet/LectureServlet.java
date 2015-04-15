@@ -25,7 +25,7 @@ public class LectureServlet extends HttpServlet {
 	
 	private void doRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		String classCode = "TEST";
+		String classCode = "";
 		
 		User user = (User) req.getSession().getAttribute("user");
 		
@@ -35,10 +35,10 @@ public class LectureServlet extends HttpServlet {
 		}else{
 			
 			int userId = user.getId();
-			
+			//TODO: Make more secure
 			LectureController cont = new LectureController();
 			ArrayList<Lecture> lectures = (ArrayList<Lecture>) cont.getAllUserLectures(userId);
-			
+			System.out.println(lectures.size());
 			for(Lecture lecture : lectures){
 				String temp = 
 					"<div id=\"Class\">"+

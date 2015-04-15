@@ -21,8 +21,7 @@
   <servlet>
   <servlet-name>LectureServlet</servlet-name>
     <servlet-class>com.YCPCS.Whiteboard.servlet.LectureServlet</servlet-class>
-  </servlet>
-  <!-- Servlet mappings -->
+  </servlet><!-- Servlet mappings -->
   <servlet-mapping>
     <servlet-name>LoginServlet</servlet-name>
     <url-pattern>/login/*</url-pattern>
@@ -52,4 +51,5 @@
     <welcome-file>/login</welcome-file>
     <welcome-file>/hub</welcome-file>
   </welcome-file-list>
+  
 </web-app>
