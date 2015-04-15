@@ -10,6 +10,7 @@
 	<div id="Options">
 		<p>Account | Help | Logout</p>
 	</div>
+	<!-- 
 	<div id="Class">
 		<h2>Computer Science</h2>
 		<h3>Professor: David Hovemeyer</h3>
@@ -20,6 +21,7 @@
 			<p>Grades</p>
 		</div>
 	</div>
+	 -->
 	${classHTML}
 </body>	
 		
