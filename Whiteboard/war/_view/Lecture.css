@@ -32,17 +32,17 @@ body {
 }
 #OptionsBar {
 	float: right;
-	padding: 10px 30px;
+	color: green;
+	padding: 10px 30px 10px 30px;
 	margin-right: 1%;
+	font-size : 150%;
+	background-color: white;
+	border-style: solid;
+	border-color: black;
 }
 h2 {
 	margin-left: 1%;
 }
 h3 {
 	margin-left: 1%;
-}
-input[type="button"], input[type="submit"], input[type="reset"], input[type="file"]::-webkit-file-upload-button, button {
-	padding: 5px 20px;
-	font-size : large;
-	}
 }
