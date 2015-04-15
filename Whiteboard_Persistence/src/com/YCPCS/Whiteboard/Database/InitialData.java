@@ -53,7 +53,7 @@ public class InitialData {
 				class1.setClassName(i.next());
 				class1.setClassDescription(i.next());
 				class1.setClassSize(Integer.parseInt(i.next()));
-				
+				class1.setTeacher(i.next());
 				classList.add(class1);
 			}
 			return classList;
