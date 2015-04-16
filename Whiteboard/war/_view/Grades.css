@@ -1,0 +1,42 @@
+#Title {
+	font-size: 100%;
+	color: green;
+	text-align: center;
+	border-style: solid;
+	border-color: green;
+	border-left-width: 0px;
+	border-right-width: 0px;
+}
+h1 {
+	font-size: 300%;
+	background-color: white;
+	color: green;
+	text-align: center;
+	border-style: solid;
+	border-color: green;
+}
+#Grades {
+	background-color: white;
+	text-align:left;
+	border-style: solid;
+	border-color: black;
+	color: green;
+}
+body {
+	background-color: green;
+}
+#Options {
+	text-align: right;
+	color: white;
+}
+#GradeList {
+	text-align: right;
+	color: green;
+	margin-right: 1%;
+}
+h2 {
+	margin-left: 1%;
+}
+h3 {
+	margin-left: 1%;
+}
