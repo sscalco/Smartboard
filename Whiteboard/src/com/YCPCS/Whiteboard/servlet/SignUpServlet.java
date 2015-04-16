@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.YCPCS.Whiteboard.Database.DatabaseProvider;
 import com.YCPCS.Whiteboard.Model.User;
 
 public class SignUpServlet extends HttpServlet {
@@ -29,6 +30,8 @@ public class SignUpServlet extends HttpServlet {
 			user.setLastname((String) req.getParameter("lastname"));
 			user.setUsername((String) req.getParameter("username"));
 			user.setPassword((String) req.getParameter("password"));
+			DatabaseProvider.getInstance().addUserToDatabase(user);
+			
 		}else{
 			req.getRequestDispatcher("/_view/signup.jsp").forward(req, resp);
 		}
