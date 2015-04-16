@@ -26,6 +26,7 @@ public class InitialData {
 				user.setPassword(i.next());
 				user.setLastname(i.next());
 				user.setFirstname(i.next());
+				user.setEmail(i.next());
 				
 				//TODO: add whiteboard permissions
 				//TODO: add login date

@@ -30,6 +30,7 @@ public class SignUpServlet extends HttpServlet {
 			user.setLastname((String) req.getParameter("lastname"));
 			user.setUsername((String) req.getParameter("username"));
 			user.setPassword((String) req.getParameter("password"));
+			user.setEmail((String) req.getParameter("email"));
 			DatabaseProvider.getInstance().addUserToDatabase(user);
 			
 		}else{
