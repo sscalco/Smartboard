@@ -222,7 +222,7 @@ public class Database {
 			}
 			stmt.addBatch();
 		}
-		
+		reader.close();
 		conn.setAutoCommit(false);
 		stmt.executeBatch();
 		conn.setAutoCommit(true);

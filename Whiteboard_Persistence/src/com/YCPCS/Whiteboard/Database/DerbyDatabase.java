@@ -43,7 +43,8 @@ public class DerbyDatabase implements DatabaseLayer{
 				
 				try {
 					stmt = conn.prepareStatement("select id" +
-							"from users where username = ? and password = ?"
+							"from users " +
+							"where username = ? and password = ?"
 					);
 					stmt.setString(1, username);		
 					stmt.setString(2, password);
@@ -101,7 +102,36 @@ public class DerbyDatabase implements DatabaseLayer{
 	@Override
 	public String getLastNameFromId(int id) {
 		// TODO Auto-generated method stub
-		return null;
+		return executeTransaction(new Transaction<String>() {
+			@Override
+			public String execute(Connection conn) throws SQLException {
+				PreparedStatement stmt = null;
+				ResultSet resultSet = null;
+				
+				try {
+					stmt = conn.prepareStatement("select lastname" +
+							"from users" +
+							"where id = ? "
+					);
+					stmt.setInt(1, id);		
+					
+					
+					String lastname = "";
+					
+					resultSet = stmt.executeQuery();
+					
+					while (resultSet.next()){
+						// find out what data is in the resultset and set result 
+						
+					}
+					return lastname;
+				} finally {
+					DBUtil.closeQuietly(resultSet);
+					DBUtil.closeQuietly(stmt);
+				}
+			}
+		});
+		
 	}
 
 	@Override
@@ -125,7 +155,7 @@ public class DerbyDatabase implements DatabaseLayer{
 					resultSet = stmt.executeQuery();
 					
 					while (resultSet.next()){
-						loadUser(user, resultSet, 6);
+						loadUser(user, resultSet, 1);
 					}
 					return user;
 				} finally {
@@ -143,10 +173,39 @@ public class DerbyDatabase implements DatabaseLayer{
 		
 	}
 
+	// needs the corrected SQL statement
 	@Override
 	public Lecture getClassById(int id) {
 		// TODO Auto-generated method stub
-		return null;
+		return executeTransaction(new Transaction<Lecture>() {
+			@Override
+			public Lecture execute(Connection conn) throws SQLException {
+				PreparedStatement stmt = null;
+				ResultSet resultSet = null;
+				
+				try {
+					stmt = conn.prepareStatement("select class" +
+							"from X where id = ? "      //TODO: get lecture from SQL
+					);
+					stmt.setInt(1, id);		
+					
+					
+					Lecture lecture = new Lecture();
+					
+					resultSet = stmt.executeQuery();
+					
+					while (resultSet.next()){
+						loadLecture(lecture, resultSet, 1);
+						
+					}
+					return lecture;
+				} finally {
+					DBUtil.closeQuietly(resultSet);
+					DBUtil.closeQuietly(stmt);
+				}
+			}
+		});
+		
 	}
 
 	@Override
@@ -199,15 +258,8 @@ public class DerbyDatabase implements DatabaseLayer{
 		}
 	}
 
-
-	@Override
-	public Grade getGradeById(int id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	private Connection connect() throws SQLException {
-		Connection conn = DriverManager.getConnection("jdbc:derby:books.db;create=true");
+		Connection conn = DriverManager.getConnection("jdbc:derby:whiteboard.db;create=true");
 		
 		// Set autocommit to false to allow multiple the execution of
 		// multiple queries/statements as part of the same transaction.
@@ -246,7 +298,6 @@ public class DerbyDatabase implements DatabaseLayer{
 		assignment.setPointValue(resultSet.getInt(index++));
 		assignment.setName(resultSet.getString(index++));
 		assignment.setDescription(resultSet.getString(index++));
-		assignment.setAssignmentGrade(resultSet.getFloat(index++));
 	}
 	
 	public void createTables() {
@@ -301,12 +352,11 @@ public class DerbyDatabase implements DatabaseLayer{
 							")");
 					assignmentStmt.executeUpdate();
 					return true;
-				}catch(Exception e){
-					System.out.println("Tables have already been created");
-					return false;
-				}finally {
+				} finally {
 					DBUtil.closeQuietly(userStmt);
 					DBUtil.closeQuietly(lectureStmt);
+					DBUtil.closeQuietly(relationshipStmt);
+					DBUtil.closeQuietly(assignmentStmt);
 				}
 			}
 		});
@@ -320,8 +370,7 @@ public class DerbyDatabase implements DatabaseLayer{
 				List<Relationship> relationshipList;
 				List<User> userList;
 				List<Assignment> assignmentList;
-				// relationship
-				// user
+				
 				try {
 					lectureList = InitialData.getClasses();
 					relationshipList = InitialData.getRelationships();
@@ -337,14 +386,15 @@ public class DerbyDatabase implements DatabaseLayer{
 				PreparedStatement insertAssignment = null;
 
 				try {
-					insertLecture = conn.prepareStatement("insert into users values (?, ?, ?, ?)");
+					insertLecture = conn.prepareStatement("insert into lectures values (?, ?, ?, ?, ?)");
 					for (Lecture lecture : lectureList) {
-						//insertLecture.setInt(1, lecture.getClassId());
-						insertLecture.setString(1, lecture.getClassName());
-						insertLecture.setInt(2, lecture.getClassSize());
-						insertLecture.setString(3, lecture.getClassDescription());
-						insertLecture.setInt(4, lecture.getClassSize());
+						insertLecture.setInt(1, lecture.getClassId());
+						insertLecture.setString(2, lecture.getClassName());
+						insertLecture.setString(3, lecture.getTeacher());
+						insertLecture.setString(4, lecture.getClassDescription());
+						insertLecture.setInt(5, lecture.getClassSize());
 						insertLecture.addBatch();
+
 					}
 					insertLecture.executeBatch();
 					
@@ -354,7 +404,7 @@ public class DerbyDatabase implements DatabaseLayer{
 						insertRelationship.setInt(2, relationship.getRootId());
 						insertRelationship.setInt(3, relationship.getTargetId());
 						insertRelationship.setString(4, relationship.getRoot());
-						insertRelationship.setString(4, relationship.getTarget());
+						insertRelationship.setString(5, relationship.getTarget());
 						insertRelationship.addBatch();
 					}
 					insertRelationship.executeBatch();
@@ -362,23 +412,24 @@ public class DerbyDatabase implements DatabaseLayer{
 					insertUser = conn.prepareStatement("insert into users values (?, ?, ?, ?, ?, ?)");
 					for (User user : userList) {
 						insertUser.setInt(1, user.getId());
-						insertUser.setString(4, user.getUsername());
-						insertUser.setString(4, user.getPassword());
+						insertUser.setString(2, user.getUsername());
+						insertUser.setString(3, user.getPassword());
 						insertUser.setString(4, user.getLastname());
-						insertUser.setString(4, user.getFirstname());
-						insertUser.setString(4, user.getEmail());
+						insertUser.setString(5, user.getFirstname());
+						insertUser.setString(6, user.getEmail());
 						insertUser.addBatch();
+
 					}
 					insertUser.executeBatch();
 					
-					insertAssignment = conn.prepareStatement("insert into users values (?, ?, ?, ?, ?)");
+					insertAssignment = conn.prepareStatement("insert into assignments values (?, ?, ?, ?, ?)");
 					for (Assignment assignment : assignmentList) {
 						insertAssignment.setInt(1, assignment.getId());
-						insertAssignment.setString(2, assignment.getName());
-						insertAssignment.setInt(3, assignment.getPointValue());
+						insertAssignment.setInt(2, assignment.getPointValue());
+						insertAssignment.setString(3, assignment.getName());
 						insertAssignment.setString(4, assignment.getDescription());
-						insertAssignment.setFloat(5, assignment.getAssignmentGrade());
 						insertAssignment.addBatch();
+
 					}
 					insertAssignment.executeBatch();
 					
@@ -392,7 +443,10 @@ public class DerbyDatabase implements DatabaseLayer{
 			}
 		});
 	}
+	
+	
 	public static void main(String[] args) throws IOException {
+		
 		System.out.println("Creating tables...");
 		DerbyDatabase db = new DerbyDatabase();
 		db.createTables();
@@ -401,7 +455,11 @@ public class DerbyDatabase implements DatabaseLayer{
 		db.loadInitialData();
 		
 		System.out.println("Success!");
-		
-		System.out.println(db.getUserByUsernameAndPassword("bfwalton", "apple"));
+	}
+
+	@Override
+	public Grade getGradeById(int id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
