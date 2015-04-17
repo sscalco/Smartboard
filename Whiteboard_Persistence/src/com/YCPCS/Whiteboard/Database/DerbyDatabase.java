@@ -293,7 +293,10 @@ public class DerbyDatabase implements DatabaseLayer{
 							")");
 					assignmentStmt.executeUpdate();
 					return true;
-				} finally {
+				}catch(Exception e){
+					System.out.println("Tables have already been created");
+					return false;
+				}finally {
 					DBUtil.closeQuietly(userStmt);
 					DBUtil.closeQuietly(lectureStmt);
 				}
@@ -326,12 +329,13 @@ public class DerbyDatabase implements DatabaseLayer{
 				PreparedStatement insertAssignment = null;
 
 				try {
-					insertLecture = conn.prepareStatement("insert into users values (?, ?, ?, >)");
+					insertLecture = conn.prepareStatement("insert into users values (?, ?, ?, ?)");
 					for (Lecture lecture : lectureList) {
-						insertLecture.setInt(1, lecture.getClassId());
-						insertLecture.setString(2, lecture.getClassName());
-						insertLecture.setInt(3, lecture.getClassSize());
-						insertLecture.setString(4, lecture.getClassDescription());
+						//insertLecture.setInt(1, lecture.getClassId());
+						insertLecture.setString(1, lecture.getClassName());
+						insertLecture.setInt(2, lecture.getClassSize());
+						insertLecture.setString(3, lecture.getClassDescription());
+						insertLecture.setInt(4, lecture.getClassSize());
 						insertLecture.addBatch();
 					}
 					insertLecture.executeBatch();
@@ -359,13 +363,13 @@ public class DerbyDatabase implements DatabaseLayer{
 					}
 					insertUser.executeBatch();
 					
-					insertAssignment = conn.prepareStatement("insert into users values (?, ?, ?, ?, ?, ?)");
+					insertAssignment = conn.prepareStatement("insert into users values (?, ?, ?, ?, ?)");
 					for (Assignment assignment : assignmentList) {
 						insertAssignment.setInt(1, assignment.getId());
-						insertAssignment.setString(4, assignment.getName());
-						insertAssignment.setInt(4, assignment.getPointValue());
+						insertAssignment.setString(2, assignment.getName());
+						insertAssignment.setInt(3, assignment.getPointValue());
 						insertAssignment.setString(4, assignment.getDescription());
-						insertAssignment.setFloat(4, assignment.getAssignmentGrade());
+						insertAssignment.setFloat(5, assignment.getAssignmentGrade());
 						insertAssignment.addBatch();
 					}
 					insertAssignment.executeBatch();
@@ -389,5 +393,7 @@ public class DerbyDatabase implements DatabaseLayer{
 		db.loadInitialData();
 		
 		System.out.println("Success!");
+		
+		System.out.println(db.getUserByUsernameAndPassword("bfwalton", "apple"));
 	}
 }
