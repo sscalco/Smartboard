@@ -39,6 +39,6 @@ public class UserAccountServlet extends HttpServlet {
 				user.setPassword((String) req.getParameter("password"));
 				user.setEmail((String) req.getParameter("email"));
 			}
-			req.getRequestDispatcher("/_view/account.jsp").forward(req, resp);
+			req.getRequestDispatcher("/_view/Account.jsp").forward(req, resp);
 	}
 }

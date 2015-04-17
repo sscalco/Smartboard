@@ -30,14 +30,7 @@ public class HubServlet extends HttpServlet{
 		if(doLogout!=null && doLogout.equals("true")){
 			System.out.println("Logout is true: "+ doLogout);
 			resp.encodeRedirectURL("/login");
-		}
-		else if(doAccount != null && doAccount.equals("true")){
-			resp.encodeRedirectURL("/account");
-		}
-		else if(doHelp != null && doHelp.equals("true")) {
-			resp.encodeRedirectURL("/help");
-		}
-		else{
+		}else{
 			User user = (User) req.getSession().getAttribute("user");
 			if (user == null) {
 				// User is not logged in, redirect to login page
@@ -50,7 +43,8 @@ public class HubServlet extends HttpServlet{
 			
 		if(doHelp!=null && doHelp.equals("true")){
 			System.out.println("Help is true: "+ doHelp);
-			resp.sendRedirect(req.getContextPath() + "/");
+			resp.sendRedirect(req.getContextPath() + "/UserAccount");
+			return;
 		}else if(doAccount != null && doAccount.equals("true")){
 			System.out.println("Account Page is true: "+ doAccount);
 			resp.sendRedirect(req.getContextPath() + "/UserAccount");
