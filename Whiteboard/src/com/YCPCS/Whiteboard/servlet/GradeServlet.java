@@ -1,12 +1,15 @@
 package com.YCPCS.Whiteboard.servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.YCPCS.Whiteboard.Controller.LectureController;
+import com.YCPCS.Whiteboard.Model.Lecture;
 import com.YCPCS.Whiteboard.Model.User;
 
 public class GradeServlet extends HttpServlet {
@@ -23,18 +26,18 @@ public class GradeServlet extends HttpServlet {
 	}
 	
 	protected void doRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
 		User user = (User) req.getSession().getAttribute("user");
 		if (user == null) {
 			// User is not logged in, redirect to login page
 			resp.sendRedirect(req.getContextPath() + "/login");
 			return;
 		}
-		else{
-			req.setAttribute("username", user.getFirstname());
+		else{			
+			req.setAttribute("grade", user.getLectures().get(0).getGrade());			
+			//req.setAttribute("username", user.getFirstname());
 		}
-		req.getRequestDispatcher("/_view/grades.jsp").forward(req, resp);
-		
-		
+		req.getRequestDispatcher("/_view/Grades.jsp").forward(req, resp);		
 		
 	}
 	

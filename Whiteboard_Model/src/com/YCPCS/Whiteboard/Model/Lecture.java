@@ -14,6 +14,7 @@ public class Lecture
 	private Schedule schedule;
 	private Forum forum;
 	private Calendar calendar;
+	private Grade grade = new Grade();
 	
 	public Lecture()
 	{
@@ -103,6 +104,14 @@ public class Lecture
 
 	public void setTeacher(String teacher) {
 		this.teacher = teacher;
+	}
+	
+	public Grade getGrade(){
+		return grade;
+	}
+	
+	public void setGrade(double g){
+		grade.setGrade(g);
 	}
 
 }

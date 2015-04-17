@@ -14,7 +14,7 @@
 	<div id="Grades">
 		<h2>Computer Science</h2>
 		<h3>Professor: David Hovemeyer</h3>
-		<div id="GradeList">
+		<div id="grade">
 			<p>Assignment 1: </p>
 		</div>
 	</div>

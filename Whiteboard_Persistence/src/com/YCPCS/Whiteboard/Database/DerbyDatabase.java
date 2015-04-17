@@ -2,6 +2,7 @@ package com.YCPCS.Whiteboard.Database;
 
 import java.util.List;
 
+import com.YCPCS.Whiteboard.Model.Grade;
 import com.YCPCS.Whiteboard.Model.Lecture;
 import com.YCPCS.Whiteboard.Model.Relationship;
 import com.YCPCS.Whiteboard.Model.User;
@@ -47,6 +48,12 @@ public class DerbyDatabase implements DatabaseLayer{
 	@Override
 	public List<Relationship> getRelationshipsByRootAndTarget(String root,
 			String target) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Grade getGradeById(int id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
