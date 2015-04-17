@@ -9,29 +9,32 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.YCPCS.Whiteboard.Model.User;
 
-public class UserAccountServlet {
-	
+public class UserAccountServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
 	public class GradeServlet extends HttpServlet {
 		private static final long serialVersionUID = 1L;
-		
-		@Override
-		protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+		protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+				throws ServletException, IOException {
 			doRequest(req, resp);
 		}
-		
-		@Override
-		protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+		protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+				throws ServletException, IOException {
 			doRequest(req, resp);
 		}
-		
-		protected void doRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+		protected void doRequest(HttpServletRequest req,
+				HttpServletResponse resp) throws ServletException, IOException {
+			System.out.println("HERE");
+
 			User user = (User) req.getSession().getAttribute("user");
 			if (user == null) {
 				// User is not logged in, redirect to login page
 				resp.sendRedirect(req.getContextPath() + "/login");
 				return;
-			}
-			else{
+			} else {
 				req.setAttribute("username", user.getFirstname());
 				user.setFirstname((String) req.getParameter("firstname"));
 				user.setLastname((String) req.getParameter("lastname"));
@@ -40,8 +43,6 @@ public class UserAccountServlet {
 				user.setEmail((String) req.getParameter("email"));
 			}
 			req.getRequestDispatcher("/_view/account.jsp").forward(req, resp);
-			
-			
 		}
 	}
 }

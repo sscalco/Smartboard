@@ -22,7 +22,13 @@ public class HubServlet extends HttpServlet{
 	
 	private void doRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
 		String doLogout = (String)req.getParameter("logout");
+		String doHelp = (String)req.getParameter("help");
+		String doAccount = (String)req.getParameter("account");
+		
+		System.out.println(doLogout +" "+ doHelp +" "+ doAccount);
+		
 		if(doLogout!=null && doLogout.equals("true")){
+			System.out.println("Logout is true: "+ doLogout);
 			resp.encodeRedirectURL("/login");
 		}else{
 			User user = (User) req.getSession().getAttribute("user");
@@ -34,7 +40,17 @@ public class HubServlet extends HttpServlet{
 			}else{
 				req.setAttribute("username", user.getFirstname());
 			}
-		req.getRequestDispatcher("/_view/hub.jsp").forward(req, resp);
+			
+		if(doHelp!=null && doHelp.equals("true")){
+			System.out.println("Help is true: "+ doHelp);
+			resp.sendRedirect(req.getContextPath() + "/");
+		}else if(doAccount != null && doAccount.equals("true")){
+			System.out.println("Account Page is true: "+ doAccount);
+			resp.sendRedirect(req.getContextPath() + "/UserAccount");
+			return;
+		}else{
+			req.getRequestDispatcher("/_view/hub.jsp").forward(req, resp);
+		}
 		}
 	}
 }
