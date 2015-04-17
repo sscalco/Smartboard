@@ -27,7 +27,8 @@ body {
 p {
 	color: white;
 }
-#Options {
+h3 {
 	text-align: right;
 	color: white;
+	margin-right: 5%;
 }

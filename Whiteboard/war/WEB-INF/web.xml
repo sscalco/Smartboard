@@ -30,6 +30,10 @@
   <servlet-name>LectureServlet</servlet-name>
     <servlet-class>com.YCPCS.Whiteboard.servlet.LectureServlet</servlet-class>
   </servlet>
+  <servlet>
+  <servlet-name>HelpServlet</servlet-name>
+    <servlet-class>com.YCPCS.Whiteboard.servlet.HelpServlet</servlet-class>
+  </servlet>
   
   <!-- Servlet mappings -->
   <servlet-mapping>
@@ -55,6 +59,10 @@
   <servlet-mapping>
     <servlet-name>HubServlet</servlet-name>
     <url-pattern>/hub/*</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>HelpServlet</servlet-name>
+    <url-pattern>/Help/*</url-pattern>
   </servlet-mapping>
  
   

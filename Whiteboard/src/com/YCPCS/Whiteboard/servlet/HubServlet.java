@@ -42,7 +42,7 @@ public class HubServlet extends HttpServlet {
 
 		if (doHelp != null && doHelp.equals("true")) {
 			//System.out.println("Help is true: " + doHelp);
-			resp.sendRedirect(req.getContextPath() + "/ClassCreate");
+			resp.sendRedirect(req.getContextPath() + "/Help");
 			return;
 		} else if (doAccount != null && doAccount.equals("true")) {
 			//System.out.println("Account Page is true: " + doAccount);
