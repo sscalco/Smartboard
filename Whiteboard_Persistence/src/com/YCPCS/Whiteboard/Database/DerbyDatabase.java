@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import com.YCPCS.Whiteboard.Model.Grade;
 import com.YCPCS.Whiteboard.Model.Lecture;
 import com.YCPCS.Whiteboard.Model.Relationship;
 import com.YCPCS.Whiteboard.Model.User;
@@ -196,6 +197,13 @@ public class DerbyDatabase implements DatabaseLayer{
 		} finally {
 			DBUtil.closeQuietly(conn);
 		}
+	}
+
+
+	@Override
+	public Grade getGradeById(int id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	private Connection connect() throws SQLException {

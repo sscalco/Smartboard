@@ -128,4 +128,12 @@ public class FakeDatabase implements DatabaseLayer{
 		}
 		return relList;
 	}
+
+	public Grade getGradeById(int id) {
+		for(Lecture lecture: classList){
+			if(lecture.getClassId()==id)
+				return lecture.getGrade();
+		}
+		return null;
+	}
 }
