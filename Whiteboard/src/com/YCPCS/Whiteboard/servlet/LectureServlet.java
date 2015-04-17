@@ -26,13 +26,30 @@ public class LectureServlet extends HttpServlet {
 	private void doRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		String classCode = "";
+		String doLogout = (String) req.getParameter("logout");
+		String doHelp = (String) req.getParameter("help");
+		String doAccount = (String) req.getParameter("account");
 		
 		User user = (User) req.getSession().getAttribute("user");
 		
 		if(user == null){
 			resp.encodeRedirectURL("/login");
 			return;
-		}else{
+		}
+		if (doHelp != null && doHelp.equals("true")) {
+			//System.out.println("Help is true: " + doHelp);
+			resp.sendRedirect(req.getContextPath() + "/Help");
+			return;
+		} else if (doAccount != null && doAccount.equals("true")) {
+			//System.out.println("Account Page is true: " + doAccount);
+			resp.sendRedirect(req.getContextPath() + "/UserAccount");
+			return;
+		} else if (doLogout != null && doLogout.equals("true")) {
+			//System.out.println("DOING LOGOUT");
+			req.setAttribute("username", null);
+			resp.sendRedirect(req.getContextPath() + "/login");
+		}
+		else{
 			
 			int userId = user.getId();
 			//TODO: Make more secure

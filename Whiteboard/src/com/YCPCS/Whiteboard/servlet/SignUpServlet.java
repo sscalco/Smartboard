@@ -32,7 +32,7 @@ public class SignUpServlet extends HttpServlet {
 			user.setPassword((String) req.getParameter("password"));
 			user.setEmail((String) req.getParameter("email"));
 			DatabaseProvider.getInstance().addUserToDatabase(user);
-			
+			resp.sendRedirect(req.getContextPath() + "/login");
 		}else{
 			req.getRequestDispatcher("/_view/signup.jsp").forward(req, resp);
 		}

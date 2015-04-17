@@ -185,4 +185,9 @@ public class JUnitTests extends TestCase{
 		assertEquals(89.5, grade.getGrade());
 		assertEquals("A", grade.getLetter());
 	}
+	
+	// real database
+	public void testGetUserIDByLogin(){
+		
+	}
 }
