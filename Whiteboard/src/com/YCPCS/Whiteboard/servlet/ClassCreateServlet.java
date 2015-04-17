@@ -22,11 +22,14 @@ public class ClassCreateServlet extends HttpServlet{
 	
 	private void doRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
 		User user = (User) req.getSession().getAttribute("user");
+		
 		if (user == null) {
-			resp.sendRedirect(req.getContextPath() + "/login");
+			//resp.sendRedirect(req.getContextPath() + "/login");
 			return;
 		}else{
 			req.setAttribute("username", user.getFirstname());
 		}
+		
+		req.getRequestDispatcher("/_view/createClass.jsp").forward(req, resp);
 	}
 }
