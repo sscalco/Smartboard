@@ -42,9 +42,8 @@ public class DerbyDatabase implements DatabaseLayer{
 				ResultSet resultSet = null;
 				
 				try {
-					stmt = conn.prepareStatement("select id" +
-							"from users " +
-							"where username = ? and password = ?"
+					stmt = conn.prepareStatement("select id from users " +
+							"where users.username = ? AND users.password = ?"
 					);
 					stmt.setString(1, username);		
 					stmt.setString(2, password);
@@ -54,7 +53,7 @@ public class DerbyDatabase implements DatabaseLayer{
 					resultSet = stmt.executeQuery();
 					
 					while (resultSet.next()){
-						
+						return resultSet.getInt(1);
 					}
 					return result;
 				} finally {
@@ -144,20 +143,23 @@ public class DerbyDatabase implements DatabaseLayer{
 				ResultSet resultSet = null;
 				
 				try {
-					stmt = conn.prepareStatement("select user" +
+					stmt = conn.prepareStatement("select users.* " +
 							"from users where username = ? and password = ?"
 					);
 					stmt.setString(1, username);		
 					stmt.setString(2, password);
 					
-					User user = new User();
-					
 					resultSet = stmt.executeQuery();
 					
-					while (resultSet.next()){
+					if (resultSet.next()){
+						// User was found
+						User user = new User();
 						loadUser(user, resultSet, 1);
+						return user;
+					} else {
+						// No such username/password combination
+						return null;
 					}
-					return user;
 				} finally {
 					DBUtil.closeQuietly(resultSet);
 					DBUtil.closeQuietly(stmt);
@@ -259,7 +261,8 @@ public class DerbyDatabase implements DatabaseLayer{
 	}
 
 	private Connection connect() throws SQLException {
-		Connection conn = DriverManager.getConnection("jdbc:derby:whiteboard.db;create=true");
+		String homeDir = System.getProperty("user.home");
+		Connection conn = DriverManager.getConnection("jdbc:derby:" + homeDir + "/whiteboard.db;create=true");
 		
 		// Set autocommit to false to allow multiple the execution of
 		// multiple queries/statements as part of the same transaction.
@@ -447,12 +450,16 @@ public class DerbyDatabase implements DatabaseLayer{
 	
 	public static void main(String[] args) throws IOException {
 		
-		System.out.println("Creating tables...");
+		System.out.println("Starting Database");
 		DerbyDatabase db = new DerbyDatabase();
+		//System.out.println("Creating tables...");
 		db.createTables();
 		
-		System.out.println("Loading initial data...");
+		//System.out.println("Loading initial data...");
 		db.loadInitialData();
+		
+		System.out.println("Testing Getting User from username and password");
+		System.out.println("User id = "+db.getUserIDByLogin("bfwalton", "apple"));
 		
 		System.out.println("Success!");
 	}
