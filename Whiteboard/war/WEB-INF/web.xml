@@ -34,6 +34,26 @@
   <servlet-name>HelpServlet</servlet-name>
     <servlet-class>com.YCPCS.Whiteboard.servlet.HelpServlet</servlet-class>
   </servlet>
+  <servlet>
+  <servlet-name>ScheduleServlet</servlet-name>
+    <servlet-class>com.YCPCS.Whiteboard.servlet.ScheduleServlet</servlet-class>
+  </servlet>
+  <servlet>
+  <servlet-name>CalendarServlet</servlet-name>
+    <servlet-class>com.YCPCS.Whiteboard.servlet.CalendarServlet</servlet-class>
+  </servlet>
+  <servlet>
+  <servlet-name>GradeServlet</servlet-name>
+    <servlet-class>com.YCPCS.Whiteboard.servlet.GradeServlet</servlet-class>
+  </servlet>
+  <servlet>
+  <servlet-name>AssignmentsServlet</servlet-name>
+    <servlet-class>com.YCPCS.Whiteboard.servlet.AssignmentsServlet</servlet-class>
+  </servlet>
+  <servlet>
+  <servlet-name>ForumsServlet</servlet-name>
+    <servlet-class>com.YCPCS.Whiteboard.servlet.ForumsServlet</servlet-class>
+  </servlet>
   
   <!-- Servlet mappings -->
   <servlet-mapping>
@@ -64,7 +84,26 @@
     <servlet-name>HelpServlet</servlet-name>
     <url-pattern>/Help/*</url-pattern>
   </servlet-mapping>
- 
+  <servlet-mapping>
+    <servlet-name>ScheduleServlet</servlet-name>
+    <url-pattern>/Schedule/*</url-pattern>
+  </servlet-mapping>
+    <servlet-mapping>
+    <servlet-name>CalendarServlet</servlet-name>
+    <url-pattern>/Calendar/*</url-pattern>
+  </servlet-mapping>
+    <servlet-mapping>
+    <servlet-name>GradeServlet</servlet-name>
+    <url-pattern>/Grades/*</url-pattern>
+  </servlet-mapping>
+    <servlet-mapping>
+    <servlet-name>AssignmentsServlet</servlet-name>
+    <url-pattern>/Assignments/*</url-pattern>
+  </servlet-mapping>
+    <servlet-mapping>
+    <servlet-name>ForumsServlet</servlet-name>
+    <url-pattern>/Forums/*</url-pattern>
+  </servlet-mapping> 
   
   <!-- Listeners -->
   <listener>

@@ -27,6 +27,11 @@ public class HubServlet extends HttpServlet {
 		String doLogout = (String) req.getParameter("logout");
 		String doHelp = (String) req.getParameter("help");
 		String doAccount = (String) req.getParameter("account");
+		String doSchedule = (String) req.getParameter("schedule");
+		String doCalendar = (String) req.getParameter("calendar");
+		String doGrades = (String) req.getParameter("grades");
+		String doAssignments = (String) req.getParameter("assignments");
+		String doForums = (String) req.getParameter("forums");
 
 		System.out.println(doLogout + " " + doHelp + " " + doAccount);
 
@@ -52,8 +57,36 @@ public class HubServlet extends HttpServlet {
 			//System.out.println("DOING LOGOUT");
 			req.setAttribute("username", null);
 			resp.sendRedirect(req.getContextPath() + "/login");
-		} else {
+		}
+		else if (doSchedule != null && doSchedule.equals("true")) {
+			//System.out.println("Account Page is true: " + doSchedule);
+			resp.sendRedirect(req.getContextPath() + "/Schedule");
+			return;
+		}
+		else if (doCalendar != null && doCalendar.equals("true")) {
+			//System.out.println("Account Page is true: " + doSchedule);
+			resp.sendRedirect(req.getContextPath() + "/Calendar");
+			return;
+		}
+		else if (doGrades != null && doGrades.equals("true")) {
+			//System.out.println("Account Page is true: " + doSchedule);
+			resp.sendRedirect(req.getContextPath() + "/Grades");
+			return;
+		}
+		else if (doAssignments != null && doAssignments.equals("true")) {
+			//System.out.println("Account Page is true: " + doSchedule);
+			resp.sendRedirect(req.getContextPath() + "/Assignments");
+			return;
+		}
+		else if (doForums != null && doForums.equals("true")) {
+			//System.out.println("Account Page is true: " + doSchedule);
+			resp.sendRedirect(req.getContextPath() + "/Forums");
+			return;
+		}
+		else {
 			req.getRequestDispatcher("/_view/hub.jsp").forward(req, resp);
 		}
+		
+		
 	}
 }
