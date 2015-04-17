@@ -22,9 +22,14 @@ public class HubServlet extends HttpServlet{
 	
 	private void doRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
 		String doLogout = (String)req.getParameter("logout");
+		String doAccount = (String)req.getParameter("account");
 		if(doLogout!=null && doLogout.equals("true")){
 			resp.encodeRedirectURL("/login");
-		}else{
+		}
+		else if(doAccount != null && doAccount.equals("true")){
+			resp.encodeRedirectURL("/account");
+		}
+		else{
 			User user = (User) req.getSession().getAttribute("user");
 			if (user == null) {
 				// User is not logged in, redirect to login page
