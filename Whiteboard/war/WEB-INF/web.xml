@@ -42,7 +42,7 @@
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>ClassCreateServlet</servlet-name>
-    <url-pattern>/CreateClass/*</url-pattern>
+    <url-pattern>/ClassCreate/*</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>LectureServlet</servlet-name>
