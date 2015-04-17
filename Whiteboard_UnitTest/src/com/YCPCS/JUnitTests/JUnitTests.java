@@ -177,4 +177,9 @@ public class JUnitTests extends TestCase{
 	public void testUserClassRelationship(){
 		
 	}
+	
+	// real database
+	public void testGetUserIDByLogin(){
+		
+	}
 }

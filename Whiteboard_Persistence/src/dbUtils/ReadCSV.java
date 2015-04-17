@@ -1,4 +1,4 @@
-package com.YCPCS.Whiteboard.Database;
+package dbUtils;
 
 import java.io.BufferedReader;
 import java.io.Closeable;

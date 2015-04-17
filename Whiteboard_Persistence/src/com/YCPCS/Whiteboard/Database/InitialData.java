@@ -6,7 +6,8 @@ import java.util.Iterator;
 import java.util.List;
 
 import com.YCPCS.Whiteboard.Model.*;
-import com.YCPCS.Whiteboard.Model.Lecture;
+
+import dbUtils.ReadCSV;
 
 public class InitialData {
 	
