@@ -6,7 +6,6 @@ public class Assignment {
 	private int pointValue;
 	private String name;
 	private String description;
-	private String assignmentName;
 	private float assignmentGrade;
 	
 	public Assignment(){
@@ -45,13 +44,6 @@ public class Assignment {
 		this.description = description;
 	}
 	
-	public String getAssignmentName() {
-		return assignmentName;
-	}
-
-	public void setAssignmentName(String assignmentName) {
-		this.assignmentName = assignmentName;
-	}
 
 	public float getAssignmentGrade() {
 		return assignmentGrade;

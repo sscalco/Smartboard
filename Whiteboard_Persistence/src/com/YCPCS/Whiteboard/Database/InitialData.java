@@ -6,7 +6,8 @@ import java.util.Iterator;
 import java.util.List;
 
 import com.YCPCS.Whiteboard.Model.*;
-import com.YCPCS.Whiteboard.Model.Lecture;
+
+import dbUtils.ReadCSV;
 
 public class InitialData {
 	
@@ -26,6 +27,7 @@ public class InitialData {
 				user.setPassword(i.next());
 				user.setLastname(i.next());
 				user.setFirstname(i.next());
+				user.setEmail(i.next());
 				
 				//TODO: add whiteboard permissions
 				//TODO: add login date

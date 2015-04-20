@@ -10,6 +10,7 @@ public class User {
 	private String password;	//Should be storing the password as a hash
 	private String firstname;
 	private String lastname;
+	private String email;
 	private Date lastLoginDate;
 	private WhiteboardPermissions permissions;
 	private UserProfile profile;
@@ -93,5 +94,13 @@ public class User {
 
 	public void setLectures(ArrayList<Lecture> lectures) {
 		this.lectures = lectures;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 }

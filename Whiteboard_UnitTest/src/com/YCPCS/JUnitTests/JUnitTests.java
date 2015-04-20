@@ -12,6 +12,7 @@ import com.YCPCS.Whiteboard.Database.DatabaseProvider;
 import com.YCPCS.Whiteboard.Database.FakeDatabase;
 import com.YCPCS.Whiteboard.Database.InitialData;
 import com.YCPCS.Whiteboard.Model.Assignment;
+import com.YCPCS.Whiteboard.Model.Grade;
 import com.YCPCS.Whiteboard.Model.Lecture;
 import com.YCPCS.Whiteboard.Model.User;
 import com.YCPCS.Whiteboard.Model.UserProfile;
@@ -175,6 +176,18 @@ public class JUnitTests extends TestCase{
 	}
 	
 	public void testUserClassRelationship(){
+		
+	}
+	
+	public void testGradeLetters(){
+		Grade grade = new Grade();
+		grade.setGrade(89.5);
+		assertEquals(89.5, grade.getGrade());
+		assertEquals("A", grade.getLetter());
+	}
+	
+	// real database
+	public void testGetUserIDByLogin(){
 		
 	}
 }

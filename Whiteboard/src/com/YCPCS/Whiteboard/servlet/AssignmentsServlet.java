@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.YCPCS.Whiteboard.Model.User;
 
-public class ScheduleServlet extends HttpServlet {
+public class AssignmentsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -51,7 +51,6 @@ public class ScheduleServlet extends HttpServlet {
 		else {
 			req.setAttribute("username", user.getFirstname());
 		}
-		req.getRequestDispatcher("/_view/Schedule.jsp").forward(req, resp);
+		req.getRequestDispatcher("/_view/Assignments.jsp").forward(req, resp);
 	}
 }
->>>>>>> refs/remotes/master/master

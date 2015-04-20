@@ -26,9 +26,10 @@ h1 {
 body {
 	background-color: green;
 }
-#Options {
+h3 {
 	text-align: right;
 	color: white;
+	margin-right: 5%;
 }
 #OptionsBar {
 	float: right;

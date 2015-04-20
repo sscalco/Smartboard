@@ -10,7 +10,7 @@
 		<h1>Welcome to SmartBoard!</h1>
 		<h2>Please Enter Information Below!</h2>
 	<div id="SignUpBox">
-		<form>
+		<form action="${pageContext.request.contextPath}/SignUp" method="get">
 		
 		<p>First Name:</p>
 		<input type="text" name="firstname">
@@ -28,8 +28,8 @@
 		<input type="text" name="password">
 		<br>
 		<br>
-		
-		<button type="button">Sign Up</button>
+		<input type="hidden" name="signup" id="signup"value="true"/>
+		<button type="submit">Sign Up</button>
 		</form>
 	</div>
 	</body>
