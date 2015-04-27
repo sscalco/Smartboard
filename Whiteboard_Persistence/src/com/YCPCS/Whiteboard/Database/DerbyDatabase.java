@@ -471,7 +471,7 @@ public class DerbyDatabase implements DatabaseLayer{
 		System.out.println("Loading initial data...");
 		db.loadInitialData();
 		
-		System.out.println("\nTesting Getting User from username and password");
+		System.out.println("\nTesting Getting User ID from username and password");
 		System.out.println("User id = "+db.getUserIDByLogin("bfwalton", "apple"));
 		
 		System.out.println("\nTesting Getting First Name from ID");
@@ -490,7 +490,7 @@ public class DerbyDatabase implements DatabaseLayer{
 		
 		System.out.println("User added");
 		
-		System.out.println("\nTrying to check user");
+		System.out.println("\nTesting to check user");
 		System.out.println("Test user id: "+db.getUserIDByLogin("TEST_USER", "banana"));
 		
 		
@@ -498,9 +498,40 @@ public class DerbyDatabase implements DatabaseLayer{
 		System.out.println("Success!");
 	}
 
+	//TODO:Finish the if(resultset.next() statement, create a loadGrade()
 	@Override
 	public Grade getGradeById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return executeTransaction(new Transaction<Grade>() {
+			@Override
+			public Grade execute(Connection conn) throws SQLException {
+				PreparedStatement stmt = null;
+				ResultSet resultSet = null;
+				
+				try {
+					stmt = conn.prepareStatement("select users.* " +
+							"from users where id = ?"
+					);
+					stmt.setInt(1, id);		
+					
+					
+					resultSet = stmt.executeQuery();
+					
+					if (resultSet.next()){
+						// grade was found
+						Grade grade = new Grade();
+						//TODO: create loadGrade method
+						//loadGrade();
+						return grade;
+					} else {
+						// No grade from this id
+						return null;
+					}
+				} finally {
+					DBUtil.closeQuietly(resultSet);
+					DBUtil.closeQuietly(stmt);
+				}
+			}
+		});
+		
 	}
 }
