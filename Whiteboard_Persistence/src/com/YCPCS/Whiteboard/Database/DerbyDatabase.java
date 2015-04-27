@@ -6,7 +6,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.List;
 
 import com.YCPCS.Whiteboard.Model.Assignment;
@@ -175,12 +174,12 @@ public class DerbyDatabase implements DatabaseLayer{
 		Connection conn = null;
 		try{
 			conn = connect();
-			PreparedStatement statement = conn.prepareStatement("INSERT INTO users (id, username, password, firstname, lastname)" + "VALUES (?, ?, ?, ?, ?)");
-			statement.setInt(1, user.getId());
-			statement.setString(2, user.getUsername());
-			statement.setString(3, user.getPassword());
-			statement.setString(4, user.getFirstname());
-			statement.setString(5, user.getLastname());
+			PreparedStatement statement = conn.prepareStatement("INSERT INTO users (username, password, firstname, lastname, email)" + "VALUES (?, ?, ?, ?, ?)");
+			statement.setString(1, user.getUsername());
+			statement.setString(2, user.getPassword());
+			statement.setString(3, user.getFirstname());
+			statement.setString(4, user.getLastname());
+			statement.setString(5, user.getEmail());
 			statement.execute();
 			conn.commit();
 			return;
@@ -332,7 +331,7 @@ public class DerbyDatabase implements DatabaseLayer{
 				try {
 					userStmt = conn.prepareStatement(
 							"create table users (" +
-							"    id integer primary key," +
+							"    id INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY," +
 							"    username varchar(20)," +
 							"    password varchar(30)," +
 							"    lastname varchar(40)," +
@@ -428,14 +427,13 @@ public class DerbyDatabase implements DatabaseLayer{
 					}
 					insertRelationship.executeBatch();
 					
-					insertUser = conn.prepareStatement("insert into users values (?, ?, ?, ?, ?, ?)");
+					insertUser = conn.prepareStatement("insert into users (username, password, lastname, firstname, email) values (?, ?, ?, ?, ?)");
 					for (User user : userList) {
-						insertUser.setInt(1, user.getId());
-						insertUser.setString(2, user.getUsername());
-						insertUser.setString(3, user.getPassword());
-						insertUser.setString(4, user.getLastname());
-						insertUser.setString(5, user.getFirstname());
-						insertUser.setString(6, user.getEmail());
+						insertUser.setString(1, user.getUsername());
+						insertUser.setString(2, user.getPassword());
+						insertUser.setString(3, user.getLastname());
+						insertUser.setString(4, user.getFirstname());
+						insertUser.setString(5, user.getEmail());
 						insertUser.addBatch();
 
 					}
@@ -468,22 +466,20 @@ public class DerbyDatabase implements DatabaseLayer{
 		
 		System.out.println("Starting Database");
 		DerbyDatabase db = new DerbyDatabase();
-		//System.out.println("Creating tables...");
-		//db.createTables();
+		System.out.println("Creating tables...");
+		db.createTables();
 		
-		//System.out.println("Loading initial data...");
-		//db.loadInitialData();
+		System.out.println("Loading initial data...");
+		db.loadInitialData();
 		
 		System.out.println("Testing Getting User from username and password");
 		System.out.println("User id = "+db.getUserIDByLogin("bfwalton", "apple"));
-//		 getFirstNameFromId
 		System.out.println("Testing Getting First Name from ID");
 		System.out.println("First Name = " + db.getFirstNameFromId(4));
 		
 		System.out.println("Testing add user");
 		User testUser = new User();
-		testUser.setId(6);
-		testUser.setUsername("TEST_USER");
+		testUser.setUsername("I AM A TEST");
 		testUser.setPassword("banana");
 		testUser.setFirstname("BOB");
 		testUser.setLastname("Testuser");
