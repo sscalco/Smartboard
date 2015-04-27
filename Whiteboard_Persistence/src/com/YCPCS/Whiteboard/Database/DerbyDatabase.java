@@ -6,13 +6,14 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 
+import com.YCPCS.Whiteboard.Model.Assignment;
 import com.YCPCS.Whiteboard.Model.Grade;
 import com.YCPCS.Whiteboard.Model.Lecture;
 import com.YCPCS.Whiteboard.Model.Relationship;
 import com.YCPCS.Whiteboard.Model.User;
-import com.YCPCS.Whiteboard.Model.Assignment;
 
 import dbUtils.DBUtil;
 import dbUtils.PersistenceException;
@@ -171,8 +172,23 @@ public class DerbyDatabase implements DatabaseLayer{
 
 	@Override
 	public void addUserToDatabase(User user) {
-		// TODO Auto-generated method stub
-		
+		Connection conn = null;
+		try{
+			conn = connect();
+			PreparedStatement statement = conn.prepareStatement("INSERT INTO users (id, username, password, firstname, lastname)" + "VALUES (?, ?, ?, ?, ?)");
+			statement.setInt(1, user.getId());
+			statement.setString(2, user.getUsername());
+			statement.setString(3, user.getPassword());
+			statement.setString(4, user.getFirstname());
+			statement.setString(5, user.getLastname());
+			statement.execute();
+			conn.commit();
+			return;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			DBUtil.closeQuietly(conn);
+		}
 	}
 
 	// needs the corrected SQL statement
@@ -453,14 +469,27 @@ public class DerbyDatabase implements DatabaseLayer{
 		System.out.println("Starting Database");
 		DerbyDatabase db = new DerbyDatabase();
 		//System.out.println("Creating tables...");
-		db.createTables();
+		//db.createTables();
 		
 		//System.out.println("Loading initial data...");
-		db.loadInitialData();
+		//db.loadInitialData();
 		
 		System.out.println("Testing Getting User from username and password");
 		System.out.println("User id = "+db.getUserIDByLogin("bfwalton", "apple"));
 		
+		System.out.println("Testing add user");
+		User testUser = new User();
+		testUser.setId(6);
+		testUser.setUsername("TEST_USER");
+		testUser.setPassword("banana");
+		testUser.setFirstname("BOB");
+		testUser.setLastname("Testuser");
+		db.addUserToDatabase(testUser);
+		
+		System.out.println("User added");
+		
+		System.out.println("Tring to check user");
+		System.out.println("Test user id: "+db.getUserIDByLogin("TEST_USER", "banana"));
 		System.out.println("Success!");
 	}
 
