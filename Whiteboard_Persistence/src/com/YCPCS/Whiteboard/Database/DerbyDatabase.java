@@ -114,7 +114,6 @@ public class DerbyDatabase implements DatabaseLayer{
 					);
 					stmt.setInt(1, id);		
 					
-					
 					String lastname = "";
 					
 					resultSet = stmt.executeQuery();
@@ -472,12 +471,16 @@ public class DerbyDatabase implements DatabaseLayer{
 		System.out.println("Loading initial data...");
 		db.loadInitialData();
 		
-		System.out.println("Testing Getting User from username and password");
+		System.out.println("\nTesting Getting User from username and password");
 		System.out.println("User id = "+db.getUserIDByLogin("bfwalton", "apple"));
-		System.out.println("Testing Getting First Name from ID");
+		
+		System.out.println("\nTesting Getting First Name from ID");
 		System.out.println("First Name = " + db.getFirstNameFromId(4));
 		
-		System.out.println("Testing add user");
+		System.out.println("\nTesting Getting Last Name from ID");
+		System.out.println("Last Name = " + db.getLastNameFromId(4));
+		
+		System.out.println("\nTesting add user");
 		User testUser = new User();
 		testUser.setUsername("I AM A TEST");
 		testUser.setPassword("banana");
@@ -487,10 +490,11 @@ public class DerbyDatabase implements DatabaseLayer{
 		
 		System.out.println("User added");
 		
-		System.out.println("Tring to check user");
+		System.out.println("\nTrying to check user");
 		System.out.println("Test user id: "+db.getUserIDByLogin("TEST_USER", "banana"));
-		System.out.println("Testing Getting Last Name from ID");
-		System.out.println("Last Name = " + db.getLastNameFromId(4));
+		
+		
+		
 		System.out.println("Success!");
 	}
 
