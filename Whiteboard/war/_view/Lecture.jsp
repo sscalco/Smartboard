@@ -1,9 +1,6 @@
 <html>
 	<head>
 	<link rel="stylesheet" type="text/css" href="_view/Lecture.css">
-	<div id="Title">
-		<title>SmartBoard</title>
-	</div>
 	</head>
 <body>
 	<h1>Smartboard: Classes</h1>

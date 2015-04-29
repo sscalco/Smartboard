@@ -15,6 +15,10 @@ body {
 	height: 100vh;
 }
 
+button {
+    display: inline;
+    box-shadow: 2px 2px 1px #999999;
+}
 #errorMessage{
 	color:red;
 }
