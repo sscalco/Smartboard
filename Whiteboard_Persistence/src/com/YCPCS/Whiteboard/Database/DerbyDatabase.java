@@ -232,17 +232,15 @@ public class DerbyDatabase implements DatabaseLayer{
 		ResultSet rs = null;
 		try {
 			conn = connect();
-			String sql = "select * from relationships where relationships.root = ? AND relationships.target = ?";
+			String sql = "select relationships.* from relationships where relationships.root = ? AND relationships.target = ?";
 			PreparedStatement statement = conn.prepareStatement(sql);
 			statement.setString(1, root);
 			statement.setString(2, target);
 			rs = statement.executeQuery();
 			
-			int index = 0;
 			while(rs.next()){
-				index++;
 				Relationship r = new Relationship();
-				loadRelationship(r, rs, index);
+				loadRelationship(r, rs, 1);
 				r.print();
 				list.add(r);
 			}
@@ -517,6 +515,7 @@ public class DerbyDatabase implements DatabaseLayer{
 			Relationship testRel = new Relationship();
 			testRel.setRoot("user");
 			testRel.setTarget("lecture");
+			testRel.setId(1);
 			testRel.setRootId(1);
 			testRel.setTargetId(1);
 			db.addRelationship(testRel);
@@ -575,7 +574,7 @@ public class DerbyDatabase implements DatabaseLayer{
 		Connection conn = null;
 		try{
 			conn = connect();
-			PreparedStatement statement = conn.prepareStatement("INSERT INTO relationships (root, target, root_id, target_id)" + "VALUES (?, ?, ?, ?)");
+			PreparedStatement statement = conn.prepareStatement("INSERT INTO relationships (root, target, root_id, target_id)" + " VALUES (?, ?, ?, ?)");
 			statement.setString(1, r.getRoot());
 			statement.setString(2, r.getTarget());
 			statement.setInt(3, r.getRootId());

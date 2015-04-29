@@ -140,6 +140,6 @@ public class FakeDatabase implements DatabaseLayer{
 	@Override
 	public void addRelationship(Relationship r) {
 		// TODO Auto-generated method stub
-		
+		relationshipList.add(r);
 	}
 }
