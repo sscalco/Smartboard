@@ -136,4 +136,10 @@ public class FakeDatabase implements DatabaseLayer{
 		}
 		return null;
 	}
+
+	@Override
+	public void addRelationship(Relationship r) {
+		// TODO Auto-generated method stub
+		
+	}
 }

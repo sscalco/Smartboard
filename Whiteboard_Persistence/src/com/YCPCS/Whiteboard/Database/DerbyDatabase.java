@@ -550,7 +550,6 @@ public class DerbyDatabase implements DatabaseLayer{
 					);
 					stmt.setInt(1, id);		
 					
-					
 					resultSet = stmt.executeQuery();
 					
 					if (resultSet.next()){
