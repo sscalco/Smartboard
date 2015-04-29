@@ -1,1 +1,4 @@
 /bin/
+
+# Don't store Derby log files in git
+/*.log

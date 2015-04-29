@@ -6,13 +6,14 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
+import com.YCPCS.Whiteboard.Model.Assignment;
 import com.YCPCS.Whiteboard.Model.Grade;
 import com.YCPCS.Whiteboard.Model.Lecture;
 import com.YCPCS.Whiteboard.Model.Relationship;
 import com.YCPCS.Whiteboard.Model.User;
-import com.YCPCS.Whiteboard.Model.Assignment;
 
 import dbUtils.DBUtil;
 import dbUtils.PersistenceException;
@@ -114,7 +115,6 @@ public class DerbyDatabase implements DatabaseLayer{
 					);
 					stmt.setInt(1, id);		
 					
-					
 					String lastname = "";
 					
 					resultSet = stmt.executeQuery();
@@ -171,8 +171,23 @@ public class DerbyDatabase implements DatabaseLayer{
 
 	@Override
 	public void addUserToDatabase(User user) {
-		// TODO Auto-generated method stub
-		
+		Connection conn = null;
+		try{
+			conn = connect();
+			PreparedStatement statement = conn.prepareStatement("INSERT INTO users (username, password, firstname, lastname, email)" + "VALUES (?, ?, ?, ?, ?)");
+			statement.setString(1, user.getUsername());
+			statement.setString(2, user.getPassword());
+			statement.setString(3, user.getFirstname());
+			statement.setString(4, user.getLastname());
+			statement.setString(5, user.getEmail());
+			statement.execute();
+			conn.commit();
+			return;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			DBUtil.closeQuietly(conn);
+		}
 	}
 
 	// needs the corrected SQL statement
@@ -209,12 +224,37 @@ public class DerbyDatabase implements DatabaseLayer{
 		});
 		
 	}
-
-	@Override
-	public List<Relationship> getRelationshipsByRootAndTarget(String root,
-			String target) {
-		// TODO Auto-generated method stub
-		return null;
+	
+	// TODO FINISH
+	public List<Relationship> getRelationshipsByRootAndTarget(String root, String target) {	
+		List<Relationship> list = new ArrayList<Relationship>();
+		Connection conn = null;
+		ResultSet rs = null;
+		try {
+			conn = connect();
+			String sql = "select * from relationships where relationships.root = ? AND relationships.target = ?";
+			PreparedStatement statement = conn.prepareStatement(sql);
+			statement.setString(1, root);
+			statement.setString(2, target);
+			rs = statement.executeQuery();
+			
+			int index = 0;
+			while(rs.next()){
+				index++;
+				Relationship r = new Relationship();
+				loadRelationship(r, rs, index);
+				r.print();
+				list.add(r);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			DBUtil.closeQuietly(conn);
+			DBUtil.closeQuietly(rs);
+			
+		}
+		return list;
 	}
 	
 	public<ResultType> ResultType executeTransaction(Transaction<ResultType> txn) {
@@ -282,10 +322,10 @@ public class DerbyDatabase implements DatabaseLayer{
 	
 	private void loadRelationship(Relationship relationship, ResultSet resultSet, int index) throws SQLException {
 		relationship.setId(resultSet.getInt(index++));
-		relationship.setRootId(resultSet.getInt(index++));
-		relationship.setTargetId(resultSet.getInt(index++));
 		relationship.setRoot(resultSet.getString(index++));
 		relationship.setTarget(resultSet.getString(index++));
+		relationship.setRootId(resultSet.getInt(index++));
+		relationship.setTargetId(resultSet.getInt(index++));
 	}
 	
 	private void loadLecture(Lecture lecture, ResultSet resultSet, int index) throws SQLException {
@@ -316,7 +356,7 @@ public class DerbyDatabase implements DatabaseLayer{
 				try {
 					userStmt = conn.prepareStatement(
 							"create table users (" +
-							"    id integer primary key," +
+							"    id INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY," +
 							"    username varchar(20)," +
 							"    password varchar(30)," +
 							"    lastname varchar(40)," +
@@ -337,11 +377,11 @@ public class DerbyDatabase implements DatabaseLayer{
 					
 					relationshipStmt = conn.prepareStatement(
 							"create table relationships (" +
-							"    id integer primary key," +
-							"    root_id integer," +
-							"    target_id integer," +
+							"    id INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY," +
 							"    root varchar(30)," +
-							"    target varchar(30)" +
+							"    target varchar(30)," +
+							"    root_id integer," +
+							"    target_id integer"+
 							")");
 					relationshipStmt.executeUpdate();
 					
@@ -401,25 +441,23 @@ public class DerbyDatabase implements DatabaseLayer{
 					}
 					insertLecture.executeBatch();
 					
-					insertRelationship = conn.prepareStatement("insert into relationships values (?, ?, ?, ?, ?)");
+					insertRelationship = conn.prepareStatement("insert into relationships (root, target, root_id, target_id) values (?, ?, ?, ?)");
 					for (Relationship relationship : relationshipList) {
-						insertRelationship.setInt(1, relationship.getId());
-						insertRelationship.setInt(2, relationship.getRootId());
-						insertRelationship.setInt(3, relationship.getTargetId());
-						insertRelationship.setString(4, relationship.getRoot());
-						insertRelationship.setString(5, relationship.getTarget());
+						insertRelationship.setString(1, relationship.getRoot());
+						insertRelationship.setString(2, relationship.getTarget());
+						insertRelationship.setInt(3, relationship.getRootId());
+						insertRelationship.setInt(4, relationship.getTargetId());
 						insertRelationship.addBatch();
 					}
 					insertRelationship.executeBatch();
 					
-					insertUser = conn.prepareStatement("insert into users values (?, ?, ?, ?, ?, ?)");
+					insertUser = conn.prepareStatement("insert into users (username, password, lastname, firstname, email) values (?, ?, ?, ?, ?)");
 					for (User user : userList) {
-						insertUser.setInt(1, user.getId());
-						insertUser.setString(2, user.getUsername());
-						insertUser.setString(3, user.getPassword());
-						insertUser.setString(4, user.getLastname());
-						insertUser.setString(5, user.getFirstname());
-						insertUser.setString(6, user.getEmail());
+						insertUser.setString(1, user.getUsername());
+						insertUser.setString(2, user.getPassword());
+						insertUser.setString(3, user.getLastname());
+						insertUser.setString(4, user.getFirstname());
+						insertUser.setString(5, user.getEmail());
 						insertUser.addBatch();
 
 					}
@@ -452,26 +490,104 @@ public class DerbyDatabase implements DatabaseLayer{
 		
 		System.out.println("Starting Database");
 		DerbyDatabase db = new DerbyDatabase();
-		//System.out.println("Creating tables...");
-		db.createTables();
-		
-		//System.out.println("Loading initial data...");
-		db.loadInitialData();
-		
-		System.out.println("Testing Getting User from username and password");
-		System.out.println("User id = "+db.getUserIDByLogin("bfwalton", "apple"));
-//		 getFirstNameFromId
-		System.out.println("Testing Getting First Name from ID");
-		System.out.println("First Name = " + db.getFirstNameFromId(4));
-		
-		System.out.println("Testing Getting Last Name from ID");
-		System.out.println("Last Name = " + db.getLastNameFromId(4));
-		System.out.println("Success!");
+		try{
+			System.out.println("Testing Getting User ID from username and password");
+			System.out.println("User id = "+db.getUserIDByLogin("bfwalton", "apple"));
+			
+			System.out.println("Testing Getting First Name from ID");
+			System.out.println("First Name = " + db.getFirstNameFromId(4));
+			
+			System.out.println("Testing Getting Last Name from ID");
+			System.out.println("Last Name = " + db.getLastNameFromId(4));
+			
+			System.out.println("Testing add user");
+			User testUser = new User();
+			testUser.setUsername("I AM A TEST");
+			testUser.setPassword("banana");
+			testUser.setFirstname("BOB");
+			testUser.setLastname("Testuser");
+			db.addUserToDatabase(testUser);
+			
+			System.out.println("User added");
+			
+			System.out.println("Testing to check user");
+			System.out.println("Test user id: "+db.getUserIDByLogin("TEST_USER", "banana"));
+			
+			System.out.println("Test Adding Relationship");
+			Relationship testRel = new Relationship();
+			testRel.setRoot("user");
+			testRel.setTarget("lecture");
+			testRel.setRootId(1);
+			testRel.setTargetId(1);
+			db.addRelationship(testRel);
+			
+			System.out.println("Testing Relationships");
+			
+			System.out.println(db.getRelationshipsByRootAndTarget("user", "lecture").get(0));
+			System.out.println("Success!");
+			
+		}catch(PersistenceException e){
+			System.out.println("Creating tables...");
+			db.createTables();
+			System.out.println("Loading initial data...");
+			db.loadInitialData();
+			System.out.println("Please run again for tests!");
+		}
 	}
 
+	//TODO:Finish the if(resultset.next() statement, create a loadGrade()
 	@Override
 	public Grade getGradeById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return executeTransaction(new Transaction<Grade>() {
+			@Override
+			public Grade execute(Connection conn) throws SQLException {
+				PreparedStatement stmt = null;
+				ResultSet resultSet = null;
+				
+				try {
+					stmt = conn.prepareStatement("select users.* " +
+							"from users where id = ?"
+					);
+					stmt.setInt(1, id);		
+					
+					
+					resultSet = stmt.executeQuery();
+					
+					if (resultSet.next()){
+						// grade was found
+						Grade grade = new Grade();
+						//TODO: create loadGrade method
+						//loadGrade();
+						return grade;
+					} else {
+						// No grade from this id
+						return null;
+					}
+				} finally {
+					DBUtil.closeQuietly(resultSet);
+					DBUtil.closeQuietly(stmt);
+				}
+			}
+		});
+		
+	}
+
+	public void addRelationship(Relationship r) {
+		Connection conn = null;
+		try{
+			conn = connect();
+			PreparedStatement statement = conn.prepareStatement("INSERT INTO relationships (root, target, root_id, target_id)" + "VALUES (?, ?, ?, ?)");
+			statement.setString(1, r.getRoot());
+			statement.setString(2, r.getTarget());
+			statement.setInt(3, r.getRootId());
+			statement.setInt(4, r.getTargetId());
+			statement.execute();
+			conn.commit();
+			return;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			DBUtil.closeQuietly(conn);
+		}
 	}
 }

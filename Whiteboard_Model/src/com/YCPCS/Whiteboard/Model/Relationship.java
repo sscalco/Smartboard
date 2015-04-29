@@ -50,4 +50,9 @@ public class Relationship {
 		return target_id;
 	}
 
+	public void print() {
+		System.out.println(getId() + " - "+ getRoot() + " - " + getTarget() + " - " +getRootId() + " - " +getTargetId());
+		
+	}
+
 }

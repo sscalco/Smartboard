@@ -17,3 +17,9 @@ h3 {
 	color: white;
 	margin-right: 5%;
 }
+#Calendar {
+	background-color: white;
+}
+TD {
+	font-size: 200%;
+}
