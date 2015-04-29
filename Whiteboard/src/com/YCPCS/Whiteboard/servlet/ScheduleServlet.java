@@ -54,4 +54,4 @@ public class ScheduleServlet extends HttpServlet {
 		req.getRequestDispatcher("/_view/Schedule.jsp").forward(req, resp);
 	}
 }
->>>>>>> refs/remotes/master/master
+
