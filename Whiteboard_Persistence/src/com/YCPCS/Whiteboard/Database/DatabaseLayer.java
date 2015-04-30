@@ -29,5 +29,7 @@ public interface DatabaseLayer {
 	public List<Relationship> getRelationshipsByRootAndTarget(String root, String target);
 
 	public Grade getGradeById(int id);
+	
+	public void addClass(Lecture lecture);
 
 }

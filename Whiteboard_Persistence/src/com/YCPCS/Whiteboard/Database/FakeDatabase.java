@@ -142,4 +142,9 @@ public class FakeDatabase implements DatabaseLayer{
 		// TODO Auto-generated method stub
 		relationshipList.add(r);
 	}
+
+	@Override
+	public void addClass(Lecture lecture) {
+		classList.add(lecture);
+	}
 }

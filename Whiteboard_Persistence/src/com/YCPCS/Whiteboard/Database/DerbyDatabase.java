@@ -193,36 +193,30 @@ public class DerbyDatabase implements DatabaseLayer{
 	// needs the corrected SQL statement
 	@Override
 	public Lecture getClassById(int id) {
-		// TODO Auto-generated method stub
-		return executeTransaction(new Transaction<Lecture>() {
-			@Override
-			public Lecture execute(Connection conn) throws SQLException {
-				PreparedStatement stmt = null;
-				ResultSet resultSet = null;
-				
-				try {
-					stmt = conn.prepareStatement("select class" +
-							"from X where id = ? "      //TODO: get lecture from SQL
-					);
-					stmt.setInt(1, id);		
-					
-					
-					Lecture lecture = new Lecture();
-					
-					resultSet = stmt.executeQuery();
-					
-					while (resultSet.next()){
-						loadLecture(lecture, resultSet, 1);
-						
-					}
-					return lecture;
-				} finally {
-					DBUtil.closeQuietly(resultSet);
-					DBUtil.closeQuietly(stmt);
-				}
+		Connection conn = null;
+		ResultSet rs = null;
+		try {
+			conn = connect();
+			String sql = "select lectures.* from lectures where lectures.id = ?";
+			PreparedStatement statement = conn.prepareStatement(sql);
+			statement.setInt(1, id);
+			rs = statement.executeQuery();
+			
+			while(rs.next()){
+				Lecture a = new Lecture();
+				loadLecture(a, rs, 1);
+				return a;
 			}
-		});
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			DBUtil.closeQuietly(conn);
+			DBUtil.closeQuietly(rs);
+			
+		}
 		
+		return null;
 	}
 	
 	// TODO FINISH
@@ -241,7 +235,6 @@ public class DerbyDatabase implements DatabaseLayer{
 			while(rs.next()){
 				Relationship r = new Relationship();
 				loadRelationship(r, rs, 1);
-				r.print();
 				list.add(r);
 			}
 			
@@ -365,7 +358,7 @@ public class DerbyDatabase implements DatabaseLayer{
 					
 					lectureStmt = conn.prepareStatement(
 							"create table lectures (" +
-							"    id integer primary key," +
+							"    id INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY," +
 							"    name varchar(40)," +
 							"    teacher varchar(30)," +
 							"    description varchar(500)," +
@@ -427,13 +420,12 @@ public class DerbyDatabase implements DatabaseLayer{
 				PreparedStatement insertAssignment = null;
 
 				try {
-					insertLecture = conn.prepareStatement("insert into lectures values (?, ?, ?, ?, ?)");
+					insertLecture = conn.prepareStatement("insert into lectures (name, teacher, description, size) values (?, ?, ?, ?)");
 					for (Lecture lecture : lectureList) {
-						insertLecture.setInt(1, lecture.getClassId());
-						insertLecture.setString(2, lecture.getClassName());
-						insertLecture.setString(3, lecture.getTeacher());
-						insertLecture.setString(4, lecture.getClassDescription());
-						insertLecture.setInt(5, lecture.getClassSize());
+						insertLecture.setString(1, lecture.getClassName());
+						insertLecture.setString(2, lecture.getTeacher());
+						insertLecture.setString(3, lecture.getClassDescription());
+						insertLecture.setInt(4, lecture.getClassSize());
 						insertLecture.addBatch();
 
 					}
@@ -490,7 +482,7 @@ public class DerbyDatabase implements DatabaseLayer{
 		DerbyDatabase db = new DerbyDatabase();
 		try{
 			System.out.println("Testing Getting User ID from username and password");
-			System.out.println("User id = "+db.getUserIDByLogin("bfwalton", "apple"));
+			System.out.println("User id = "+db.getUserIDByLogin("test", "p"));
 			
 			System.out.println("Testing Getting First Name from ID");
 			System.out.println("First Name = " + db.getFirstNameFromId(4));
@@ -521,8 +513,16 @@ public class DerbyDatabase implements DatabaseLayer{
 			db.addRelationship(testRel);
 			
 			System.out.println("Testing Relationships");
+			db.getRelationshipsByRootAndTarget("user", "lecture");
 			
-			System.out.println(db.getRelationshipsByRootAndTarget("user", "lecture").get(0));
+			System.out.println("Testing Lectures");
+			Lecture lecture = new Lecture();
+			lecture.setClassName("Test Lecture Name");
+			lecture.setClassSize(10);
+			lecture.setClassDescription("BLA BLA BLA BLA");
+			lecture.setTeacher("Dr. Bob Jones");
+			db.addClass(lecture);
+			System.out.println(db.getClassById(1).getClassName());
 			System.out.println("Success!");
 			
 		}catch(PersistenceException e){
@@ -587,5 +587,25 @@ public class DerbyDatabase implements DatabaseLayer{
 		}finally{
 			DBUtil.closeQuietly(conn);
 		}
+	}
+
+	public void addClass(Lecture lecture) {
+		Connection conn = null;
+		try{
+			conn = connect();
+			PreparedStatement statement = conn.prepareStatement("INSERT INTO lectures (name, teacher, description, size)" + "VALUES (?, ?, ?, ?)");
+			statement.setString(1, lecture.getClassName());
+			statement.setString(2, lecture.getTeacher());
+			statement.setString(3, lecture.getClassDescription());
+			statement.setInt(4, lecture.getClassSize());//Name teacher desc size
+			statement.execute();
+			conn.commit();
+			return;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			DBUtil.closeQuietly(conn);
+		}
+		
 	}
 }
