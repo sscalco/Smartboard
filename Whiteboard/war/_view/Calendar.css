@@ -29,7 +29,7 @@ TABLE.Calendar{
     margin-right:10%;
     background-color: white;
 	align-content: center;
-	border:3px solid;
+	border:3px solid green;
 	width:1080px;
 	height: 700px;
 }
