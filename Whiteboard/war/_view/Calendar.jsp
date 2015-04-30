@@ -23,14 +23,14 @@
 		<ul><form action="${pageContext.request.contextPath}/Forums"><button type="submit">Forums</button></form></ul>
 	</div>	
 	<div id="Calendar">
-		<TABLE class="Calendar" > 
-		<TR>
+		<TABLE border="1" class="Calendar" > 
+		<TR bgcolor="#E8E8E8">
 			<TD COLSPAN="7" ALIGN=center><B>May 2015</B></TD> 
 		</TR>
 		<TR> 
 			<TD COLSPAN="7" ALIGN=center><I>One more month til summer!</I></TD>
 		</TR>
-		<TR> 
+		<TR bgcolor="#E8E8E8"> 
 			<TD ALIGN=center>Sun</TD>
 			<TD ALIGN=center>Mon</TD>
 			<TD ALIGN=center>Tue</TD>
@@ -48,7 +48,7 @@
 			<TD ALIGN=center>1</TD>
 			<TD ALIGN=center>2</TD>
 		</TR>
-		<TR> 
+		<TR bgcolor="#E8E8E8"> 
 			<TD ALIGN=center>3</TD>
 			<TD ALIGN=center>4</TD>
 			<TD ALIGN=center>5</TD>
@@ -66,7 +66,7 @@
 			<TD ALIGN=center>15</TD>
 			<TD ALIGN=center>16</TD>
 		</TR>
-		<TR> 
+		<TR bgcolor="#E8E8E8"> 
 			<TD ALIGN=center>17</TD>
 			<TD ALIGN=center>18</TD>
 			<TD ALIGN=center>19</TD>
@@ -84,7 +84,7 @@
 			<TD ALIGN=center>29</TD>
 			<TD ALIGN=center>30</TD>
 		</TR>
-		<TR> 
+		<TR bgcolor="#E8E8E8"> 
 			<TD ALIGN=center>31</TD>
 			<TD ALIGN=center></TD>
 			<TD ALIGN=center></TD>
