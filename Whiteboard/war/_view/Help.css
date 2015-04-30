@@ -23,3 +23,13 @@ h3 {
 	color: white;
 	margin-right: 5%;
 }
+h2 {
+	text-align: center;
+	color: white;
+	font-size: 200%;
+}
+p { 
+	font-size: 200%;
+	color: white;
+	text-align: center;
+}

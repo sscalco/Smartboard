@@ -21,6 +21,28 @@
 		<ul><form action="${pageContext.request.contextPath}/Grades"><button type="submit">Grades</button></form></ul>
 		<ul><form action="${pageContext.request.contextPath}/Assignments"><button type="submit">Assignments</button></form></ul>
 		<ul><form action="${pageContext.request.contextPath}/Forums"><button type="submit">Forums</button></form></ul>
-	</div>	
+	</div>
+	<div id="ClassOptions">
+		<TABLE border="1" class="Schedule" >
+		<TR bgcolor="#E8E8E8"> 
+			<TD ALIGN=center>Sun</TD>
+			<TD ALIGN=center>Mon</TD>
+			<TD ALIGN=center>Tue</TD>
+			<TD ALIGN=center>Wed</TD>
+			<TD ALIGN=center>Thu</TD>
+			<TD ALIGN=center>Fri</TD>
+			<TD ALIGN=center>Sat</TD>
+		</TR>
+		<TR>
+			<TD ALIGN=center></TD>
+			<TD ALIGN=center></TD>
+			<TD ALIGN=center></TD>
+			<TD ALIGN=center></TD>
+			<TD ALIGN=center></TD>
+			<TD ALIGN=center></TD>
+			<TD ALIGN=center></TD>
+		</TR>
+		</TABLE>
+	</div>
 </body>
 </html>
