@@ -32,6 +32,9 @@ h3 {
 #AssignmentCreator {
 	text-align:left;
 	margin-left: 2%;
+	border-style: solid;
+	border-color: white;
+	border-width:5px;
 }
 p {
 	font-size:200%;

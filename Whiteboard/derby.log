@@ -1,11 +1,11 @@
 ----------------------------------------------------------------
-Thu Apr 30 22:35:35 PDT 2015:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instance a816c00e-014d-0df8-fb98-00000d57f5d8 
-on database directory C:\Users\Todd\whiteboard.db with class loader sun.misc.Launcher$AppClassLoader@c387f44 
-Loaded from file:/C:/Users/Todd/Dropbox/Java/Whiteboard/CS320_Derby/lib/derby.jar
+Thu Apr 30 23:02:03 EDT 2015:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instance a816c00e-014d-0d6c-7894-0000025595d0 
+on database directory C:\Users\Brandon\whiteboard.db with class loader sun.misc.Launcher$AppClassLoader@73d16e93 
+Loaded from file:/C:/Users/Brandon/Dropbox/Smartboard/CS320_Derby/lib/derby.jar
 java.vendor=Oracle Corporation
-java.runtime.version=1.8.0_45-b14
-user.dir=C:\Users\Todd\git\Smartboard\Whiteboard
+java.runtime.version=1.8.0_31-b13
+user.dir=C:\Users\Brandon\git\Smartboard\Whiteboard
 os.name=Windows 8.1
 os.arch=amd64
 os.version=6.3
