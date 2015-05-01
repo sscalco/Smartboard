@@ -26,7 +26,7 @@ body {
 }
 h3 {
 	text-align: right;
-	color: white;
+	color: green;
 	margin-right: 5%;
 }
 #AssignmentCreator {
@@ -35,8 +35,21 @@ h3 {
 	border-style: solid;
 	border-color: white;
 	border-width:5px;
+	width:75%;
 }
+
+#CreatedAssignments{
+	background-color: white;
+	text-align:left;
+	border-style: solid;
+	border-color: black;
+	color: green;
+	width : 75%;
+	margin-left: 2%;
+	margin-top:2%;
+}
+
 p {
 	font-size:200%;
-	color: white;
+	color: green;
 }

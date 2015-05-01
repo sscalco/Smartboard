@@ -61,7 +61,7 @@ public class AssignmentsServlet extends HttpServlet {
 		String classCode = "";
 		for(Assignment assignment : assignments){
 			String temp = 
-				"<div id=\"Class\">"+
+				"<div id=\"Assignment\">"+
 					"<h2>"+assignment.getName()+"</h2>"+
 					"<h3>Grade: "+assignment.getAssignmentGrade()+"</h3>"+
 					"<div id=\"ClassOptions\">"+

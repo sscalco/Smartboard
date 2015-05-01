@@ -129,7 +129,6 @@ public class DerbyDatabase implements DatabaseLayer{
 				}
 			}
 		});
-		
 	}
 
 	@Override
@@ -711,13 +710,19 @@ public class DerbyDatabase implements DatabaseLayer{
 			ass.setDescription("This is the assignments description");
 			ass.setName("Test Assignment");
 			db.addAssignment(ass);
+			System.out.println("TESTING: 123 - "+db.getAssignmentById(1).getName());
 			//Add relationship to user
 			Relationship rel2 = new Relationship();
 			rel2.setRoot("user");
 			rel2.setTarget("assignment");
 			rel2.setTargetId(1);
 			rel2.setRootId(7);
-			//db.addRelationship(rel2);
+			
+			List<Assignment> temp = db.getAllAssignments();
+			
+			for(Assignment as : temp){
+				System.out.println(as.getId()+ ": "+as.getName() + " "+as.getDescription() + " "+as.getAssignmentGrade() + "/"+as.getPointValue());
+			}
 			
 		}catch(PersistenceException e){
 			System.out.println("Creating tables...");
@@ -802,6 +807,60 @@ public class DerbyDatabase implements DatabaseLayer{
 			
 		}
 		
+		return null;
+	}
+	
+	public List<User> getAllUsers(){
+		Connection conn = null;
+		ResultSet rs = null;
+		List<User> temp = new ArrayList<User>();
+		try {
+			conn = connect();
+			String sql = "select users.* from users";
+			PreparedStatement statement = conn.prepareStatement(sql);
+			rs = statement.executeQuery();
+			
+			while(rs.next()){
+				User usr = new User();
+				loadUser(usr, rs, 1);
+				temp.add(usr);
+				return temp;
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			DBUtil.closeQuietly(conn);
+			DBUtil.closeQuietly(rs);
+			
+		}
+		return null;
+	}
+	
+	public List<Assignment> getAllAssignments(){
+		Connection conn = null;
+		ResultSet rs = null;
+		List<Assignment> temp = new ArrayList<Assignment>();
+		try {
+			conn = connect();
+			String sql = "select assignments.* from assignments";
+			PreparedStatement statement = conn.prepareStatement(sql);
+			rs = statement.executeQuery();
+			
+			while(rs.next()){
+				Assignment ass = new Assignment();
+				temp.add(ass);
+				loadAssignment(ass, rs, 1);
+			}
+			return temp;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			DBUtil.closeQuietly(conn);
+			DBUtil.closeQuietly(rs);
+			
+		}
 		return null;
 	}
 

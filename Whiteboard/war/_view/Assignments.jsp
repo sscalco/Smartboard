@@ -29,8 +29,11 @@
 		<p>Title:</p>
 		<input type="text" name="title">
 		
-		<p>Question:</p>
+		<p>Description:</p>
 		<input type="text" name="question">
+		
+		<p>Teacher Name:</p>
+		<input type="text" name="teacher">
 		
 		<p>Due Date: </p>
 		<input type="date" name="dueDate">
