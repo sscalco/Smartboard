@@ -55,7 +55,7 @@ public class LectureServlet extends HttpServlet {
 			//TODO: Make more secure
 			LectureController cont = new LectureController();
 			ArrayList<Lecture> lectures = (ArrayList<Lecture>) cont.getAllUserLectures(userId);
-			System.out.println(lectures.size());
+			//System.out.println(lectures.size());
 			for(Lecture lecture : lectures){
 				String temp = 
 					"<div id=\"Class\">"+

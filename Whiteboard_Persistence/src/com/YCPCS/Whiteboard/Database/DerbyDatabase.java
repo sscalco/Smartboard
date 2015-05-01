@@ -548,7 +548,7 @@ public class DerbyDatabase implements DatabaseLayer{
 					
 					assignmentStmt = conn.prepareStatement(
 							"create table assignments (" +
-							"    id integer primary key," +
+							"    id INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY," +
 							"    point_value integer," +
 							"    name varchar(50)," +
 							"    description varchar(500)," +
@@ -627,24 +627,22 @@ public class DerbyDatabase implements DatabaseLayer{
 					}
 					insertUser.executeBatch();
 					
-					insertAssignment = conn.prepareStatement("insert into assignments values (?, ?, ?, ?, ?)");
+					insertAssignment = conn.prepareStatement("insert into assignments (point_value, name, description, grade) values (?, ?, ?, ?)");
 					for (Assignment assignment : assignmentList) {
-						insertAssignment.setInt(1, assignment.getId());
-						insertAssignment.setInt(2, assignment.getPointValue());
-						insertAssignment.setString(3, assignment.getName());
-						insertAssignment.setString(4, assignment.getDescription());
-						insertAssignment.setFloat(5, assignment.getAssignmentGrade());
+						insertAssignment.setInt(1, assignment.getPointValue());
+						insertAssignment.setString(2, assignment.getName());
+						insertAssignment.setString(3, assignment.getDescription());
+						insertAssignment.setFloat(4, assignment.getAssignmentGrade());
 						insertAssignment.addBatch();
 
 					}
 					insertAssignment.executeBatch();
 					
-					insertPermission = conn.prepareStatement("insert into permissions values (?, ?, ?, ?)");
+					insertPermission = conn.prepareStatement("insert into permissions (name, userId, fruitcake)values (?, ?, ?)");
 					for (Permission permission : permissionList) {
-						insertPermission.setInt(1, permission.getId());
-						insertPermission.setString(2, permission.getName());
-						insertPermission.setInt(3, permission.getUserId());
-						insertPermission.setBoolean(4, permission.isFruitcake());
+						insertPermission.setString(1, permission.getName());
+						insertPermission.setInt(2, permission.getUserId());
+						insertPermission.setBoolean(3, permission.isFruitcake());
 						insertPermission.addBatch();
 
 					}
@@ -708,7 +706,7 @@ public class DerbyDatabase implements DatabaseLayer{
 				System.out.println(lec.getClassName());
 			}
 			
-		}catch(PersistenceException e){
+		}catch(Exception e){
 			System.out.println("Creating tables...");
 			db.createTables();
 			System.out.println("Loading initial data...");

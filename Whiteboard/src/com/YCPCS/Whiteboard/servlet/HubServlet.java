@@ -33,7 +33,7 @@ public class HubServlet extends HttpServlet {
 		String doAssignments = (String) req.getParameter("assignments");
 		String doForums = (String) req.getParameter("forums");
 
-		System.out.println(doLogout + " " + doHelp + " " + doAccount);
+		//System.out.println(doLogout + " " + doHelp + " " + doAccount);
 
 		User user = (User) req.getSession().getAttribute("user");
 		if (user == null) {
