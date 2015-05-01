@@ -181,6 +181,21 @@ public class FakeDatabase implements DatabaseLayer{
 	@Override
 	public void addPermission(Permission permission) {
 		// TODO Auto-generated method stub
-		
+	}
+	public User getUserById(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Lecture getLectureById(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Relationship> getTarget(String root, String target, int rootId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

@@ -15,12 +15,9 @@ public class LectureController {
 	
 	public List<Lecture> getAllUserLectures(int userId){
 		
+		List<Relationship> rels = DatabaseProvider.getInstance().getTarget("user", "lecture", userId);
+		
 		List<Lecture> lectures = new ArrayList<Lecture>();
-		
-		RelationshipController relCon = new RelationshipController();
-		
-		List<Relationship> rels = relCon.findRelationships("user", userId, "lecture");
-		
 		for(Relationship rel : rels){
 			lectures.add(getLectureFromId(rel.getTargetId()));
 		}

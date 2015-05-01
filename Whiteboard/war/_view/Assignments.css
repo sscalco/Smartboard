@@ -29,3 +29,11 @@ h3 {
 	color: white;
 	margin-right: 5%;
 }
+#AssignmentCreator {
+	text-align:left;
+	margin-left: 2%;
+}
+p {
+	font-size:200%;
+	color: white;
+}

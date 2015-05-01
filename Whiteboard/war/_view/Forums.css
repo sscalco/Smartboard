@@ -29,3 +29,13 @@ h3 {
 	color: white;
 	margin-right: 5%;
 }
+#ForumHeadings {
+	border-color: white;
+	border-style: solid;
+	margin-right: 10%;
+}
+ol {
+	font-size: 200%;
+	text-align: left;
+	color: white;
+}

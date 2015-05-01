@@ -38,5 +38,10 @@ public interface DatabaseLayer {
 	public List<Permission> getPermissionsFromPermissionId(int id);
 	
 	public void addPermission(Permission permission);
+	public User getUserById(int id);
+	
+	public Lecture getLectureById(int id);
+	
+	public List<Relationship> getTarget(String root, String target, int rootId);
 	
 }
