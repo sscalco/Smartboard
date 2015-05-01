@@ -6,6 +6,7 @@ import com.YCPCS.Whiteboard.Model.Grade;
 import com.YCPCS.Whiteboard.Model.Lecture;
 import com.YCPCS.Whiteboard.Model.Relationship;
 import com.YCPCS.Whiteboard.Model.User;
+import com.YCPCS.Whiteboard.Model.Assignment;
 
 public interface DatabaseLayer {
 	
@@ -28,6 +29,6 @@ public interface DatabaseLayer {
 	
 	public List<Relationship> getRelationshipsByRootAndTarget(String root, String target);
 
-	public Grade getGradeById(int id);
-
+	public Assignment getAssignmentById(int id);
+	
 }

@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.YCPCS.Whiteboard.Model.Assignment;
-import com.YCPCS.Whiteboard.Model.Grade;
 import com.YCPCS.Whiteboard.Model.Lecture;
 import com.YCPCS.Whiteboard.Model.Relationship;
 import com.YCPCS.Whiteboard.Model.User;
@@ -68,7 +67,6 @@ public class DerbyDatabase implements DatabaseLayer{
 
 	@Override
 	public String getFirstNameFromId(int id) {
-		// TODO: fix the sql query
 		return executeTransaction(new Transaction<String>() {
 			@Override
 			public String execute(Connection conn) throws SQLException {
@@ -101,7 +99,7 @@ public class DerbyDatabase implements DatabaseLayer{
 
 	@Override
 	public String getLastNameFromId(int id) {
-		// TODO Auto-generated method stub
+		
 		return executeTransaction(new Transaction<String>() {
 			@Override
 			public String execute(Connection conn) throws SQLException {
@@ -189,11 +187,29 @@ public class DerbyDatabase implements DatabaseLayer{
 			DBUtil.closeQuietly(conn);
 		}
 	}
+	
+	@Override
+	public void addRelationship(Relationship r) {
+		Connection conn = null;
+		try{
+			conn = connect();
+			PreparedStatement statement = conn.prepareStatement("INSERT INTO relationships (root, target, root_id, target_id)" + " VALUES (?, ?, ?, ?)");
+			statement.setString(1, r.getRoot());
+			statement.setString(2, r.getTarget());
+			statement.setInt(3, r.getRootId());
+			statement.setInt(4, r.getTargetId());
+			statement.execute();
+			conn.commit();
+			return;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			DBUtil.closeQuietly(conn);
+		}
+	}
 
-	// needs the corrected SQL statement
 	@Override
 	public Lecture getClassById(int id) {
-		// TODO Auto-generated method stub
 		return executeTransaction(new Transaction<Lecture>() {
 			@Override
 			public Lecture execute(Connection conn) throws SQLException {
@@ -225,7 +241,7 @@ public class DerbyDatabase implements DatabaseLayer{
 		
 	}
 	
-	// TODO FINISH
+	
 	public List<Relationship> getRelationshipsByRootAndTarget(String root, String target) {	
 		List<Relationship> list = new ArrayList<Relationship>();
 		Connection conn = null;
@@ -253,6 +269,36 @@ public class DerbyDatabase implements DatabaseLayer{
 			
 		}
 		return list;
+	}
+	
+	public Assignment getAssignmentById(int id) {
+		return executeTransaction(new Transaction<Assignment>() {
+			public Assignment execute(Connection conn) throws SQLException {
+				PreparedStatement stmt = null;
+				ResultSet resultSet = null;
+				
+				try {
+					stmt = conn.prepareStatement("select users.* " +
+							"from users where id = ?"
+					);
+					stmt.setInt(1, id);		
+					
+					resultSet = stmt.executeQuery();
+					
+					if (resultSet.next()){
+						Assignment assign = new Assignment();
+						loadAssignment(assign, resultSet, 1);
+						return assign;
+					} else {
+						// No grade from this id
+						return null;
+					}
+				} finally {
+					DBUtil.closeQuietly(resultSet);
+					DBUtil.closeQuietly(stmt);
+				}
+			}
+		});
 	}
 	
 	public<ResultType> ResultType executeTransaction(Transaction<ResultType> txn) {
@@ -339,6 +385,7 @@ public class DerbyDatabase implements DatabaseLayer{
 		assignment.setPointValue(resultSet.getInt(index++));
 		assignment.setName(resultSet.getString(index++));
 		assignment.setDescription(resultSet.getString(index++));
+		assignment.setAssignmentGrade(resultSet.getLong(index++));
 	}
 	
 	public void createTables() {
@@ -467,6 +514,7 @@ public class DerbyDatabase implements DatabaseLayer{
 						insertAssignment.setInt(2, assignment.getPointValue());
 						insertAssignment.setString(3, assignment.getName());
 						insertAssignment.setString(4, assignment.getDescription());
+						insertAssignment.setFloat(5, assignment.getAssignmentGrade());
 						insertAssignment.addBatch();
 
 					}
@@ -489,8 +537,9 @@ public class DerbyDatabase implements DatabaseLayer{
 		System.out.println("Starting Database");
 		DerbyDatabase db = new DerbyDatabase();
 		try{
+			int userId = db.getUserIDByLogin("bfwalton", "apple");
 			System.out.println("Testing Getting User ID from username and password");
-			System.out.println("User id = "+db.getUserIDByLogin("bfwalton", "apple"));
+			System.out.println("User id = "+userId);
 			
 			System.out.println("Testing Getting First Name from ID");
 			System.out.println("First Name = " + db.getFirstNameFromId(4));
@@ -523,6 +572,9 @@ public class DerbyDatabase implements DatabaseLayer{
 			System.out.println("Testing Relationships");
 			
 			System.out.println(db.getRelationshipsByRootAndTarget("user", "lecture").get(0));
+			
+			System.out.println("Testing getting Assignment");
+			System.out.println("Assignment: " + db.getAssignmentById(0));
 			System.out.println("Success!");
 			
 		}catch(PersistenceException e){
@@ -533,59 +585,8 @@ public class DerbyDatabase implements DatabaseLayer{
 			System.out.println("Please run again for tests!");
 		}
 	}
-
-	//TODO:Finish the if(resultset.next() statement, create a loadGrade()
-	@Override
-	public Grade getGradeById(int id) {
-		return executeTransaction(new Transaction<Grade>() {
-			@Override
-			public Grade execute(Connection conn) throws SQLException {
-				PreparedStatement stmt = null;
-				ResultSet resultSet = null;
-				
-				try {
-					stmt = conn.prepareStatement("select users.* " +
-							"from users where id = ?"
-					);
-					stmt.setInt(1, id);		
-					
-					resultSet = stmt.executeQuery();
-					
-					if (resultSet.next()){
-						// grade was found
-						Grade grade = new Grade();
-						//TODO: create loadGrade method
-						//loadGrade();
-						return grade;
-					} else {
-						// No grade from this id
-						return null;
-					}
-				} finally {
-					DBUtil.closeQuietly(resultSet);
-					DBUtil.closeQuietly(stmt);
-				}
-			}
-		});
-		
-	}
-
-	public void addRelationship(Relationship r) {
-		Connection conn = null;
-		try{
-			conn = connect();
-			PreparedStatement statement = conn.prepareStatement("INSERT INTO relationships (root, target, root_id, target_id)" + " VALUES (?, ?, ?, ?)");
-			statement.setString(1, r.getRoot());
-			statement.setString(2, r.getTarget());
-			statement.setInt(3, r.getRootId());
-			statement.setInt(4, r.getTargetId());
-			statement.execute();
-			conn.commit();
-			return;
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}finally{
-			DBUtil.closeQuietly(conn);
-		}
-	}
+	
+	
+	
+	
 }

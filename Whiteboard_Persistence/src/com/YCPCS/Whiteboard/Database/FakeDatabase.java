@@ -12,6 +12,8 @@ public class FakeDatabase implements DatabaseLayer{
 	private List<Lecture> classList;
 	private List<Assignment> assignmentList;
 	private List<Relationship> relationshipList;
+	private List<Grade> gradeList;
+	
 	//Below is covered in the user class
 	//private ArrayList<String> usernames;
 	//private ArrayList<String> passwords;
@@ -24,6 +26,7 @@ public class FakeDatabase implements DatabaseLayer{
 		classList = new ArrayList<Lecture>();
 		assignmentList = new ArrayList<Assignment>();
 		relationshipList = new ArrayList<Relationship>();
+		gradeList = new ArrayList<Grade>();
 		// get initial data
 		readInitialData();
 	}
@@ -38,9 +41,21 @@ public class FakeDatabase implements DatabaseLayer{
 			classList.addAll(InitialData.getClasses());
 			assignmentList.addAll(InitialData.getAssignments());
 			relationshipList.addAll(InitialData.getRelationships());
+			gradeList.addAll(InitialData.getGrades());
 		} catch (IOException e) {
 			throw new IllegalStateException("Couldn't read initial data", e);
 		}
+	}
+	
+	// grade
+	public float getGradeByAssignmentID(int id) {
+		for (Assignment assign : assignmentList){
+			if (assign.getId() == id){
+				return assign.getAssignmentGrade();
+			}
+		}
+		
+		return -1;
 	}
 	
 	// user 
@@ -139,7 +154,12 @@ public class FakeDatabase implements DatabaseLayer{
 
 	@Override
 	public void addRelationship(Relationship r) {
-		// TODO Auto-generated method stub
 		relationshipList.add(r);
+	}
+
+	@Override
+	public Assignment getAssignmentById(int id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
