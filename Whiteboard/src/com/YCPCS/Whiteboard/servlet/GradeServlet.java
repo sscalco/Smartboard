@@ -51,8 +51,8 @@ public class GradeServlet extends HttpServlet {
 			req.setAttribute("username", null);
 			resp.sendRedirect(req.getContextPath() + "/login");
 		}
-		else{			
-			req.setAttribute("grade", user.getLectures().get(0).getGrade());			
+		else{
+//			req.setAttribute("grade", user.getLectures().get(0).getGrade());			
 			req.setAttribute("username", user.getFirstname());
 		}
 		req.getRequestDispatcher("/_view/Grades.jsp").forward(req, resp);		
