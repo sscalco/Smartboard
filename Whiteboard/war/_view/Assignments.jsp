@@ -34,7 +34,7 @@
 		
 		<p>Due Date: </p>
 		<input type="date" name="dueDate">
-		
+		</form>
 	</div>
 	<div id="Assignments">
 		
