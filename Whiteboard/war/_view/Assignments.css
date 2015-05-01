@@ -30,12 +30,15 @@ h3 {
 	margin-right: 5%;
 }
 #AssignmentCreator {
+	background-color: white;
 	text-align:left;
-	margin-left: 2%;
 	border-style: solid;
-	border-color: white;
-	border-width:5px;
-	width:75%;
+	border-color: black;
+	color: green;
+	width : 11%;
+	margin-left: 2%;
+	margin-top: 2%;
+	padding-left: 2%;
 	display: none;
 }
 
@@ -48,6 +51,7 @@ h3 {
 	width : 75%;
 	margin-left: 2%;
 	margin-top:2%;
+	padding-left: 2%;
 }
 
 p {

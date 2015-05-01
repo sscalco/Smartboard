@@ -11,10 +11,10 @@
 <script type="text/javascript">
    function toggle_visibility(id) {
        var e = document.getElementById(id);
-       if(e.style.display == 'none')
-          e.style.display = 'block';
-       else
+       if(e.style.display == 'block')
           e.style.display = 'none';
+       else
+          e.style.display = 'block';
    }
 </script>
 </head>
@@ -35,16 +35,16 @@
 	<div id="AssignmentCreator">
 		<form action="${pageContext.request.contextPath}/Assignment" method="get">
 		<br>
-		<p>Title:</p>
+		<h2>Title:</h2>
 		<input type="text" name="title">
 		
-		<p>Description:</p>
+		<h2>Description:</h2>
 		<input type="text" name="question">
 		
-		<p>Teacher Name:</p>
+		<h2>Teacher Name:</h2>
 		<input type="text" name="teacher">
 		
-		<p>Due Date: </p>
+		<h2>Due Date: </h2>
 		<input type="date" name="dueDate">
 		</form>
 		<ul><button type="submit">Finish</button></ul>

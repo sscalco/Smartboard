@@ -61,12 +61,6 @@ public class LectureServlet extends HttpServlet {
 					"<div id=\"Class\">"+
 						"<h2>"+lecture.getClassName()+"</h2>"+
 						"<h3>Professor: "+lecture.getTeacher()+"</h3>"+
-						"<div id=\"ClassOptions\">"+
-							"<p>Schedule</p>"+
-							"<p>Assignments</p>"+
-							"<p>Forum</p>"+
-							"<p>Grades</p>"+
-						"</div>"+
 					"</div>";
 				
 				classCode += temp;
