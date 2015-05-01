@@ -198,4 +198,10 @@ public class FakeDatabase implements DatabaseLayer{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public void addAssignment(Assignment as) {
+		// TODO Auto-generated method stub
+		
+	}
 }

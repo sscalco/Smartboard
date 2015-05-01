@@ -320,8 +320,8 @@ public class DerbyDatabase implements DatabaseLayer{
 				ResultSet resultSet = null;
 				
 				try {
-					stmt = conn.prepareStatement("select users.* " +
-							"from users where id = ?"
+					stmt = conn.prepareStatement("select assignments.* " +
+							"from assignments where id = ?"
 					);
 					stmt.setInt(1, id);		
 					
@@ -632,7 +632,7 @@ public class DerbyDatabase implements DatabaseLayer{
 						insertAssignment.setInt(1, assignment.getPointValue());
 						insertAssignment.setString(2, assignment.getName());
 						insertAssignment.setString(3, assignment.getDescription());
-						insertAssignment.setFloat(4, assignment.getAssignmentGrade());
+						insertAssignment.setInt(4,(int) assignment.getAssignmentGrade());
 						insertAssignment.addBatch();
 
 					}
@@ -690,7 +690,7 @@ public class DerbyDatabase implements DatabaseLayer{
 			System.out.println(db.getRelationshipsByRootAndTarget("user", "lecture").get(0));
 			
 			System.out.println("Testing getting Assignment");
-			System.out.println("Assignment: " + db.getAssignmentById(0));
+			System.out.println("Assignment: " + db.getAssignmentById(1));
 			System.out.println("Lecture: "+db.getLectureById(4).getClassName());
 			//Test Relationship
 			Relationship rel = new Relationship();
@@ -710,8 +710,16 @@ public class DerbyDatabase implements DatabaseLayer{
 			ass.setAssignmentGrade(0.0F);
 			ass.setDescription("This is the assignments description");
 			ass.setName("Test Assignment");
+			db.addAssignment(ass);
+			//Add relationship to user
+			Relationship rel2 = new Relationship();
+			rel2.setRoot("user");
+			rel2.setTarget("assignment");
+			rel2.setTargetId(1);
+			rel2.setRootId(7);
+			//db.addRelationship(rel2);
 			
-		}catch(Exception e){
+		}catch(PersistenceException e){
 			System.out.println("Creating tables...");
 			db.createTables();
 			System.out.println("Loading initial data...");
@@ -795,5 +803,24 @@ public class DerbyDatabase implements DatabaseLayer{
 		}
 		
 		return null;
+	}
+
+	public void addAssignment(Assignment as) {
+		Connection conn = null;
+		try{
+			conn = connect();
+			PreparedStatement statement = conn.prepareStatement("INSERT INTO assignments (name, description, grade, point_value)" + "VALUES (?, ?, ?, ?)");
+			statement.setString(1, as.getName());
+			statement.setString(2, as.getDescription());
+			statement.setInt(3, (int)as.getAssignmentGrade());
+			statement.setInt(4, as.getPointValue());//Name teacher desc size
+			statement.execute();
+			conn.commit();
+			return;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			DBUtil.closeQuietly(conn);
+		}
 	}
 }

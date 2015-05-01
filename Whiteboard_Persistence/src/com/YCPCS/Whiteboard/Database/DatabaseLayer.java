@@ -44,4 +44,6 @@ public interface DatabaseLayer {
 	
 	public List<Relationship> getTarget(String root, String target, int rootId);
 	
+	public void addAssignment(Assignment as);
+	
 }
