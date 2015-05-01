@@ -8,6 +8,15 @@
 	<div id="Title">
 		<title>SmartBoard</title>
 	</div>
+<script type="text/javascript">
+   function toggle_visibility(id) {
+       var e = document.getElementById(id);
+       if(e.style.display == 'none')
+          e.style.display = 'block';
+       else
+          e.style.display = 'none';
+   }
+</script>
 </head>
 <body>
 	<h1>SmartBoard: Assignments</h1>
@@ -22,8 +31,8 @@
 		<ul><form action="${pageContext.request.contextPath}/Assignments"><button type="submit">Assignments</button></form></ul>
 		<ul><form action="${pageContext.request.contextPath}/Forums"><button type="submit">Forums</button></form></ul>
 	</div>
+	<ul><button onclick="toggle_visibility('AssignmentCreator')">Create New Assignment</button></ul>
 	<div id="AssignmentCreator">
-		<ul><button type="submit">Create Assignment</button></ul>
 		<form action="${pageContext.request.contextPath}/Assignment" method="get">
 		<br>
 		<p>Title:</p>
@@ -38,6 +47,7 @@
 		<p>Due Date: </p>
 		<input type="date" name="dueDate">
 		</form>
+		<ul><button type="submit">Finish</button></ul>
 	</div>
 	<div id="CreatedAssignments">
 		${classHTML}

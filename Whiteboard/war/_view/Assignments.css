@@ -36,6 +36,7 @@ h3 {
 	border-color: white;
 	border-width:5px;
 	width:75%;
+	display: none;
 }
 
 #CreatedAssignments{
