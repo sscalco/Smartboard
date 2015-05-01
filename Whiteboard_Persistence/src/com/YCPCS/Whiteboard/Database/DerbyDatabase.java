@@ -585,8 +585,4 @@ public class DerbyDatabase implements DatabaseLayer{
 			System.out.println("Please run again for tests!");
 		}
 	}
-	
-	
-	
-	
 }
