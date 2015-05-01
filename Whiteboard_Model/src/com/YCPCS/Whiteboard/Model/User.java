@@ -12,7 +12,7 @@ public class User {
 	private String lastname;
 	private String email;
 	private Date lastLoginDate;
-	private WhiteboardPermissions permissions;
+	private ArrayList<Permission> permissions;
 	private UserProfile profile;
 
 	private ArrayList<Lecture> lectures = new ArrayList<Lecture>();
@@ -68,11 +68,11 @@ public class User {
 		return password;
 	}
 	
-	public void setPermissions(WhiteboardPermissions permissions){
+	public void setPermissions(ArrayList<Permission> permissions){
 		this.permissions = permissions;
 	}
 	
-	public WhiteboardPermissions getPermissions(){
+	public ArrayList<Permission> getPermissions(){
 		return permissions;
 	}
 	

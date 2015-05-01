@@ -12,7 +12,7 @@ public class FakeDatabase implements DatabaseLayer{
 	private List<Lecture> classList;
 	private List<Assignment> assignmentList;
 	private List<Relationship> relationshipList;
-	private List<Grade> gradeList;
+	private List<Permission> permissionList;
 	
 	//Below is covered in the user class
 	//private ArrayList<String> usernames;
@@ -26,7 +26,7 @@ public class FakeDatabase implements DatabaseLayer{
 		classList = new ArrayList<Lecture>();
 		assignmentList = new ArrayList<Assignment>();
 		relationshipList = new ArrayList<Relationship>();
-		gradeList = new ArrayList<Grade>();
+		permissionList = new ArrayList<Permission>();
 		// get initial data
 		readInitialData();
 	}
@@ -41,7 +41,7 @@ public class FakeDatabase implements DatabaseLayer{
 			classList.addAll(InitialData.getClasses());
 			assignmentList.addAll(InitialData.getAssignments());
 			relationshipList.addAll(InitialData.getRelationships());
-			gradeList.addAll(InitialData.getGrades());
+			permissionList.addAll(InitialData.getPermission());
 		} catch (IOException e) {
 			throw new IllegalStateException("Couldn't read initial data", e);
 		}
@@ -164,5 +164,23 @@ public class FakeDatabase implements DatabaseLayer{
 	public Assignment getAssignmentById(int id) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public List<Permission> getUserPermissionsfromUserId(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Permission> getPermissionsFromPermissionId(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void addPermission(Permission permission) {
+		// TODO Auto-generated method stub
+		
 	}
 }

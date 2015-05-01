@@ -12,6 +12,7 @@ import java.util.List;
 import com.YCPCS.Whiteboard.Model.Assignment;
 import com.YCPCS.Whiteboard.Model.Grade;
 import com.YCPCS.Whiteboard.Model.Lecture;
+import com.YCPCS.Whiteboard.Model.Permission;
 import com.YCPCS.Whiteboard.Model.Relationship;
 import com.YCPCS.Whiteboard.Model.User;
 
@@ -188,6 +189,26 @@ public class DerbyDatabase implements DatabaseLayer{
 			DBUtil.closeQuietly(conn);
 		}
 	}
+	@Override
+	public void addPermission(Permission permission) {
+		Connection conn = null;
+		try{
+			conn = connect();
+			PreparedStatement statement = conn.prepareStatement("INSERT INTO permissions (name, userId, fruitcake)" + "VALUES (?, ?, ?)");
+			//statement.setInt(1, permission.getId());
+			statement.setString(1, permission.getName());
+			statement.setInt(2, permission.getUserId());
+			statement.setBoolean(3, permission.isFruitcake());//Name teacher desc size
+			statement.execute();
+			conn.commit();
+			return;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			DBUtil.closeQuietly(conn);
+		}
+		
+	}
 	
 	@Override
 	public void addRelationship(Relationship r) {
@@ -295,7 +316,65 @@ public class DerbyDatabase implements DatabaseLayer{
 			}
 		});
 	}
+	@Override
+	public List<Permission> getPermissionsFromPermissionId(int id){
+		List<Permission> list = new ArrayList<Permission>();
+		Connection conn = null;
+		ResultSet rs = null;
+		try {
+			conn = connect();
+			String sql = "select permissions.* from permissions where permissions.id = ?";
+			PreparedStatement statement = conn.prepareStatement(sql);
+			statement.setInt(1, id);
+			
+			rs = statement.executeQuery();
+			
+			while(rs.next()){
+				Permission p = new Permission();
+				loadPermissions(p, rs, 1);
+				list.add(p);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			DBUtil.closeQuietly(conn);
+			DBUtil.closeQuietly(rs);
+			
+		}
+		return list;
+	}
+	@Override
+	public List<Permission> getUserPermissionsfromUserId(int id) {
+		List<Permission> list = new ArrayList<Permission>();
+		Connection conn = null;
+		ResultSet rs = null;
+		try {
+			conn = connect();
+			String sql = "select permissions.* from permissions where permissions.userId = ?";
+			PreparedStatement statement = conn.prepareStatement(sql);
+			statement.setInt(1, id);
+			
+			rs = statement.executeQuery();
+			
+			while(rs.next()){
+				Permission p = new Permission();
+				loadPermissions(p, rs, 1);
+				list.add(p);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			DBUtil.closeQuietly(conn);
+			DBUtil.closeQuietly(rs);
+			
+		}
+		return list;
+	}
 	
+	
+
 	public<ResultType> ResultType executeTransaction(Transaction<ResultType> txn) {
 		try {
 			return doExecuteTransaction(txn);
@@ -383,6 +462,13 @@ public class DerbyDatabase implements DatabaseLayer{
 		assignment.setAssignmentGrade(resultSet.getLong(index++));
 	}
 	
+	private void loadPermissions(Permission p, ResultSet rs, int i) throws SQLException {
+		p.setId(rs.getInt(i++));
+		p.setName(rs.getString(i++));
+		p.setUserId(rs.getInt(i++));
+		p.setFruitcake(rs.getBoolean(i++));
+	}
+	
 	public void createTables() {
 		executeTransaction(new Transaction<Boolean>() {
 			@Override
@@ -391,7 +477,7 @@ public class DerbyDatabase implements DatabaseLayer{
 				PreparedStatement lectureStmt = null;
 				PreparedStatement relationshipStmt = null;
 				PreparedStatement assignmentStmt = null;
-				
+				PreparedStatement permissionStmt = null;
 				
 				try {
 					userStmt = conn.prepareStatement(
@@ -404,6 +490,15 @@ public class DerbyDatabase implements DatabaseLayer{
 							"    email varchar(40)" +
 							")");
 					userStmt.executeUpdate();
+					
+					permissionStmt = conn.prepareStatement(
+							"create table permissions (" +
+							"    id INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY," +
+							"    name varchar(30)," +
+							"    userId integer," +
+							"    fruitcake smallint " +
+							")");
+					permissionStmt.executeUpdate();
 					
 					lectureStmt = conn.prepareStatement(
 							"create table lectures (" +
@@ -440,6 +535,7 @@ public class DerbyDatabase implements DatabaseLayer{
 					DBUtil.closeQuietly(lectureStmt);
 					DBUtil.closeQuietly(relationshipStmt);
 					DBUtil.closeQuietly(assignmentStmt);
+					DBUtil.closeQuietly(permissionStmt);
 				}
 			}
 		});
@@ -453,12 +549,14 @@ public class DerbyDatabase implements DatabaseLayer{
 				List<Relationship> relationshipList;
 				List<User> userList;
 				List<Assignment> assignmentList;
+				List<Permission> permissionList;
 				
 				try {
 					lectureList = InitialData.getClasses();
 					relationshipList = InitialData.getRelationships();
 					userList = InitialData.getUsers();
 					assignmentList = InitialData.getAssignments();
+					permissionList = InitialData.getPermission();
 				} catch (IOException e) {
 					throw new SQLException("Couldn't read initial data", e);
 				}
@@ -467,6 +565,7 @@ public class DerbyDatabase implements DatabaseLayer{
 				PreparedStatement insertRelationship = null;
 				PreparedStatement insertUser = null;
 				PreparedStatement insertAssignment = null;
+				PreparedStatement insertPermission = null;
 
 				try {
 					insertLecture = conn.prepareStatement("insert into lectures (name, teacher, description, size) values (?, ?, ?, ?)");
@@ -514,12 +613,24 @@ public class DerbyDatabase implements DatabaseLayer{
 					}
 					insertAssignment.executeBatch();
 					
+					insertPermission = conn.prepareStatement("insert into permissions values (?, ?, ?, ?)");
+					for (Permission permission : permissionList) {
+						insertPermission.setInt(1, permission.getId());
+						insertPermission.setString(2, permission.getName());
+						insertPermission.setInt(3, permission.getUserId());
+						insertPermission.setBoolean(4, permission.isFruitcake());
+						insertPermission.addBatch();
+
+					}
+					insertPermission.executeBatch();
+					
 					return true;
 				} finally {
 					DBUtil.closeQuietly(insertRelationship);
 					DBUtil.closeQuietly(insertLecture);
 					DBUtil.closeQuietly(insertUser);
 					DBUtil.closeQuietly(insertAssignment);
+					DBUtil.closeQuietly(insertPermission);
 				}
 			}
 		});
@@ -578,6 +689,22 @@ public class DerbyDatabase implements DatabaseLayer{
 			
 			System.out.println("Testing getting Assignment");
 			System.out.println("Assignment: " + db.getAssignmentById(0));
+			
+			
+			System.out.println("Testing Permissions");
+			Permission permission = new Permission();
+			permission.setId(1);
+			permission.setName("addClass");
+			permission.setUserId(1);
+			permission.setFruitcake(true);
+			db.addPermission(permission);
+			
+			System.out.println("Testing getting permissions from user id");
+			System.out.println("Permissions: " + db.getPermissionsFromPermissionId(1));
+			System.out.println("Testing getting permissions from permissions id");
+			System.out.println("Permissions: " + db.getUserPermissionsfromUserId(1));
+			
+			
 			System.out.println("Success!");
 			
 		}catch(PersistenceException e){
@@ -607,11 +734,5 @@ public class DerbyDatabase implements DatabaseLayer{
 			DBUtil.closeQuietly(conn);
 		}
 		
-	}
-
-	@Override
-	public Grade getGradeById(int id) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 }

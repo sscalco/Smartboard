@@ -29,9 +29,6 @@ public class InitialData {
 				user.setFirstname(i.next());
 				user.setEmail(i.next());
 				
-				//TODO: add whiteboard permissions
-				//TODO: add login date
-				
 				userList.add(user);
 			}
 			return userList;
@@ -113,24 +110,26 @@ public class InitialData {
 		}
 	}
 	
-	public static List<Grade> getGrades() throws IOException {
-		List<Grade> gradeList = new ArrayList<Grade>();
-		ReadCSV gradesList = new ReadCSV("Grades.csv");
+	public static List<Permission> getPermission() throws IOException {
+		List<Permission> permissionList = new ArrayList<Permission>();
+		ReadCSV permissionsList = new ReadCSV("Permissions.csv");
 		try {
 			while (true) {
-				List<String> tuple = gradesList.next();
+				List<String> tuple = permissionsList.next();
 				if (tuple == null) {
 					break;
 				}
 				Iterator<String> i = tuple.iterator();
-				Grade grade = new Grade();
-				grade.setGrade(Integer.parseInt(i.next()));
-				grade.setGradeLetter();
-				gradeList.add(grade);
+				Permission permission = new Permission();
+				permission.setId(Integer.parseInt(i.next()));
+				permission.setName(i.next());
+				permission.setUserId(Integer.parseInt(i.next()));
+				permission.setFruitcake(Boolean.getBoolean(i.next()));
+				permissionList.add(permission);
 			}
-			return gradeList;
+			return permissionList;
 		} finally {
-			gradesList.close();
+			permissionsList.close();
 		}
 	}
 }
