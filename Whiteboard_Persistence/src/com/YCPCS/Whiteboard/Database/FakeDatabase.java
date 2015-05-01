@@ -179,7 +179,7 @@ public class FakeDatabase implements DatabaseLayer{
 	}
 
 	@Override
-	public Relationship getTarget(String root, String target, int rootId) {
+	public List<Relationship> getTarget(String root, String target, int rootId) {
 		// TODO Auto-generated method stub
 		return null;
 	}

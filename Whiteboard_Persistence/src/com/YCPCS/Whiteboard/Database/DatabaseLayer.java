@@ -36,6 +36,6 @@ public interface DatabaseLayer {
 	
 	public Lecture getLectureById(int id);
 	
-	public Relationship getTarget(String root, String target, int rootId);
+	public List<Relationship> getTarget(String root, String target, int rootId);
 	
 }

@@ -586,6 +586,11 @@ public class DerbyDatabase implements DatabaseLayer{
 			rel.setTargetId(4);
 			db.addRelationship(rel);
 			System.out.println("Relationship: "+db.getRelationshipsByRootAndTarget("user", "lecture").get(4).getRoot());
+			System.out.println("Get Classes for User: ");
+			for(Relationship rela : db.getTarget("user", "lecture", 7)){
+				Lecture lec = db.getClassById(rela.getTargetId());
+				System.out.println(lec.getClassName());
+			}
 			
 		}catch(PersistenceException e){
 			System.out.println("Creating tables...");
@@ -644,8 +649,34 @@ public class DerbyDatabase implements DatabaseLayer{
 	}
 
 	@Override
-	public Relationship getTarget(String root, String target, int rootId) {
-		// TODO Auto-generated method stub
+	public List<Relationship> getTarget(String root, String target, int rootId) {
+		Connection conn = null;
+		ResultSet rs = null;
+		List<Relationship> temp = new ArrayList<Relationship>();
+		try {
+			conn = connect();
+			String sql = "select relationships.* from relationships where relationships.root = ? AND relationships.target = ? AND relationships.root_id = ?";
+			PreparedStatement statement = conn.prepareStatement(sql);
+			statement.setString(1, root);
+			statement.setString(2, target);
+			statement.setInt(3, rootId);
+			rs = statement.executeQuery();
+			
+			while(rs.next()){
+				Relationship rel = new Relationship();
+				temp.add(rel);
+				loadRelationship(rel, rs, 1);
+				return temp;
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			DBUtil.closeQuietly(conn);
+			DBUtil.closeQuietly(rs);
+			
+		}
+		
 		return null;
 	}
 }
