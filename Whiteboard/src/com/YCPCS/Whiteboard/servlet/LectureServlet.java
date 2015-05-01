@@ -71,6 +71,9 @@ public class LectureServlet extends HttpServlet {
 				
 				classCode += temp;
 			}
+			if(lectures.size() == 0){
+				classCode = "<h2 style=\"color:red;\">You are not enrolled in any classes</h2>";
+			}
 			
 			req.setAttribute("classHTML", classCode);
 			req.getRequestDispatcher("/_view/Lecture.jsp").forward(req, resp);

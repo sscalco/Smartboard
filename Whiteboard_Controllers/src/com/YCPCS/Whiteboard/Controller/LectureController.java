@@ -18,12 +18,12 @@ public class LectureController {
 		List<Relationship> rels = DatabaseProvider.getInstance().getTarget("user", "lecture", userId);
 		
 		List<Lecture> lectures = new ArrayList<Lecture>();
-		for(Relationship rel : rels){
-			lectures.add(getLectureFromId(rel.getTargetId()));
+		if(rels != null){
+			for(Relationship rel : rels){
+				lectures.add(getLectureFromId(rel.getTargetId()));
+			}
 		}
-		
 		return lectures;
-		
 	}
 	
 	public Lecture getLectureFromId(int id){

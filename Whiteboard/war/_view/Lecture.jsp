@@ -15,10 +15,10 @@
 		<ul><form action="${pageContext.request.contextPath}/Assignments"><button type="submit">Assignments</button></form></ul>
 		<ul><form action="${pageContext.request.contextPath}/Forums"><button type="submit">Forums</button></form></ul>
 	</div>
-	<div id="Class">
+	<!--<div id="Class">
 		<h2>Computer Science</h2>
 		<h3>Professor: David Hovemeyer</h3>
-	</div>
+	</div>-->
 	${classHTML}
 </body>	
 		

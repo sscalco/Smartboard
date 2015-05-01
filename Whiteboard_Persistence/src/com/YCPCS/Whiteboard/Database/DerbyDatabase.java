@@ -759,7 +759,6 @@ public class DerbyDatabase implements DatabaseLayer{
 			DBUtil.closeQuietly(rs);
 			
 		}
-		
 		return null;
 	}
 
