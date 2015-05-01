@@ -1,12 +1,17 @@
 package com.YCPCS.Whiteboard.servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.YCPCS.Whiteboard.Controller.AssignmentController;
+import com.YCPCS.Whiteboard.Controller.LectureController;
+import com.YCPCS.Whiteboard.Model.Assignment;
+import com.YCPCS.Whiteboard.Model.Lecture;
 import com.YCPCS.Whiteboard.Model.User;
 
 public class AssignmentsServlet extends HttpServlet {
@@ -24,7 +29,6 @@ public class AssignmentsServlet extends HttpServlet {
 
 	protected void doRequest(HttpServletRequest req,
 			HttpServletResponse resp) throws ServletException, IOException {
-		System.out.println("HERE");
 		String doLogout = (String) req.getParameter("logout");
 		String doHelp = (String) req.getParameter("help");
 		String doAccount = (String) req.getParameter("account");
@@ -51,6 +55,28 @@ public class AssignmentsServlet extends HttpServlet {
 		else {
 			req.setAttribute("username", user.getFirstname());
 		}
+		
+		AssignmentController cont = new AssignmentController();
+		ArrayList<Assignment> assignments = (ArrayList<Assignment>) cont.getAllUserAssignments(user.getId());
+		String classCode = "";
+		for(Assignment assignment : assignments){
+			String temp = 
+				"<div id=\"Class\">"+
+					"<h2>"+assignment.getName()+"</h2>"+
+					"<h3>Grade: "+assignment.getAssignmentGrade()+"</h3>"+
+					"<div id=\"ClassOptions\">"+
+						"<p>"+assignment.getDescription()+"</p>"+
+					"</div>"+
+				"</div>";
+			
+			classCode += temp;
+		}
+		if(assignments.size() == 0){
+			classCode = "<h2 style=\"color:red;\">You are not enrolled in any classes</h2>";
+		}
+		
+		req.setAttribute("classHTML", classCode);
+		
 		req.getRequestDispatcher("/_view/Assignments.jsp").forward(req, resp);
 	}
 }

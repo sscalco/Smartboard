@@ -37,7 +37,7 @@
 		</form>
 	</div>
 	<div id="CreatedAssignments">
-		
+		${classHTML}
 	</div>	
 </body>
 </html>

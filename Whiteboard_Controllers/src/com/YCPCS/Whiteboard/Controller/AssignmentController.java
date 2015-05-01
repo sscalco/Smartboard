@@ -18,14 +18,12 @@ public class AssignmentController {
 		
 		List<Assignment> assignments = new ArrayList<Assignment>();
 		
-		RelationshipController relCon = new RelationshipController();
-		
-		List<Relationship> rels = relCon.findRelationships("user", userId, "lecture");
-		
-		//for(Relationship rel : rels){
-		//	assignments.add(getAssignmentFromId(rel.getTargetId()));
-		//}
-		
+		List<Relationship> rels = DatabaseProvider.getInstance().getTarget("user", "lecture", userId);
+		if(rels != null){
+			for(Relationship rel : rels){
+				assignments.add(DatabaseProvider.getInstance().getAssignmentById(rel.getTargetId()));
+			}
+		}
 		return assignments;
 		
 	}

@@ -1,16 +1,8 @@
-<<<<<<< HEAD
 ----------------------------------------------------------------
-Thu Apr 30 23:02:03 EDT 2015:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instance a816c00e-014d-0d6c-7894-0000025595d0 
+Thu Apr 30 23:54:11 EDT 2015:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instance a816c00e-014d-0d9c-2b72-000002551e70 
 on database directory C:\Users\Brandon\whiteboard.db with class loader sun.misc.Launcher$AppClassLoader@73d16e93 
 Loaded from file:/C:/Users/Brandon/Dropbox/Smartboard/CS320_Derby/lib/derby.jar
-=======
-----------------------------------------------------------------
-Thu Apr 30 23:37:38 PDT 2015:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instance a816c00e-014d-0e31-d25c-00000d57fb18 
-on database directory C:\Users\Todd\whiteboard.db with class loader sun.misc.Launcher$AppClassLoader@c387f44 
-Loaded from file:/C:/Users/Todd/Dropbox/Java/Whiteboard/CS320_Derby/lib/derby.jar
->>>>>>> branch 'master' of https://github.com/nexion21/Smartboard.git
 java.vendor=Oracle Corporation
 java.runtime.version=1.8.0_31-b13
 user.dir=C:\Users\Brandon\git\Smartboard\Whiteboard

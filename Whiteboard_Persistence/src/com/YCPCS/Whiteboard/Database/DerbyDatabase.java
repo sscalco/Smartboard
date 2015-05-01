@@ -705,6 +705,11 @@ public class DerbyDatabase implements DatabaseLayer{
 				Lecture lec = db.getClassById(rela.getTargetId());
 				System.out.println(lec.getClassName());
 			}
+			//Test Assignment
+			Assignment ass = new Assignment();
+			ass.setAssignmentGrade(0.0F);
+			ass.setDescription("This is the assignments description");
+			ass.setName("Test Assignment");
 			
 		}catch(Exception e){
 			System.out.println("Creating tables...");
