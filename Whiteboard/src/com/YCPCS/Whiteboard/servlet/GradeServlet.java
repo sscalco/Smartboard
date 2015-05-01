@@ -28,6 +28,7 @@ public class GradeServlet extends HttpServlet {
 	protected void doRequest(HttpServletRequest req,
 			HttpServletResponse resp) throws ServletException, IOException {
 		System.out.println("HERE");
+		String classCode = "";
 		String doLogout = (String) req.getParameter("logout");
 		String doHelp = (String) req.getParameter("help");
 		String doAccount = (String) req.getParameter("account");
@@ -52,9 +53,25 @@ public class GradeServlet extends HttpServlet {
 			resp.sendRedirect(req.getContextPath() + "/login");
 		}
 		else{
-//			req.setAttribute("grade", user.getLectures().get(0).getGrade());			
-			req.setAttribute("username", user.getFirstname());
+			int userId = user.getId();
+			//TODO: Make more secure
+			LectureController cont = new LectureController();
+			ArrayList<Lecture> lectures = (ArrayList<Lecture>) cont.getAllUserLectures(userId);
+			for(Lecture lecture : lectures){
+				String temp =
+						"<div id=\"Class\">"+
+								"<h2>"+lecture.getClassName()+"</h2>"+
+								"<h3>Professor: "+lecture.getTeacher()+"</h3>"+
+								"<p>Grade:" + lecture.getGrade()+"</p>"+
+						"</div>";
+				classCode += temp;
+			}
+			if(lectures.size() == 0){
+				classCode = "<h2 style=\"color:red;\">You are not enrolled in any classes</h2>";
+			}
+			
 		}
+		req.setAttribute("classHTML", classCode);
 		req.getRequestDispatcher("/_view/Grades.jsp").forward(req, resp);		
 	}
 	
