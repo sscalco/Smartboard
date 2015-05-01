@@ -21,6 +21,23 @@
 		<ul><form action="${pageContext.request.contextPath}/Grades"><button type="submit">Grades</button></form></ul>
 		<ul><form action="${pageContext.request.contextPath}/Assignments"><button type="submit">Assignments</button></form></ul>
 		<ul><form action="${pageContext.request.contextPath}/Forums"><button type="submit">Forums</button></form></ul>
+	</div>
+	<div id="AssignmentCreator">
+		<ul><button type="submit">Create Assignment</button></ul>
+		<form action="${pageContext.request.contextPath}/Assignment" method="get">
+		<br>
+		<p>Title:</p>
+		<input type="text" name="title">
+		
+		<p>Question:</p>
+		<input type="text" name="question">
+		
+		<p>Due Date: </p>
+		<input type="date" name="dueDate">
+		
+	</div>
+	<div id="Assignments">
+		
 	</div>	
 </body>
 </html>
