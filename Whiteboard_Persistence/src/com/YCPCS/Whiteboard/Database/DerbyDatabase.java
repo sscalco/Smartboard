@@ -666,6 +666,7 @@ public class DerbyDatabase implements DatabaseLayer{
 		System.out.println("Starting Database");
 		DerbyDatabase db = new DerbyDatabase();
 		try{
+			db.getAssignmentById(0); // for error checking
 			System.out.println("Testing Database");
 			//Test User
 			System.out.println("Adding User:");
@@ -681,7 +682,7 @@ public class DerbyDatabase implements DatabaseLayer{
 			System.out.println("Username is: "+db.getUserById(7).getUsername());
 			//Test Lecture
 			Lecture lecture = new Lecture();
-			lecture.setClassName("TESICAL CLASS");
+			lecture.setClassName("TESTICAL CLASS");
 			lecture.setClassDescription("This is a test class for testing classes");
 			lecture.setTeacher("Dr. Quizical");
 			//add lecture
