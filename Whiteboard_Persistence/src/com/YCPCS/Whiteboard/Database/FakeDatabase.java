@@ -165,4 +165,22 @@ public class FakeDatabase implements DatabaseLayer{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public User getUserById(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Lecture getLectureById(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Relationship getTarget(String root, String target, int rootId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
