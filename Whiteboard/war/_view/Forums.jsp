@@ -21,6 +21,12 @@
 		<ul><form action="${pageContext.request.contextPath}/Grades"><button type="submit">Grades</button></form></ul>
 		<ul><form action="${pageContext.request.contextPath}/Assignments"><button type="submit">Assignments</button></form></ul>
 		<ul><form action="${pageContext.request.contextPath}/Forums"><button type="submit">Forums</button></form></ul>
+	</div>
+	<div id="ForumHeadings">
+		<ol>General Discussion</ol>
+		<ol>Teacher Help</ol>
+		<ol>Student Help</ol>
+		<ol>Bug Reports</ol>
 	</div>	
 </body>
 </html>
