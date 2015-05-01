@@ -23,16 +23,12 @@ public class GradeController {
 		
 		List<Relationship> rels = relCon.findRelationships("user", userId, "grade");
 		
-		for(Relationship rel : rels){
-			grades.add(getGradeFromId(rel.getTargetId()));
-		}
+//		for(Relationship rel : rels){
+//			grades.add(getGradeFromId(rel.getTargetId()));
+//		}
 		
 		return grades;
 		
-	}
-	
-	public Grade getGradeFromId(int id){
-		return DatabaseProvider.getInstance().getGradeById(id);
 	}
 	
 }

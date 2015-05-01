@@ -2,10 +2,10 @@ package com.YCPCS.Whiteboard.Database;
 
 import java.util.List;
 
-import com.YCPCS.Whiteboard.Model.Grade;
 import com.YCPCS.Whiteboard.Model.Lecture;
 import com.YCPCS.Whiteboard.Model.Relationship;
 import com.YCPCS.Whiteboard.Model.User;
+import com.YCPCS.Whiteboard.Model.Assignment;
 
 public interface DatabaseLayer {
 	
@@ -27,7 +27,15 @@ public interface DatabaseLayer {
 	public void addRelationship(Relationship r);
 	
 	public List<Relationship> getRelationshipsByRootAndTarget(String root, String target);
+	
+	public void addClass(Lecture lecture);
 
-	public Grade getGradeById(int id);
-
+	public Assignment getAssignmentById(int id);
+	
+	public User getUserById(int id);
+	
+	public Lecture getLectureById(int id);
+	
+	public Relationship getTarget(String root, String target, int rootId);
+	
 }

@@ -1,13 +1,52 @@
+<<<<<<< HEAD
 ----------------------------------------------------------------
 Thu Apr 30 17:52:36 EDT 2015:
 Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instance a816c00e-014d-0c51-2cb6-00000ab82100 
 on database directory C:\Users\HP\whiteboard.db with class loader sun.misc.Launcher$AppClassLoader@73d16e93 
 Loaded from file:/C:/Users/HP/Desktop/Programs/CS320_Derby/lib/derby.jar
+=======
+<<<<<<< HEAD
+----------------------------------------------------------------
+Thu Apr 30 18:57:44 EDT 2015:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instance a816c00e-014d-0c8c-ce83-000002ccffb8 
+on database directory C:\Users\Brandon\whiteboard.db with class loader sun.misc.Launcher$AppClassLoader@73d16e93 
+Loaded from file:/C:/Users/Brandon/Dropbox/Smartboard/CS320_Derby/lib/derby.jar
+=======
+----------------------------------------------------------------
+Thu Apr 30 18:36:03 PDT 2015:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instance a816c00e-014d-0d1d-c2a7-00000ab66e48 
+on database directory C:\Users\Todd\whiteboard.db with class loader sun.misc.Launcher$AppClassLoader@c387f44 
+Loaded from file:/D:/Dropbox/Java/Whiteboard/CS320_Derby/lib/derby.jar
+>>>>>>> branch 'master' of https://github.com/nexion21/Smartboard.git
+>>>>>>> branch 'master' of https://github.com/nexion21/Smartboard.git
 java.vendor=Oracle Corporation
+<<<<<<< HEAD
 java.runtime.version=1.8.0_20-b26
 user.dir=C:\Users\HP\git\Smartboard\Whiteboard_Persistence
 os.name=Windows 8
+=======
+<<<<<<< HEAD
+java.runtime.version=1.8.0_31-b13
+user.dir=C:\Users\Brandon\git\Smartboard\Whiteboard_Persistence
+=======
+java.runtime.version=1.8.0_45-b14
+user.dir=C:\Users\Todd\git\Smartboard\Whiteboard_Persistence
+>>>>>>> branch 'master' of https://github.com/nexion21/Smartboard.git
+os.name=Windows 8.1
+>>>>>>> branch 'master' of https://github.com/nexion21/Smartboard.git
 os.arch=amd64
+<<<<<<< HEAD
 os.version=6.2
 derby.system.home=null
 Database Class Loader started - derby.database.classpath=''
+=======
+<<<<<<< HEAD
+os.version=6.3
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''
+=======
+os.version=6.3
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''
+>>>>>>> branch 'master' of https://github.com/nexion21/Smartboard.git
+>>>>>>> branch 'master' of https://github.com/nexion21/Smartboard.git

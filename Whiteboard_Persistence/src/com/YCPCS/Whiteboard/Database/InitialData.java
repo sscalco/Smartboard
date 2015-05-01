@@ -112,4 +112,25 @@ public class InitialData {
 			readRelationships.close();
 		}
 	}
+	
+	public static List<Grade> getGrades() throws IOException {
+		List<Grade> gradeList = new ArrayList<Grade>();
+		ReadCSV gradesList = new ReadCSV("Grades.csv");
+		try {
+			while (true) {
+				List<String> tuple = gradesList.next();
+				if (tuple == null) {
+					break;
+				}
+				Iterator<String> i = tuple.iterator();
+				Grade grade = new Grade();
+				grade.setGrade(Integer.parseInt(i.next()));
+				grade.setGradeLetter();
+				gradeList.add(grade);
+			}
+			return gradeList;
+		} finally {
+			gradesList.close();
+		}
+	}
 }
