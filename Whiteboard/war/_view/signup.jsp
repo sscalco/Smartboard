@@ -28,8 +28,8 @@
 		<input type="text" name="password">
 		<br>
 		<br>
-		<input type="hidden" name="signup" id="signup"value="true"/>
-		<button type="submit">Sign Up</button>
+		<input type="hidden" name="signup" id="signup" value="true"/>
+		<input type="submit" value="Sign Up"/>
 		</form>
 	</div>
 	</body>

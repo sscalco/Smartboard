@@ -33,7 +33,7 @@
 	</div>
 	<ul><button onclick="toggle_visibility('AssignmentCreator')">Create New Assignment</button></ul>
 	<div id="AssignmentCreator">
-		<form action="${pageContext.request.contextPath}/Assignment" method="get">
+		<form action="${pageContext.request.contextPath}/Assignments" method="post">
 		<br>
 		<h2>Title:</h2>
 		<input type="text" name="title">
@@ -46,8 +46,8 @@
 		
 		<h2>Due Date: </h2>
 		<input type="date" name="dueDate">
-		</form>
 		<ul><button type="submit">Finish</button></ul>
+		</form>
 	</div>
 	<div id="CreatedAssignments">
 		${classHTML}
