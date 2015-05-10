@@ -26,7 +26,7 @@
 	</div>
 	
 	<div id="LectureCreator">
-		<form action="${pageContext.request.contextPath}/ClassCreate" method="post">
+		<form class="lecture" action="${pageContext.request.contextPath}/ClassCreate" method="post">
 		<br>
 		<h2>Class Name:</h2>
 		<input type="text" name="className">
@@ -40,7 +40,7 @@
 		<h2>Class Size:</h2>
 		<input type="number" name="size">
 		
-		<ul><button type="submit">Finish</button></ul>
+		<ul><button type="submit" style="margin-left: -40px;">Submit New Class</button></ul>
 		</form>
 	</div>
 </body>	
