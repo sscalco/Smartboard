@@ -1,6 +1,6 @@
 ----------------------------------------------------------------
-Mon May 04 13:57:30 EDT 2015:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instance a816c00e-014d-2013-46a7-000003971470 
+Sat May 09 20:27:12 EDT 2015:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instance a816c00e-014d-3b37-ddb7-000003979288 
 on database directory /home/sscalco/whiteboard.db with class loader sun.misc.Launcher$AppClassLoader@73d16e93 
 Loaded from file:/home/sscalco/workspace/CS320_Derby/lib/derby.jar
 java.vendor=Oracle Corporation

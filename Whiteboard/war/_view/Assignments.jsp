@@ -41,11 +41,11 @@
 		<h2>Description:</h2>
 		<input type="text" name="question">
 		
-		<h2>Teacher Name:</h2>
-		<input type="text" name="teacher">
+		<h2>Assignment Grade:</h2>
+		<input type="number" name="assignmentGrade">
 		
-		<h2>Due Date: </h2>
-		<input type="date" name="dueDate">
+		<h2>Point Value: </h2>
+		<input type="number" name="pointValue">
 		<ul><button type="submit">Finish</button></ul>
 		</form>
 	</div>

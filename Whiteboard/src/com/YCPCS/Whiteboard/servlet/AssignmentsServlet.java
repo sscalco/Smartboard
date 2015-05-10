@@ -2,6 +2,7 @@ package com.YCPCS.Whiteboard.servlet;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -20,16 +21,6 @@ public class AssignmentsServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		req.getRequestDispatcher("/_view/Assignments.jsp").forward(req, resp);
-	}
-
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
-		doRequest(req, resp);
-	}
-
-	protected void doRequest(HttpServletRequest req,
-			HttpServletResponse resp) throws ServletException, IOException {
 		String doLogout = (String) req.getParameter("logout");
 		String doHelp = (String) req.getParameter("help");
 		String doAccount = (String) req.getParameter("account");
@@ -57,16 +48,6 @@ public class AssignmentsServlet extends HttpServlet {
 			req.setAttribute("username", user.getFirstname());
 		}
 		
-	//{	
-		System.out.println("Adding Assignment");
-		Assignment ass = new Assignment();
-		ass.setName((String) req.getParameter("title"));
-		ass.setDescription((String) req.getParameter("description"));
-		ass.setTeacherName((String) req.getParameter("teacher"));
-		//ass.setDueDate(Float.parseFloat(req.getParameter("dueDate")));
-		DatabaseProvider.getInstance().addAssignment(ass);
-		//resp.sendRedirect(req.getContextPath() + "/Assignments");
-	//}
 		AssignmentController cont = new AssignmentController();
 		ArrayList<Assignment> assignments = (ArrayList<Assignment>) cont.getAllUserAssignments(user.getId());
 		String classCode = "";
@@ -81,6 +62,7 @@ public class AssignmentsServlet extends HttpServlet {
 				"</div>";
 			
 			classCode += temp;
+
 		}
 		if(assignments.size() == 0){
 			classCode = "<h2 style=\"color:red;\">You are not enrolled in any classes</h2>";
@@ -90,4 +72,25 @@ public class AssignmentsServlet extends HttpServlet {
 		
 		req.getRequestDispatcher("/_view/Assignments.jsp").forward(req, resp);
 	}
+
+
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		doRequest(req, resp);
+	}
+
+	protected void doRequest(HttpServletRequest req,
+			HttpServletResponse resp) throws ServletException, IOException {
+		//{	
+		System.out.println("Adding Assignment");
+		Assignment ass = new Assignment();
+		ass.setName((String) req.getParameter("title"));
+		ass.setDescription((String) req.getParameter("description"));
+		ass.setAssignmentGrade(Float.parseFloat(req.getParameter("assignmentGrade")));
+		ass.setPointValue(Integer.parseInt(req.getParameter("pointValue")));
+		DatabaseProvider.getInstance().addAssignment(ass);
+		resp.sendRedirect(req.getContextPath() + "/Assignments");
+	//}
+	}
+		
 }
