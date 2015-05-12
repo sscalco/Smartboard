@@ -46,4 +46,6 @@ public interface DatabaseLayer {
 	
 	public void addAssignment(Assignment as);
 	
+	public List<User> getAllUsers();
+	
 }

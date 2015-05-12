@@ -204,4 +204,10 @@ public class FakeDatabase implements DatabaseLayer{
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public List<User> getAllUsers() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

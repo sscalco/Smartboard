@@ -284,6 +284,34 @@ public class DerbyDatabase implements DatabaseLayer{
 		return null;
 	}
 	
+	public List<User> getAllUsers(){
+		Connection conn = null;
+		ResultSet rs = null;
+		List<User> temp = new ArrayList<User>();
+		try {
+			conn = connect();
+			String sql = "select users.* from users";
+			PreparedStatement statement = conn.prepareStatement(sql);
+			rs = statement.executeQuery();
+			
+			while(rs.next()){
+				User a = new User();
+				loadUser(a, rs, 1);
+				temp.add(a);
+			}
+			
+			return temp;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			DBUtil.closeQuietly(conn);
+			DBUtil.closeQuietly(rs);
+			
+		}
+		
+		return null;
+	}
+	
 	
 	public List<Relationship> getRelationshipsByRootAndTarget(String root, String target) {	
 		List<Relationship> list = new ArrayList<Relationship>();
@@ -718,6 +746,11 @@ public class DerbyDatabase implements DatabaseLayer{
 			rel2.setTargetId(1);
 			rel2.setRootId(7);
 			//db.addRelationship(rel2);
+			System.out.println("Show users");
+			ArrayList<User> temp = (ArrayList<User>) db.getAllUsers();
+			for(User u: temp){
+				System.out.println(u.getId()+" Username: "+u.getUsername());
+			}
 			
 		}catch(PersistenceException e){
 			System.out.println("Creating tables...");
