@@ -129,7 +129,6 @@ public class DerbyDatabase implements DatabaseLayer{
 				}
 			}
 		});
-		
 	}
 
 	@Override
@@ -692,73 +691,7 @@ public class DerbyDatabase implements DatabaseLayer{
 		
 		System.out.println("Starting Database");
 		DerbyDatabase db = new DerbyDatabase();
-		try{
-			db.getAssignmentById(0); // for error checking
-			System.out.println("Testing Database");
-			//Test User
-			System.out.println("Adding User:");
-			User user = new User();
-			user.setFirstname("Testificate");
-			user.setLastname("Testuser");
-			user.setUsername("Test");
-			user.setPassword("password");
-			user.setEmail("test@testuser.com");
-			//add user
-			db.addUserToDatabase(user);
-			System.out.println("User: Test created with ID: "+db.getUserIDByLogin("Test", "password"));
-			System.out.println("Username is: "+db.getUserById(7).getUsername());
-			//Test Lecture
-			Lecture lecture = new Lecture();
-			lecture.setClassName("TESTICAL CLASS");
-			lecture.setClassDescription("This is a test class for testing classes");
-			lecture.setTeacher("Dr. Quizical");
-			//add lecture
-			db.addClass(lecture);
-			System.out.println(db.getClassById(1).getClassName());
-			System.out.println(db.getRelationshipsByRootAndTarget("user", "lecture").get(0));
-			
-			System.out.println("Testing getting Assignment");
-			System.out.println("Assignment: " + db.getAssignmentById(1));
-			System.out.println("Lecture: "+db.getLectureById(4).getClassName());
-			//Test Relationship
-			Relationship rel = new Relationship();
-			rel.setRoot("user");
-			rel.setTarget("lecture");
-			rel.setRootId(7);
-			rel.setTargetId(4);
-			db.addRelationship(rel);
-			System.out.println("Relationship: "+db.getRelationshipsByRootAndTarget("user", "lecture").get(4).getRoot());
-			System.out.println("Get Classes for User: ");
-			for(Relationship rela : db.getTarget("user", "lecture", 7)){
-				Lecture lec = db.getClassById(rela.getTargetId());
-				System.out.println(lec.getClassName());
-			}
-			//Test Assignment
-			Assignment ass = new Assignment();
-			ass.setAssignmentGrade(0.0F);
-			ass.setDescription("This is the assignments description");
-			ass.setName("Test Assignment");
-			db.addAssignment(ass);
-			//Add relationship to user
-			Relationship rel2 = new Relationship();
-			rel2.setRoot("user");
-			rel2.setTarget("assignment");
-			rel2.setTargetId(1);
-			rel2.setRootId(7);
-			//db.addRelationship(rel2);
-			System.out.println("Show users");
-			ArrayList<User> temp = (ArrayList<User>) db.getAllUsers();
-			for(User u: temp){
-				System.out.println(u.getId()+" Username: "+u.getUsername());
-			}
-			
-		}catch(PersistenceException e){
-			System.out.println("Creating tables...");
-			db.createTables();
-			System.out.println("Loading initial data...");
-			db.loadInitialData();
-			System.out.println("Please run again for tests!");
-		}
+		
 	}
 
 	public void addClass(Lecture lecture) {
@@ -835,6 +768,33 @@ public class DerbyDatabase implements DatabaseLayer{
 			
 		}
 		
+		return null;
+	}
+	
+	public List<Assignment> getAllAssignments(){
+		Connection conn = null;
+		ResultSet rs = null;
+		List<Assignment> temp = new ArrayList<Assignment>();
+		try {
+			conn = connect();
+			String sql = "select assignments.* from assignments";
+			PreparedStatement statement = conn.prepareStatement(sql);
+			rs = statement.executeQuery();
+			
+			while(rs.next()){
+				Assignment ass = new Assignment();
+				temp.add(ass);
+				loadAssignment(ass, rs, 1);
+			}
+			return temp;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			DBUtil.closeQuietly(conn);
+			DBUtil.closeQuietly(rs);
+			
+		}
 		return null;
 	}
 

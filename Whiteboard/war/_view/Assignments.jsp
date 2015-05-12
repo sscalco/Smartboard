@@ -8,6 +8,15 @@
 	<div id="Title">
 		<title>SmartBoard</title>
 	</div>
+<script type="text/javascript">
+   function toggle_visibility(id) {
+       var e = document.getElementById(id);
+       if(e.style.display == 'block')
+          e.style.display = 'none';
+       else
+          e.style.display = 'block';
+   }
+</script>
 </head>
 <body>
 	<h1>SmartBoard: Assignments</h1>
@@ -22,18 +31,22 @@
 		<ul><form action="${pageContext.request.contextPath}/Assignments"><button type="submit">Assignments</button></form></ul>
 		<ul><form action="${pageContext.request.contextPath}/Forums"><button type="submit">Forums</button></form></ul>
 	</div>
+	<ul><button onclick="toggle_visibility('AssignmentCreator')">Create New Assignment</button></ul>
 	<div id="AssignmentCreator">
-		<ul><button type="submit">Create Assignment</button></ul>
-		<form action="${pageContext.request.contextPath}/Assignment" method="get">
+		<form action="${pageContext.request.contextPath}/Assignments" method="post">
 		<br>
-		<p>Title:</p>
+		<h2>Title:</h2>
 		<input type="text" name="title">
 		
-		<p>Question:</p>
+		<h2>Description:</h2>
 		<input type="text" name="question">
 		
-		<p>Due Date: </p>
-		<input type="date" name="dueDate">
+		<h2>Assignment Grade:</h2>
+		<input type="number" name="assignmentGrade">
+		
+		<h2>Point Value: </h2>
+		<input type="number" name="pointValue">
+		<ul><button type="submit">Finish</button></ul>
 		</form>
 	</div>
 	<div id="CreatedAssignments">

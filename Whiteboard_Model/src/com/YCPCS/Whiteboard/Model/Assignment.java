@@ -7,6 +7,8 @@ public class Assignment {
 	private String name;
 	private String description;
 	private float assignmentGrade;
+	private String teacherName;
+	private float dueDate;
 	
 	public Assignment(){
 		
@@ -51,5 +53,21 @@ public class Assignment {
 
 	public void setAssignmentGrade(float assignmentGrade) {
 		this.assignmentGrade = assignmentGrade;
+	}
+
+	public String getTeacherName() {
+		return teacherName;
+	}
+
+	public void setTeacherName(String teacherName) {
+		this.teacherName = teacherName;
+	}
+
+	public float getDueDate() {
+		return dueDate;
+	}
+
+	public void setDueDate(float dueDate) {
+		this.dueDate = dueDate;
 	}
 }

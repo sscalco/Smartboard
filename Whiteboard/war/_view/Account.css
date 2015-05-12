@@ -34,3 +34,7 @@ h3 {
 	color: white;
 	margin-right: 5%;
 }
+button {
+    display: inline;
+    box-shadow: 2px 2px 1px #999999;
+}

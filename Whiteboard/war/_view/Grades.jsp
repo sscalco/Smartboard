@@ -24,5 +24,6 @@
 	</div>	
 	<div id="grade">
 	</div>
+	${classHTML}
 </body>
 </html>

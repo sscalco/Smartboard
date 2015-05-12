@@ -14,7 +14,6 @@
 
 <html>
 	<head>
-	<link rel="stylesheet" type="text/css" href="_view/Account.css"/>
 	<link rel="stylesheet" type="text/css" href="_view/createClass.css"/>
 	<div id="Title">
 		<title>SmartBoard</title>
@@ -23,19 +22,26 @@
 <body>
 	<h1>Smartboard: Create Class</h1>
 	<div id="Options">
-		<p>Account | Help | Logout</p>
+		<h3><form action="${pageContext.request.contextPath}/hub" method="post"><button type="submit">Home</button> | <button type="submit" name="account" value="true">My Account</button> | <button type="submit" name="help" value="true">Help</button> | <button type="submit" name="logout" value="true">Log Out</button></form></h3>
 	</div>
 	
-	<div id="form">
-		<div id="data_entry">
-		<select name="sometext" MULTIPLE size="5">
-  			<option>text1</option>
-  			<option>text2</option>
-  			<option>text3</option>
-  			<option>text4</option>
-  			<option>text5</option>
-		</select>
-</div>
+	<div id="LectureCreator">
+		<form class="lecture" action="${pageContext.request.contextPath}/ClassCreate" method="post">
+		<br>
+		<h2>Class Name:</h2>
+		<input type="text" name="className">
+		
+		<h2>Teacher:</h2>
+		<input type="text" name="teacher">
+		
+		<h2>Description:</h2>
+		<input type="text" name="description">
+		
+		<h2>Class Size:</h2>
+		<input type="number" name="size">
+		
+		<ul><button type="submit" style="margin-left: -40px;">Submit New Class</button></ul>
+		</form>
 	</div>
 </body>	
 		
