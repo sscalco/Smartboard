@@ -30,10 +30,7 @@
 		<br>
 		<h2>Class Name:</h2>
 		<input type="text" name="className">
-		
-		<h2>Teacher:</h2>
-		<input type="text" name="teacher">
-		
+
 		<h2>Description:</h2>
 		<input type="text" name="description">
 		
