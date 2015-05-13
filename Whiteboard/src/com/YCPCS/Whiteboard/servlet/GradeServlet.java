@@ -27,7 +27,6 @@ public class GradeServlet extends HttpServlet {
 
 	protected void doRequest(HttpServletRequest req,
 			HttpServletResponse resp) throws ServletException, IOException {
-		System.out.println("HERE");
 		String classCode = "";
 		String doLogout = (String) req.getParameter("logout");
 		String doHelp = (String) req.getParameter("help");

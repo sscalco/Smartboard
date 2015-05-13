@@ -691,6 +691,8 @@ public class DerbyDatabase implements DatabaseLayer{
 		
 		System.out.println("Starting Database");
 		DerbyDatabase db = new DerbyDatabase();
+		db.createTables();
+		db.loadInitialData();
 		
 	}
 
