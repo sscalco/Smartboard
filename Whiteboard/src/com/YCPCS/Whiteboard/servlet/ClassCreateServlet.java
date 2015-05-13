@@ -35,7 +35,8 @@ public class ClassCreateServlet extends HttpServlet{
 		System.out.println("Adding Class");
 		Lecture lec = new Lecture();
 		lec.setClassName((String) req.getParameter("className"));
-		lec.setTeacher(req.getParameter("teacher"));
+		User user = (User) req.getSession().getAttribute("user");
+		lec.setTeacherId(user.getId());
 		lec.setClassDescription(req.getParameter("description"));
 		lec.setClassSize(Integer.parseInt(req.getParameter("size")));
 		DatabaseProvider.getInstance().addClass(lec);

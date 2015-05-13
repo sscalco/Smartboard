@@ -14,7 +14,6 @@ public class User {
 	private Date lastLoginDate;
 	private ArrayList<Permission> permissions;
 	private UserProfile profile;
-
 	private ArrayList<Lecture> lectures = new ArrayList<Lecture>();
 
 	
