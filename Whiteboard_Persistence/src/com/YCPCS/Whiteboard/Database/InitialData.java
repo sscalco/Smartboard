@@ -148,7 +148,6 @@ public class InitialData {
 				lecture.setClassName(i.next());
 				lecture.setClassSize(Integer.parseInt(i.next()));
 				lecture.setGrade(Float.parseFloat(i.next()));
-				lecture.setTeacher(i.next());
 				lecture.setClassDescription(i.next());
 				List.add(lecture);
 			}

@@ -150,6 +150,7 @@ public class JUnitTests extends TestCase{
 		assertEquals("addClass", permission1.getName());
 		assertEquals(0, permission1.getUserId());
 		assertEquals(false, permission1.isFruitcake());
+		
 	}
 		
 	public void testGetNameFromId(){
