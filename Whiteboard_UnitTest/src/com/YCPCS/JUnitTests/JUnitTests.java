@@ -186,12 +186,14 @@ public class JUnitTests extends TestCase{
 		System.out.print(lecture.getClassName());
 	}
 	
-	public void testUserClassRelationship(){
-		
-	}
-	
 	public void testGetUserByUsernameAndPassword(){
-		
+		String username = "koopaluigi";
+		String password = "toadstool";
+		for (User user : usersList){
+			if (user.getPassword() == password && user.getUsername() == username){
+				assertEquals(true, true);
+			}
+		}
 	}
 	
 	public void testAddUser(){
@@ -200,7 +202,6 @@ public class JUnitTests extends TestCase{
 		db.addUserToDatabase(user);
 		assertEquals(users, usersList.size());
 	}
-	
 	
 	public void testGradeLetters(){
 		Grade grade = new Grade();
