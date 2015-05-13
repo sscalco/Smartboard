@@ -49,17 +49,6 @@ public class FakeDatabase implements DatabaseLayer{
 		}
 	}
 	
-	// grade
-	public float getGradeByAssignmentID(int id) {
-		for (Assignment assign : assignmentList){
-			if (assign.getId() == id){
-				return assign.getAssignmentGrade();
-			}
-		}
-		
-		return -1;
-	}
-	
 	// user 
 	public User getUserByUsernameAndPassword(String username, String password){
 		if(username!=null && password!=null){

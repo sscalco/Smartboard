@@ -189,6 +189,18 @@ public class JUnitTests extends TestCase{
 		
 	}
 	
+	public void testGetUserByUsernameAndPassword(){
+		
+	}
+	
+	public void testAddUser(){
+		User user = new User();
+		int users = usersList.size();
+		db.addUserToDatabase(user);
+		assertEquals(users, usersList.size());
+	}
+	
+	
 	public void testGradeLetters(){
 		Grade grade = new Grade();
 		grade.setGrade(89.5);
