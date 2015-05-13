@@ -60,7 +60,7 @@ public class GradeServlet extends HttpServlet {
 				String temp =
 						"<div id=\"Class\">"+
 								"<h2>"+lecture.getClassName()+"</h2>"+
-								"<h3>Professor: "+lecture.getTeacher()+"</h3>"+
+								"<h3>Professor: "+lecture.getTeacherId()+"</h3>"+
 								"<p>Grade:" + lecture.getGrade()+"</p>"+
 						"</div>";
 				classCode += temp;

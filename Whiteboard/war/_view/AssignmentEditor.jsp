@@ -19,7 +19,7 @@
 		<ul><form action="${pageContext.request.contextPath}/assignments"><button type="submit">Assignments</button></form></ul>
 		<ul><form action="${pageContext.request.contextPath}/forums"><button type="submit">Forums</button></form></ul>
 	</div>
-	${classHTML}
+	
 	<form class="lecture" action="${pageContext.request.contextPath}/ClassCreate" method="post">
 	<ul><button type="submit" style="margin-left: -40px;">Submit New Class</button></ul>
 	</form>
