@@ -36,7 +36,7 @@ public class FakeDatabase implements DatabaseLayer{
 	public void addUserToDatabase(User user){
 		usersList.add(user);
 	}
-	
+
 	public void readInitialData() {
 		try {
 			usersList.addAll(InitialData.getUsers());
@@ -124,7 +124,11 @@ public class FakeDatabase implements DatabaseLayer{
 		}
 		return null;
 	}
-
+	
+	public List<Lecture> getAllLectures(){		
+		return classList;
+	}
+	
 	public List<Relationship> getRelationshipsByRootAndTarget(String root, String target) {
 		List<Relationship> relList = new ArrayList<Relationship>();
 		for(Relationship rel : relationshipList){

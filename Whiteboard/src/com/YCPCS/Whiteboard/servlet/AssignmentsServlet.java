@@ -51,21 +51,22 @@ public class AssignmentsServlet extends HttpServlet {
 		AssignmentController cont = new AssignmentController();
 		ArrayList<Assignment> assignments = (ArrayList<Assignment>) cont.getAllUserAssignments(user.getId());
 		String classCode = "";
-		for(Assignment assignment : assignments){
-			String temp = 
-				"<div id=\"Assignment\">"+
-					"<h2>"+assignment.getName()+"</h2>"+
-					"<h3>Grade: "+assignment.getAssignmentGrade()+"</h3>"+
-					"<div id=\"ClassOptions\">"+
-						"<p>"+assignment.getDescription()+"</p>"+
-					"</div>"+
-				"</div>";
-			
-			classCode += temp;
-
-		}
 		if(assignments.size() == 0){
 			classCode = "<h2 style=\"color:red;\">You are not enrolled in any classes</h2>";
+		}else{
+			for(Assignment assignment : assignments){
+				String temp = 
+					"<div id=\"Assignment\">"+
+						"<h2>"+assignment.getName()+"</h2>"+
+						"<h3>Grade: "+assignment.getAssignmentGrade()+"</h3>"+
+						"<div id=\"ClassOptions\">"+
+							"<p>"+assignment.getDescription()+"</p>"+
+						"</div>"+
+					"</div>";
+				
+				classCode += temp;
+
+			}
 		}
 		
 		req.setAttribute("classHTML", classCode);

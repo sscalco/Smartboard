@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.YCPCS.Whiteboard.Database.DatabaseProvider;
-import com.YCPCS.Whiteboard.Model.Assignment;
 import com.YCPCS.Whiteboard.Model.Lecture;
+import com.YCPCS.Whiteboard.Model.Relationship;
 import com.YCPCS.Whiteboard.Model.User;
 
 public class ClassCreateServlet extends HttpServlet{
@@ -32,11 +32,11 @@ public class ClassCreateServlet extends HttpServlet{
 	}
 	
 	private void doRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
-		
 		System.out.println("Adding Class");
-		Lecture lec = new Lecture();		
+		Lecture lec = new Lecture();
 		lec.setClassName((String) req.getParameter("className"));
-		lec.setTeacher(req.getParameter("teacher"));
+		User user = (User) req.getSession().getAttribute("user");
+		lec.setTeacherId(user.getId());
 		lec.setClassDescription(req.getParameter("description"));
 		lec.setClassSize(Integer.parseInt(req.getParameter("size")));
 		DatabaseProvider.getInstance().addClass(lec);

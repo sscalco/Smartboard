@@ -27,7 +27,6 @@ public class GradeServlet extends HttpServlet {
 
 	protected void doRequest(HttpServletRequest req,
 			HttpServletResponse resp) throws ServletException, IOException {
-		System.out.println("HERE");
 		String classCode = "";
 		String doLogout = (String) req.getParameter("logout");
 		String doHelp = (String) req.getParameter("help");
@@ -61,7 +60,7 @@ public class GradeServlet extends HttpServlet {
 				String temp =
 						"<div id=\"Class\">"+
 								"<h2>"+lecture.getClassName()+"</h2>"+
-								"<h3>Professor: "+lecture.getTeacher()+"</h3>"+
+								"<h3>Professor: "+lecture.getTeacherId()+"</h3>"+
 								"<p>Grade:" + lecture.getGrade()+"</p>"+
 						"</div>";
 				classCode += temp;

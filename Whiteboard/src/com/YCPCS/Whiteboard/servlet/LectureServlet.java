@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.YCPCS.Whiteboard.Controller.LectureController;
+import com.YCPCS.Whiteboard.Database.DatabaseProvider;
 import com.YCPCS.Whiteboard.Model.Lecture;
 import com.YCPCS.Whiteboard.Model.User;
 
@@ -60,7 +61,7 @@ public class LectureServlet extends HttpServlet {
 				String temp = 
 					"<div id=\"Class\">"+
 						"<h2>"+lecture.getClassName()+"</h2>"+
-						"<h3>Professor: "+lecture.getTeacher()+"</h3>"+
+						"<h3>Professor: "+DatabaseProvider.getInstance().getUserById(lecture.getTeacherId())+"</h3>"+
 					"</div>";
 				
 				classCode += temp;

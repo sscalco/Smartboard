@@ -130,7 +130,7 @@ public class JUnitTests extends TestCase{
 		assertEquals("Computer Science 320", class1.getClassName());
 		assertEquals("Is Awesome", class1.getClassDescription());
 		assertEquals(15, class1.getClassSize());
-		assertEquals("Hovemeyer", class1.getTeacher());
+		assertEquals(1, class1.getTeacherId());
 		
 		Assignment assignment1 = assignmentList.get(0);
 		assertEquals(0,assignment1.getId());
