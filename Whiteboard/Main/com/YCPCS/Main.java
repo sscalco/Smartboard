@@ -98,7 +98,7 @@ public class Main {
 						try{
 							Lecture lecture = new Lecture();
 							lecture.setClassName(temp[2]);
-							lecture.setTeacher(temp[3]);
+							lecture.setTeacherId(Integer.parseInt(temp[3]));
 							lecture.setClassDescription(temp[4]);
 							lecture.setClassSize(Integer.parseInt(temp[5]));
 							DatabaseProvider.getInstance().addClass(lecture);

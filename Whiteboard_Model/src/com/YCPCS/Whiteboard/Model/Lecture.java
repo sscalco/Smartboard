@@ -7,7 +7,7 @@ public class Lecture
 	private int classSize = 0;
 	private int classId;
 	private String className;
-	private String teacher;
+	private int teacher_id;
 	private String classDescription;
 	private ArrayList<User> students = new ArrayList<User>();
 	private ArrayList<Assignment> assignments = new ArrayList<Assignment>();
@@ -98,12 +98,12 @@ public class Lecture
 		assignments.add(assignment);
 	}
 
-	public String getTeacher() {
-		return teacher;
+	public int getTeacherId() {
+		return teacher_id;
 	}
 
-	public void setTeacher(String teacher) {
-		this.teacher = teacher;
+	public void setTeacherId(int teacher_id) {
+		this.teacher_id = teacher_id;
 	}
 	
 	public Grade getGrade(){

@@ -502,7 +502,7 @@ public class DerbyDatabase implements DatabaseLayer{
 	private void loadLecture(Lecture lecture, ResultSet resultSet, int index) throws SQLException {
 		lecture.setClassId(resultSet.getInt(index++));
 		lecture.setClassName(resultSet.getString(index++));
-		lecture.setTeacher(resultSet.getString(index++));
+		lecture.setTeacherId(resultSet.getInt(index++));
 		lecture.setClassDescription(resultSet.getString(index++));
 		lecture.setClassSize(resultSet.getInt(index++));
 	}
@@ -557,7 +557,7 @@ public class DerbyDatabase implements DatabaseLayer{
 							"create table lectures (" +
 							"    id INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY," +
 							"    name varchar(40)," +
-							"    teacher varchar(30)," +
+							"    teacher_id integer," +
 							"    description varchar(500)," +
 							"    size integer" +
 							")");
@@ -621,10 +621,10 @@ public class DerbyDatabase implements DatabaseLayer{
 				PreparedStatement insertPermission = null;
 
 				try {
-					insertLecture = conn.prepareStatement("insert into lectures (name, teacher, description, size) values (?, ?, ?, ?)");
+					insertLecture = conn.prepareStatement("insert into lectures (name, teacher_id, description, size) values (?, ?, ?, ?)");
 					for (Lecture lecture : lectureList) {
 						insertLecture.setString(1, lecture.getClassName());
-						insertLecture.setString(2, lecture.getTeacher());
+						insertLecture.setInt(2, lecture.getTeacherId());
 						insertLecture.setString(3, lecture.getClassDescription());
 						insertLecture.setInt(4, lecture.getClassSize());
 						insertLecture.addBatch();
@@ -689,20 +689,21 @@ public class DerbyDatabase implements DatabaseLayer{
 	
 	public static void main(String[] args) throws IOException {
 		
-		System.out.println("Starting Database");
 		DerbyDatabase db = new DerbyDatabase();
+		System.out.println("Creating tables...");
 		db.createTables();
+		System.out.println("Loading initial data...");
 		db.loadInitialData();
-		
+		System.out.println("Please run again for tests!");
 	}
 
 	public void addClass(Lecture lecture) {
 		Connection conn = null;
 		try{
 			conn = connect();
-			PreparedStatement statement = conn.prepareStatement("INSERT INTO lectures (name, teacher, description, size)" + "VALUES (?, ?, ?, ?)");
+			PreparedStatement statement = conn.prepareStatement("INSERT INTO lectures (name, teacher_id, description, size)" + "VALUES (?, ?, ?, ?)");
 			statement.setString(1, lecture.getClassName());
-			statement.setString(2, lecture.getTeacher());
+			statement.setInt(2, lecture.getTeacherId());
 			statement.setString(3, lecture.getClassDescription());
 			statement.setInt(4, lecture.getClassSize());//Name teacher desc size
 			statement.execute();
