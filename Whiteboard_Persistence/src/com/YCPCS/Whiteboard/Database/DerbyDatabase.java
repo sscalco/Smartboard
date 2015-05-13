@@ -66,6 +66,26 @@ public class DerbyDatabase implements DatabaseLayer{
 		//return 0;
 	}
 
+	public void updateGrades(int id, Assignment assign){
+		Connection conn = null; 
+		try{
+			conn = connect();
+			PreparedStatement statement = conn.prepareStatement("INSERT INTO assignments (grade)" + " VALUES (?)");
+			
+			statement.setFloat(1, assign.getAssignmentGrade());
+			
+//			assignment.setId(resultSet.getInt(index++));
+//			assignment.setPointValue(resultSet.getInt(index++));
+//			assignment.setName(resultSet.getString(index++));
+//			assignment.setDescription(resultSet.getString(index++));
+//			assignment.setAssignmentGrade(resultSet.getLong(index++));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			DBUtil.closeQuietly(conn);
+		}
+	}
+	
 	@Override
 	public String getFirstNameFromId(int id) {
 		return executeTransaction(new Transaction<String>() {

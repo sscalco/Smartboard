@@ -13,6 +13,7 @@ public class FakeDatabase implements DatabaseLayer{
 	private List<Assignment> assignmentList;
 	private List<Relationship> relationshipList;
 	private List<Permission> permissionList;
+	private List<Lecture> lectureList;
 	
 	//Below is covered in the user class
 	//private ArrayList<String> usernames;
@@ -27,6 +28,7 @@ public class FakeDatabase implements DatabaseLayer{
 		assignmentList = new ArrayList<Assignment>();
 		relationshipList = new ArrayList<Relationship>();
 		permissionList = new ArrayList<Permission>();
+		lectureList = new ArrayList<Lecture>();
 		// get initial data
 		readInitialData();
 	}
@@ -45,17 +47,6 @@ public class FakeDatabase implements DatabaseLayer{
 		} catch (IOException e) {
 			throw new IllegalStateException("Couldn't read initial data", e);
 		}
-	}
-	
-	// grade
-	public float getGradeByAssignmentID(int id) {
-		for (Assignment assign : assignmentList){
-			if (assign.getId() == id){
-				return assign.getAssignmentGrade();
-			}
-		}
-		
-		return -1;
 	}
 	
 	// user 
@@ -166,52 +157,75 @@ public class FakeDatabase implements DatabaseLayer{
 		classList.add(lecture);
 	}
 	public Assignment getAssignmentById(int id) {
-		// TODO Auto-generated method stub
+		for (Assignment assign: assignmentList){
+			if(assign.getId()==id){
+				return assign;
+			}
+		}
 		return null;
 	}
 
 	@Override
 	public List<Permission> getUserPermissionsfromUserId(int id) {
-		// TODO Auto-generated method stub
+		List<Permission> permissions = new ArrayList<Permission>();
+		for (Permission permission : permissionList) {
+			if (permission.getId()==id){
+				permissions.add(permission);
+				return permissions;
+			}
+		}
 		return null;
 	}
 
 	@Override
 	public List<Permission> getPermissionsFromPermissionId(int id) {
-		// TODO Auto-generated method stub
+		List<Permission> permissions = new ArrayList<Permission>();
+		for (Permission permission : permissionList) {
+			if (permission.getId()==id){
+				permissions.add(permission);
+				return permissions;
+			}
+		}
 		return null;
 	}
 
 	@Override
 	public void addPermission(Permission permission) {
-		// TODO Auto-generated method stub
+		permissionList.add(permission);
 	}
 	public User getUserById(int id) {
-		// TODO Auto-generated method stub
+		for (User user : usersList) {
+			if (user.getId()==id){
+				return user;
+			}
+		}
 		return null;
 	}
 
 	@Override
 	public Lecture getLectureById(int id) {
-		// TODO Auto-generated method stub
+		for (Lecture lecture : lectureList) {
+			if (lecture.getClassId()==id){
+				return lecture;
+			}
+		}
 		return null;
 	}
 
 	@Override
 	public List<Relationship> getTarget(String root, String target, int rootId) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
 	@Override
 	public void addAssignment(Assignment as) {
-		// TODO Auto-generated method stub
+		assignmentList.add(as);
 		
 	}
 
 	@Override
 	public List<User> getAllUsers() {
-		// TODO Auto-generated method stub
-		return null;
+		return usersList;
 	}
 }
