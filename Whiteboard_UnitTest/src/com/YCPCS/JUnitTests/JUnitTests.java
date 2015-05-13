@@ -16,6 +16,9 @@ import com.YCPCS.Whiteboard.Model.Grade;
 import com.YCPCS.Whiteboard.Model.Lecture;
 import com.YCPCS.Whiteboard.Model.User;
 import com.YCPCS.Whiteboard.Model.UserProfile;
+import com.YCPCS.Whiteboard.Model.Relationship;
+import com.YCPCS.Whiteboard.Model.Permission;
+
 
 public class JUnitTests extends TestCase{
 	User user = new User();
@@ -26,14 +29,17 @@ public class JUnitTests extends TestCase{
 	ArrayList<User> students = new ArrayList<User>();
 	ArrayList<Assignment> assignments = new ArrayList<Assignment>();
 	List<User> usersList = new ArrayList<User>();
-	List<Lecture> classList = new ArrayList<Lecture>();
+	List<Lecture> lectureList = new ArrayList<Lecture>();
 	List<Assignment> assignmentList = new ArrayList<Assignment>();
-	
+	List<Relationship> relationshipList = new ArrayList<Relationship>();
+	List<Permission> permissionList = new ArrayList<Permission>();
 	public void setUp(){
 		try {
 			usersList.addAll(InitialData.getUsers());
-			classList.addAll(InitialData.getClasses());
+			lectureList.addAll(InitialData.getClasses());
 			assignmentList.addAll(InitialData.getAssignments());
+			relationshipList.addAll(InitialData.getRelationships());
+			permissionList.addAll(InitialData.getPermission());
 		} catch (IOException e) {
 			throw new IllegalStateException("Couldn't read initial data", e);
 		}
@@ -119,7 +125,7 @@ public class JUnitTests extends TestCase{
 		assertEquals("Todd",user1.getFirstname());
 		assertEquals("Leach",user1.getLastname());
 		
-		Lecture class1 = classList.get(0);
+		Lecture class1 = lectureList.get(0);
 		assertEquals(1, class1.getClassId());
 		assertEquals("Computer Science 320", class1.getClassName());
 		assertEquals("Is Awesome", class1.getClassDescription());
@@ -131,17 +137,21 @@ public class JUnitTests extends TestCase{
 		assertEquals("Quiz 1", assignment1.getName());
 		assertEquals(20, assignment1.getPointValue());
 		assertEquals("20 questions pertaining to the philosophy of velociraptors", assignment1.getDescription());
+	
+		Relationship relationship1 = relationshipList.get(0);
+		assertEquals(1, relationship1.getId());
+		assertEquals("user", relationship1.getRoot());
+		assertEquals("lecture", relationship1.getTarget());
+		assertEquals(4, relationship1.getRootId());
+		assertEquals(1, relationship1.getTargetId());
+		
+		Permission permission1 = permissionList.get(0);
+		assertEquals(0, permission1.getId());
+		assertEquals("addClass", permission1.getName());
+		assertEquals(0, permission1.getUserId());
+		assertEquals(false, permission1.isFruitcake());
 	}
-	
-	// TODO: compare user login information to match database (csv file)
-//	public void testGetUserByUsernameAndPassword(){
-//		setUp();
-//		
-//		User user = usersList.get(0);
-//		
-//
-//	}
-	
+		
 	public void testGetNameFromId(){
 		setUp();
 		assertEquals("Todd", db.getFirstNameFromId(0));
