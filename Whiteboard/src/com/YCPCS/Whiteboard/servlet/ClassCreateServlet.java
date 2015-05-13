@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.YCPCS.Whiteboard.Database.DatabaseProvider;
-import com.YCPCS.Whiteboard.Model.Assignment;
 import com.YCPCS.Whiteboard.Model.Lecture;
+import com.YCPCS.Whiteboard.Model.Relationship;
 import com.YCPCS.Whiteboard.Model.User;
 
 public class ClassCreateServlet extends HttpServlet{

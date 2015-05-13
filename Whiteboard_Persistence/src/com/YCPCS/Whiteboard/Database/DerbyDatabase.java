@@ -695,6 +695,9 @@ public class DerbyDatabase implements DatabaseLayer{
 		System.out.println("Loading initial data...");
 		db.loadInitialData();
 		System.out.println("Please run again for tests!");
+		for(Assignment a : db.getAllAssignments()){
+			System.out.println("Assignment: "+a.getName());
+		}
 	}
 
 	public void addClass(Lecture lecture) {
