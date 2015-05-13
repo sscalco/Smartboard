@@ -698,6 +698,9 @@ public class DerbyDatabase implements DatabaseLayer{
 		for(Assignment a : db.getAllAssignments()){
 			System.out.println("Assignment: "+a.getName());
 		}
+		for(Lecture a : db.getAllLectures()){
+			System.out.println("Lecture: "+a.getClassName());
+		}
 	}
 
 	public void addClass(Lecture lecture) {

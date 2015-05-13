@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.YCPCS.Whiteboard.Database.DatabaseProvider;
+import com.YCPCS.Whiteboard.Model.Assignment;
 import com.YCPCS.Whiteboard.Model.Lecture;
 import com.YCPCS.Whiteboard.Model.Relationship;
 import com.YCPCS.Whiteboard.Model.User;
@@ -32,6 +33,7 @@ public class ClassCreateServlet extends HttpServlet{
 	}
 	
 	private void doRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+		
 		System.out.println("Adding Class");
 		Lecture lec = new Lecture();
 		lec.setClassName((String) req.getParameter("className"));
@@ -40,6 +42,17 @@ public class ClassCreateServlet extends HttpServlet{
 		lec.setClassDescription(req.getParameter("description"));
 		lec.setClassSize(Integer.parseInt(req.getParameter("size")));
 		DatabaseProvider.getInstance().addClass(lec);
+		int classID = DatabaseProvider.getInstance().getAllLectures().size();
+		for(Lecture a : DatabaseProvider.getInstance().getAllLectures()){
+			System.out.println("Class: "+a.getClassName());
+			System.out.println("ID: "+a.getClassId());
+		}
+		Relationship rel = new Relationship();
+		rel.setRoot("user");
+		rel.setRootId(user.getId());
+		rel.setTarget("lecture");
+		rel.setTargetId(classID);
+		DatabaseProvider.getInstance().addRelationship(rel);
 		resp.sendRedirect(req.getContextPath() + "/lecture");
 	}
 }
