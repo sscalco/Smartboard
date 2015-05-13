@@ -132,4 +132,29 @@ public class InitialData {
 			permissionsList.close();
 		}
 	}
+	
+	public static List<Lecture> getLecture() throws IOException {
+		List<Lecture> List = new ArrayList<Lecture>();
+		ReadCSV readList = new ReadCSV("Lectures.csv");
+		try {
+			while (true) {
+				List<String> tuple = readList.next();
+				if (tuple == null) {
+					break;
+				}
+				Iterator<String> i = tuple.iterator();
+				Lecture lecture = new Lecture();
+				lecture.setClassId(Integer.parseInt(i.next()));
+				lecture.setClassName(i.next());
+				lecture.setClassSize(Integer.parseInt(i.next()));
+				lecture.setGrade(Float.parseFloat(i.next()));
+				lecture.setClassDescription(i.next());
+				List.add(lecture);
+			}
+			return List;
+		} finally {
+			readList.close();
+		}
+	}
 }
+	

@@ -58,10 +58,11 @@ public class LectureServlet extends HttpServlet {
 			ArrayList<Lecture> lectures = (ArrayList<Lecture>) cont.getAllUserLectures(userId);
 			//System.out.println(lectures.size());
 			for(Lecture lecture : lectures){
+				User teacher = DatabaseProvider.getInstance().getUserById(lecture.getTeacherId());
 				String temp = 
 					"<div id=\"Class\">"+
 						"<h2>"+lecture.getClassName()+"</h2>"+
-						"<h3>Professor: "+DatabaseProvider.getInstance().getUserById(lecture.getTeacherId())+"</h3>"+
+						"<h3>Professor: "+teacher.getFirstname() + " " + teacher.getLastname()+"</h3>"+
 					"</div>";
 				
 				classCode += temp;
