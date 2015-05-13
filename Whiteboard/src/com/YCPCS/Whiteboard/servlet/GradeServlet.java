@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.YCPCS.Whiteboard.Controller.LectureController;
+import com.YCPCS.Whiteboard.Database.DatabaseProvider;
 import com.YCPCS.Whiteboard.Model.Lecture;
 import com.YCPCS.Whiteboard.Model.User;
 
@@ -56,11 +57,13 @@ public class GradeServlet extends HttpServlet {
 			//TODO: Make more secure
 			LectureController cont = new LectureController();
 			ArrayList<Lecture> lectures = (ArrayList<Lecture>) cont.getAllUserLectures(userId);
+			
 			for(Lecture lecture : lectures){
+				User teacher = DatabaseProvider.getInstance().getUserById(lecture.getTeacherId());
 				String temp =
 						"<div id=\"Class\">"+
 								"<h2>"+lecture.getClassName()+"</h2>"+
-								"<h3>Professor: "+lecture.getTeacherId()+"</h3>"+
+								"<h3>Professor: "+teacher.getFirstname()+ " "+ teacher.getLastname() + "</h3>"+
 								"<p>Grade:" + lecture.getGrade()+"</p>"+
 						"</div>";
 				classCode += temp;
