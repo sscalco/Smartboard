@@ -32,9 +32,8 @@ public class ClassCreateServlet extends HttpServlet{
 	}
 	
 	private void doRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
-		
 		System.out.println("Adding Class");
-		Lecture lec = new Lecture();		
+		Lecture lec = new Lecture();
 		lec.setClassName((String) req.getParameter("className"));
 		lec.setTeacher(req.getParameter("teacher"));
 		lec.setClassDescription(req.getParameter("description"));
