@@ -819,4 +819,31 @@ public class DerbyDatabase implements DatabaseLayer{
 			DBUtil.closeQuietly(conn);
 		}
 	}
+	
+	public List<Lecture> getAllLectures(){
+		Connection conn = null;
+		ResultSet rs = null;
+		List<Lecture> temp = new ArrayList<Lecture>();
+		try {
+			conn = connect();
+			String sql = "select lectures.* from lectures";
+			PreparedStatement statement = conn.prepareStatement(sql);
+			rs = statement.executeQuery();
+			
+			while(rs.next()){
+				Lecture lec = new Lecture();
+				temp.add(lec);
+				loadLecture(lec, rs, 1);
+			}
+			return temp;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			DBUtil.closeQuietly(conn);
+			DBUtil.closeQuietly(rs);
+			
+		}
+		return null;
+	}
 }
